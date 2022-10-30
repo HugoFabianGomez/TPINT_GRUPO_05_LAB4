@@ -22,26 +22,45 @@
 	<td style="width: 380px;" align="right">Busqueda de Cliente</td>
 	<td style="height: 0px; "><input type="text" name="txtBusqueda"/></td>
 	
- 
-	
-	
 	<br><br>	
 	
 	<table border="1" width="900">
-		<tr>
-			<th>DNI</th>
-			<th style="width: 139px; ">CUIL</th>
-			<th>NOMBRE</th>
-			<th>APELLIDO</th>
-			<th style="width: 139px; ">CBU</th>
-			<th>TIPO CUENTA</th>
-			<th>SALDOS</th>
-			<th>otra cosa</th>
-		</tr>
+		<thead>
+			<tr>
+				<th>DNI</th>
+				<th style="width: 139px; ">CUIL</th>
+				<th>NOMBRE</th>
+				<th>APELLIDO</th>
+				<th style="width: 139px; ">CBU</th>
+				<th>TIPO CUENTA</th>
+				<th>SALDOS</th>
+				<th>otra cosa</th>
+				<th>Acción</th>
+	            <th>Acción</th>
+			</tr>
+		</thead>
+			<tbody>
+				<tr>
+					<td>		</td>
+					<td>		</td>
+					<td>		</td>
+					<td>		</td>
+					<td>		</td>
+					<td>		</td>
+					<td>		</td>
+					<td>		</td>
+					<td>		</td>
+					
+				
+				</tr>
+			
+			</tbody>
 		
-
-	
 	</table>
+		<div>
+			<a class="btn btn-primary" href="Inicio.jsp">Volver</a>
+		</div>
+	
 </form>
 
 </body>
