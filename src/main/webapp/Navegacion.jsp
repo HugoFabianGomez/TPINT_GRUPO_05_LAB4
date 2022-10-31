@@ -7,6 +7,8 @@
 				<li><a href="Login.jsp">Login</a></li>
 				<li><a href="AltaCliente.jsp">Agregar Cliente</a></li>
 				<li><a href="ListarClientes.jsp">Listar Clientes</a></li>
+				<li><a href="AltaCuenta.jsp">Agregar Cuenta</a></li>
+				<li><a href="ListarCuentas.jsp">Listar Cuentas</a></li>
 			</ul>
 		</td>
 		<td style="width: 850px" align="right" valign="top">

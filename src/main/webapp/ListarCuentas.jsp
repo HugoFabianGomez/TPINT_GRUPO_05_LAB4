@@ -5,24 +5,24 @@
 <html>
 <head>
 	<meta charset="UTF-8">	
-	<title>Lista Clientes</title>
+	<title>Lista Cuentas</title>
 </head>
 <body>
 <jsp:include page="Navegacion.jsp"></jsp:include>
-	<h1>Lista de Clientes</h1>
+	<h1>Lista de Cuentas</h1>
 
-<form method="get" action="ServletListaclientes">
+<form method="get" action="ServletListaCuentas">
 	 <table>
 	 	<tr>
-	 		<td>Filtros de Lista de Clientes</td>
-	 		<td><select name="">
+	 		<td>Filtros de Lista de Cuentas</td>
+	 		<td><select name="filtros">
 		<option value="" >Todos</option>
 		<!-- ACA  SE DESARROLLARA SEGUN EL FULTRO QUE PIDA LA PROFESORA -->
 		
 	</select></td>
 	 	</tr>
 	 	<tr>
-	 		<td align="right">Busqueda de Cliente</td>
+	 		<td align="right">Busqueda de Cuenta</td>
 	 		<td style="height: 0px;"><input type="text" name="txtBusqueda"/></td>
 	 	</tr>
 	 </table>
@@ -32,14 +32,13 @@
 	<table border="1" width="900">
 		<thead>
 			<tr>
-				<th>DNI</th>
-				<th style="width: 139px; ">CUIL</th>
-				<th>NOMBRE</th>
-				<th>APELLIDO</th>
-				<th style="width: 139px; ">CBU</th>
-				<th>TIPO CUENTA</th>
-				<th>SALDOS</th>
-				<th>otra cosa</th>
+				<th>NUMERO DE CUENTA</th>
+				<th>CBU</th>
+				<th>TIPO DE CUENTA</th>
+				<th>FECHA DE CREACION</th>
+				<th>DNI DEL CLIENTE</th>
+				<th>SALDO</th>
+				<th>ESTADO</th>
 
 			</tr>
 		</thead>
@@ -52,14 +51,9 @@
 					<td>		</td>
 					<td>		</td>
 					<td>		</td>
-					<td>		</td>
 					<td><input type="submit" name="btnModificar" value="MODIFICAR"/></td>
-					<td><input type="submit" name="btnEliminar" value="ELIMINAR"/></td>
-					
-					
-				
-				</tr>
-			
+					<td><input type="submit" name="btnModificar" value="ELIMINAR"/></td>	
+				</tr>	
 			</tbody>
 		
 	</table>
