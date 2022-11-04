@@ -4,12 +4,12 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>Alta de Cliente</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
 	<jsp:include page="Navegacion.jsp"></jsp:include>
-<h3>ALTA CLIENTE</h3>
-
+	<h3>Alta de Cliente</h3>
 <form action="servletSeguro" method="get">
 <table>
 	<tr> 
@@ -24,23 +24,22 @@
 
 	</tr>
 		<tr> 
-		<td>NOMBRE/S </td>
+		<td>Nombre(s): </td>
 		<td style="height: 0px; "><input type="text" name="txtNOMBRE"/></td>
-		<td>APELLIDO/S </td>
+		<td>Apellido(s): </td>
 		<td style="height: 0px; "><input type="text" name="txtAPELLIDO"/></td>
-		
 	</tr>
 	 
 	<tr> 
-		<td>NACIONALIDAD</td>
+		<td>Nacionalidad: </td>
 		<td style="height: 0px; ">
 			<select name="txtNACIONALIDAD" >
 					<!-- ACA DESARROLLO LAS OPCIONES -->									 				
 			 </select>	
 		</td>
-		<td>FECHA NACIMIENTO</td>
+		<td>Fecha de Nacimiento: </td>
 		<td style="height: 0px; "><input type="date" name="txtFECHA_NAC" value="DD/MM/AAAA" /><br></td>
-		<td>GENERO </td>
+		<td>Género: </td>
 		<td style="height: 0px; ">
 			<select name="txtSEXO" >
 			
@@ -63,36 +62,36 @@
 	</tr>
 	
 	<tr>
-		<td>DOMICILIO </td>
+		<td>Domicilio: </td>
 		<td style="height: 0px; "><input type="text" name="txtDIRECCION" required  maxlength="40" autocomplete="off" /><br></td>
 		<td style="height: 0px; ">
 			<select name="txtLOCALIDAD" >
-			<option value="1" >Localidad</option>
+			<option value="1" >Localidad: </option>
 					<!-- ACA DESARROLLO LAS OPCIONES -->									 				
 			 </select>	
 		</td>
 		<td style="height: 0px; ">
 			<select name="txtPROVINCIA" >
-			<option value="1" >Provincia</option>
+			<option value="1" >Provincia: </option>
 					<!-- ACA DESARROLLO LAS OPCIONES -->									 				
 			 </select>	
 		</td>
 	</tr>
 	<tr>
-		<td>CORREO ELECTRONICO	</td>
+		<td>Correo Electrónico: </td>
 		<td style="height: 0px; ">  <input type="email" name="textEMAIL" required /> </td>	
 	</tr>
 	<tr> 
-		<td>TELEFONO </td>
+		<td>Teléfono: </td>
 		<td style="height: 0px; "><input type="tel" name="txtTELEFONO"/></td>
 	</tr>
 	
 	<tr>
 		<td></td>
 	</tr>
-	<tr> 
-		<br><br>
-		<td style="height: 0px; "><input type="submit" name="btnAceptar" value="AGREGAR"/></td>
+	<br />
+	<tr>
+		<td style="height: 0px; "><input type="submit" name="btnAceptar" value="Agregar"/></td>
 	</tr>
 
 </table>

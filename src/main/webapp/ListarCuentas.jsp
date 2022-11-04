@@ -4,8 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">	
-	<title>Lista Cuentas</title>
+	<meta charset="UTF-8">
+	<title>Lista de Cuentas</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
 <jsp:include page="Navegacion.jsp"></jsp:include>
@@ -14,7 +15,7 @@
 <form method="get" action="ServletListaCuentas">
 	 <table>
 	 	<tr>
-	 		<td>Filtros de Lista de Cuentas</td>
+	 		<td>Filtrar: </td>
 	 		<td><select name="filtros">
 		<option value="" >Todos</option>
 		<!-- ACA  SE DESARROLLARA SEGUN EL FULTRO QUE PIDA LA PROFESORA -->
@@ -22,7 +23,7 @@
 	</select></td>
 	 	</tr>
 	 	<tr>
-	 		<td align="right">Busqueda de Cuenta</td>
+	 		<td align="right">Búsqueda de Cuenta: </td>
 	 		<td style="height: 0px;"><input type="text" name="txtBusqueda"/></td>
 	 	</tr>
 	 </table>
@@ -32,14 +33,13 @@
 	<table border="1" width="900">
 		<thead>
 			<tr>
-				<th>NUMERO DE CUENTA</th>
+				<th>Nro. de Cuenta</th>
 				<th>CBU</th>
-				<th>TIPO DE CUENTA</th>
-				<th>FECHA DE CREACION</th>
-				<th>DNI DEL CLIENTE</th>
-				<th>SALDO</th>
-				<th>ESTADO</th>
-
+				<th>Tipo</th>
+				<th>Fecha de Creación</th>
+				<th>DNI del Cliente</th>
+				<th>Saldo</th>
+				<th>Estado</th>
 			</tr>
 		</thead>
 			<tbody>
@@ -51,8 +51,8 @@
 					<td>		</td>
 					<td>		</td>
 					<td>		</td>
-					<td><input type="submit" name="btnModificar" value="MODIFICAR"/></td>
-					<td><input type="submit" name="btnModificar" value="ELIMINAR"/></td>	
+					<td><input type="submit" name="btnModificar" value="Modificar"/></td>
+					<td><input type="submit" name="btnModificar" value="Eliminar"/></td>	
 				</tr>	
 			</tbody>
 		

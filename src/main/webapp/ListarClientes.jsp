@@ -1,11 +1,12 @@
-<%@ page import="java.util.ArrayList"%>
+<%@ page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">	
-	<title>Lista Clientes</title>
+	<meta charset="UTF-8">
+	<title>Lista de Clientes</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
 <jsp:include page="Navegacion.jsp"></jsp:include>
@@ -18,11 +19,10 @@
 	 		<td><select name="">
 		<option value="" >Todos</option>
 		<!-- ACA  SE DESARROLLARA SEGUN EL FULTRO QUE PIDA LA PROFESORA -->
-		
 	</select></td>
 	 	</tr>
 	 	<tr>
-	 		<td align="right">Busqueda de Cliente</td>
+	 		<td align="right">Búsqueda de Cliente</td>
 	 		<td style="height: 0px;"><input type="text" name="txtBusqueda"/></td>
 	 	</tr>
 	 </table>
@@ -34,12 +34,12 @@
 			<tr>
 				<th>DNI</th>
 				<th style="width: 139px; ">CUIL</th>
-				<th>NOMBRE</th>
-				<th>APELLIDO</th>
+				<th>Nombre</th>
+				<th>Apellido</th>
 				<th style="width: 139px; ">CBU</th>
-				<th>TIPO CUENTA</th>
-				<th>SALDOS</th>
-				<th>otra cosa</th>
+				<th>Tipo de Cuenta</th>
+				<th>Saldo</th>
+				<th>Observaciones</th>
 
 			</tr>
 		</thead>
@@ -53,8 +53,8 @@
 					<td>		</td>
 					<td>		</td>
 					<td>		</td>
-					<td><input type="submit" name="btnModificar" value="MODIFICAR"/></td>
-					<td><input type="submit" name="btnEliminar" value="ELIMINAR"/></td>
+					<td><input type="submit" name="btnModificar" value="Modificar"/></td>
+					<td><input type="submit" name="btnEliminar" value="Eliminar"/></td>
 					
 					
 				
