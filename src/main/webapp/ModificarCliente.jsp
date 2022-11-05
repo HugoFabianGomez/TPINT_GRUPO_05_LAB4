@@ -36,6 +36,9 @@
 		<td>NACIONALIDAD</td>
 		<td style="height: 0px; ">
 			<select name="txtNACIONALIDAD" >
+				<option value="0" >Seleccione Nacionalidad</option>
+				<option value="1" >Argentino</option>
+				<option value="2" >Brasilero</option>
 					<!-- ACA DESARROLLO LAS OPCIONES -->									 				
 			 </select>	
 		</td>
