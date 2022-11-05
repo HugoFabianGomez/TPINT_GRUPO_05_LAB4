@@ -9,24 +9,24 @@
 </head>
 <body>
 	<jsp:include page="Menu.html"></jsp:include>
-	<h1>LISTA DE PRESTAMOS</h1>
+	<h1>Lista de Préstamos</h1>
 
 <form method="get" action="ServletPrestamos">
 
-	BUSCAR CLIENTE <input type="text" name="txtBuscarCliente"/>
+	Buscar Cliente: <input type="text" name="txtBuscarCliente"/>
 	
 	<br><br>	
 	
 	<table border="1" width="900">
 		<thead>
 			<tr>
-				<th>NRO PRESTAMOS</th>
-				<th style="width: 139px; ">CLIENTE</th>
-				<th>CUENTA</th>
-				<th>MONTO</th>
-				<th style="width: 139px; ">SALDO</th>
-				<th>ACCION</th>
-	            <th>ACCION</th>
+				<th>Nro. de Préstamo</th>
+				<th style="width: 139px; ">Cliente</th>
+				<th>Cuenta</th>
+				<th>Monto</th>
+				<th style="width: 139px; ">Saldo</th>
+				<th>Acción 1</th>
+	            <th>Acción 2</th>
 			</tr>
 		</thead>
 			<tbody>
@@ -42,7 +42,7 @@
 			</tbody>
 	</table>
 		<div>
-			<a class="btn btn-primary" href="Inicio.jsp">VOLVER</a>
+			<a class="btn btn-primary" href="Inicio.jsp">Volver</a>
 		</div>
 </form>
 
