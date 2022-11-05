@@ -23,7 +23,7 @@
 <title>Autorizar prestamo</title>
 </head>
 <body onload="addDate();">
-	<jsp:include page="Navegacion.jsp"></jsp:include>
+	<jsp:include page="Menu.html"></jsp:include>
 	<h3>AUTORIZAR PRESTAMO</h3>
 
 	<form action="servletSeguro" method="get">

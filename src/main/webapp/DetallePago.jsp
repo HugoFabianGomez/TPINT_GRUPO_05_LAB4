@@ -9,7 +9,7 @@
 <title>Detalle pago</title>
 </head>
 <body onload="addDate();">
-	<jsp:include page="Navegacion.jsp"></jsp:include>
+	<jsp:include page="Menu.html"></jsp:include>
 
 	<form action="servletSeguro" method="get">
 		<table>

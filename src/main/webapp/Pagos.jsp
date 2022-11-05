@@ -8,7 +8,7 @@
 	<title>Lista Pagos</title>
 </head>
 <body>
-<jsp:include page="Navegacion.jsp"></jsp:include>
+	<jsp:include page="Menu.html"></jsp:include>
 	<h1>LISTA DE PAGOS</h1>
 
 <form method="get" action="ServletPagos">

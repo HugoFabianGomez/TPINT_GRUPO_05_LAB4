@@ -9,7 +9,7 @@
 </head>
 <body>
 	
-	<jsp:include page="Navegacion.jsp"></jsp:include>
+	<jsp:include page="Menu.html"></jsp:include>
 <h3>Agregar Cuenta</h3>
 
 <form action="servletSeguro" method="get">

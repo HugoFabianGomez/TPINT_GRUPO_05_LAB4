@@ -8,7 +8,7 @@
 	<title>Lista Prestamos</title>
 </head>
 <body>
-<jsp:include page="Navegacion.jsp"></jsp:include>
+	<jsp:include page="Menu.html"></jsp:include>
 	<h1>LISTA DE PRESTAMOS</h1>
 
 <form method="get" action="ServletPrestamos">
