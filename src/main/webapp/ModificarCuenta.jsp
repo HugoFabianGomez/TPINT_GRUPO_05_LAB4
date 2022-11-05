@@ -28,6 +28,9 @@
 		<td>TIPO DE CUENTA </td>
 		<td style="height: 0px; ">
 			<select name="txtNACIONALIDAD" >
+				<option value="0" >Seleccione Tipo de Cuenta</option>
+				<option value="1" >Caja de Ahorro</option>
+				<option value="2" >Cuenta Corriente</option>
 					<!-- DESARROLLO OPCIONES TIPO DE CUENTA -->									 				
 			 </select>
 		</td>
