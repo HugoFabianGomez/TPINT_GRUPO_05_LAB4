@@ -9,7 +9,7 @@
 </head>
 <body>
 	<jsp:include page="Navegacion.jsp"></jsp:include>
-	<h3>Nueva Transferencia</h3>
+	<h1>Nueva Transferencia</h1>
 <form action="servletSeguro" method="get">
 <table>
 	<tr> 
