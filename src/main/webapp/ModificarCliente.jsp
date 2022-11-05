@@ -77,7 +77,9 @@
 		</td>
 		<td style="height: 0px; ">
 			<select name="txtPROVINCIA" >
-			<option value="1" >Provincia</option>
+				<option value="0" >Seleccione Provincia</option>
+				<option value="1" >Ciudad Auronome de Bs As</option>
+				<option value="2" >Gran Buenos Aires</option>
 					<!-- ACA DESARROLLO LAS OPCIONES -->									 				
 			 </select>	
 		</td>
