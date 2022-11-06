@@ -15,7 +15,7 @@
 <form method="get" action="ServletListaMovimientos">
 	 <table>
 	 	<tr>
-	 		<td>Filtros de Lista de Movimientos</td>
+	 		<td>Filtrar Movimientos</td>
 	 		<td><select name="">
 		<option value="" >Todos</option>
 		<!-- ACA  SE DESARROLLARA SEGUN EL FULTRO QUE PIDA LA PROFESORA -->
@@ -32,9 +32,9 @@
 	<table border="1" width="900">
 		<thead>
 			<tr>
-				<th style="width: 162px; ">Codigo de Movimiento</th>
-				<th style="width: 136px; ">Tipo de movimiento</th>
-				<th style="width: 139px; ">Numero de cuenta</th>
+				<th style="width: 162px; ">Código</th>
+				<th style="width: 136px; ">Tipo</th>
+				<th style="width: 139px; ">Nro. de cuenta</th>
 				<th>Fecha</th>
 				<th>Detalle</th>
 				<th>Importe</th>
