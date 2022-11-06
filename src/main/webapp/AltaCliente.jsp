@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -34,6 +34,9 @@
 		<td>Nacionalidad: </td>
 		<td style="height: 0px; ">
 			<select name="txtNACIONALIDAD" >
+				<option value="0" >Seleccione Nacionalidad</option>
+				<option value="1" >Argentino</option>
+				<option value="2" >Brasilero</option>
 					<!-- ACA DESARROLLO LAS OPCIONES -->									 				
 			 </select>	
 		</td>

@@ -36,8 +36,8 @@
 					<td>		</td>
 					<td>		</td>
 					<td>		</td>
-					<td>		</td>
-					<td>		</td>
+					<td><input type="submit" name="btnModificar" value="Autorizar"/></td>
+					<td><input type="submit" name="btnEliminar" value="Rechazar"/></td>
 				</tr>	
 			</tbody>
 	</table>

@@ -9,7 +9,7 @@
 </head>
 <body>
 	<jsp:include page="Menu.html"></jsp:include>
-<h3>ALTA CLIENTE</h3>
+<h3>MODIFICAR CLIENTE</h3>
 
 <form action="servletSeguro" method="get">
 <table>
@@ -36,6 +36,9 @@
 		<td>NACIONALIDAD</td>
 		<td style="height: 0px; ">
 			<select name="txtNACIONALIDAD" >
+				<option value="0" >Seleccione Nacionalidad</option>
+				<option value="1" >Argentino</option>
+				<option value="2" >Brasilero</option>
 					<!-- ACA DESARROLLO LAS OPCIONES -->									 				
 			 </select>	
 		</td>
@@ -74,7 +77,9 @@
 		</td>
 		<td style="height: 0px; ">
 			<select name="txtPROVINCIA" >
-			<option value="1" >Provincia</option>
+				<option value="0" >Seleccione Provincia</option>
+				<option value="1" >Ciudad Auronome de Bs As</option>
+				<option value="2" >Gran Buenos Aires</option>
 					<!-- ACA DESARROLLO LAS OPCIONES -->									 				
 			 </select>	
 		</td>
