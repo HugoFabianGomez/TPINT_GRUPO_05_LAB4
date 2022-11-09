@@ -8,8 +8,8 @@ public class Prestamo {
 	private int plazoMeses;
 	private float intereses;
 	private float importeCuota;
-	private Boolean otorgado;
-	private Boolean estado;
+	private boolean otorgado;
+	private boolean estado;
 	private String motivoRechazo;
 	private Cliente cliente;
 	
@@ -18,7 +18,7 @@ public class Prestamo {
 	}
 
 	public Prestamo(int codigo, String fecha, float importePagar, float importePedido, int plazoMeses, float intereses,
-			float importeCuota, Boolean otorgado, Boolean estado, String motivoRechazo, Cliente cliente) {
+			float importeCuota, boolean otorgado, boolean estado, String motivoRechazo, Cliente cliente) {
 		this.codigo = codigo;
 		this.fecha = fecha;
 		this.importePagar = importePagar;
@@ -88,19 +88,19 @@ public class Prestamo {
 		this.importeCuota = importeCuota;
 	}
 
-	public Boolean getOtorgado() {
+	public boolean getOtorgado() {
 		return otorgado;
 	}
 
-	public void setOtorgado(Boolean otorgado) {
+	public void setOtorgado(boolean otorgado) {
 		this.otorgado = otorgado;
 	}
 
-	public Boolean getEstado() {
+	public boolean getEstado() {
 		return estado;
 	}
 
-	public void setEstado(Boolean estado) {
+	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
 

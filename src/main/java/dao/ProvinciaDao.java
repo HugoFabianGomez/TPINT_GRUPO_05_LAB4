@@ -1,5 +1,8 @@
 package dao;
 
-public interface ProvinciaDao {
+import java.util.List;
+import entidades.Provincia;
 
+public interface ProvinciaDao {
+	public List<Provincia> obtenerTodos();
 }

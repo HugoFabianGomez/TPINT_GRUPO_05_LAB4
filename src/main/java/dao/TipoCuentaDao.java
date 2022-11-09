@@ -1,5 +1,8 @@
 package dao;
 
-public interface TipoCuentaDao {
+import java.util.List;
+import entidades.TipoCuenta;
 
+public interface TipoCuentaDao {
+	public List<TipoCuenta> obtenerTodos();
 }

@@ -1,5 +1,8 @@
 package dao;
 
-public interface LocalidadDao {
+import java.util.List;
+import entidades.Localidad;
 
+public interface LocalidadDao {
+	public List<Localidad> obtenerTodos();
 }

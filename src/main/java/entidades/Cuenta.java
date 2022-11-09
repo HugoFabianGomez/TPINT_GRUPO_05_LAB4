@@ -5,7 +5,7 @@ public class Cuenta {
 	private int cbu;
 	private String fechaCreacion;
 	private float saldo;
-	private Boolean estado;
+	private boolean estado;
 	private TipoCuenta tipoCuenta;
 	private Cliente cliente;
 	
@@ -13,7 +13,7 @@ public class Cuenta {
 
 	}
 
-	public Cuenta(int numeroCuenta, int cbu, String fechaCreacion, float saldo, Boolean estado, TipoCuenta tipoCuenta,
+	public Cuenta(int numeroCuenta, int cbu, String fechaCreacion, float saldo, boolean estado, TipoCuenta tipoCuenta,
 			Cliente cliente) {
 		this.numeroCuenta = numeroCuenta;
 		this.cbu = cbu;
@@ -56,11 +56,11 @@ public class Cuenta {
 		this.saldo = saldo;
 	}
 
-	public Boolean getEstado() {
+	public boolean getEstado() {
 		return estado;
 	}
 
-	public void setEstado(Boolean estado) {
+	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
 

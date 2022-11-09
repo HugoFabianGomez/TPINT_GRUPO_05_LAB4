@@ -2,13 +2,13 @@ package entidades;
 
 public class TipoMovimiento {
 	private int codigo;
-	private int descripcion;
+	private String descripcion;
 	
 	public TipoMovimiento() {
 
 	}
 
-	public TipoMovimiento(int codigo, int descripcion) {
+	public TipoMovimiento(int codigo, String descripcion) {
 		this.codigo = codigo;
 		this.descripcion = descripcion;
 	}
@@ -21,11 +21,11 @@ public class TipoMovimiento {
 		this.codigo = codigo;
 	}
 
-	public int getDescripcion() {
+	public String getDescripcion() {
 		return descripcion;
 	}
 
-	public void setDescripcion(int descripcion) {
+	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
 

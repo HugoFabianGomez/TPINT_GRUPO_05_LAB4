@@ -1,5 +1,8 @@
 package dao;
 
-public interface TipoMovimientoDao {
+import java.util.List;
+import entidades.TipoMovimiento;
 
+public interface TipoMovimientoDao {
+	public List<TipoMovimiento> obtenerTodos();
 }

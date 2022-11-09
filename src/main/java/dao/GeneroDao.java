@@ -1,5 +1,8 @@
 package dao;
 
-public interface GeneroDao {
+import java.util.List;
+import entidades.Genero;
 
+public interface GeneroDao {
+	public List<Genero> obtenerTodos();
 }
