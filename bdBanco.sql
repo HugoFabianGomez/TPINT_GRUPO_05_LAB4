@@ -2695,6 +2695,23 @@ insert into Localidades (codigo_localidad_LOC, codigo_provincia_LOC, descripcion
 (2381, 25, 'Yerba Buena'),
 (2382, 25, 'Yerba Buena (S)');
 
+create table TiposUsuario(
+	codigo_tipo_usuario_TUS int not null auto_increment primary key,
+    descripcion_TUS varchar(20) not null unique
+);
+
+insert into TiposUsuario values
+(1, 'Administrador'),
+(2, 'Cliente');
+
+create table Usuarios(
+	nombre_usuario_US varchar(30) not null primary key,
+    contrasena_US varchar(30) not null,
+    estado_US bit not null default 1,
+    codigo_tipo_usuario_US int not null,
+	foreign key (codigo_tipo_usuario_US) references TiposUsuario(codigo_tipo_usuario_TUS)
+);
+
 create table Clientes(
     dni_CLI int not null primary key,
     cuil_CLI int not null,
@@ -2704,18 +2721,17 @@ create table Clientes(
     domicilio_CLI varchar(50),
     email_CLI varchar(50) not null,
     telefono_CLI varchar(20) not null,
-    nombre_usuario_CLI varchar(30) not null unique,
-    contrasena_CLI varchar(30) not null,
-    tipo_usuario_CLI bit not null,
     estado_CLI bit not null default 1,
     codigo_nacionalidad_CLI int not null,
     codigo_localidad_CLI int not null,
     codigo_provincia_CLI int  not null,
     codigo_genero_CLI int not null,
+    nombre_usuario_CLI varchar(30) not null,
     foreign key (codigo_nacionalidad_CLI) references Nacionalidades (codigo_nacionalidad_NAC),
     foreign key (codigo_localidad_CLI) references Localidades (codigo_localidad_LOC),
     foreign key (codigo_provincia_CLI) references Provincias (codigo_provincia_PRO),
-    foreign key (codigo_genero_CLI) references Generos (codigo_genero_GEN)
+    foreign key (codigo_genero_CLI) references Generos (codigo_genero_GEN),
+    foreign key (nombre_usuario_CLI) references Usuarios (nombre_usuario_US)
 );
 
 create table TiposCuenta(
