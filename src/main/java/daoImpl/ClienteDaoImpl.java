@@ -39,9 +39,6 @@ public class ClienteDaoImpl implements ClienteDao {
 				 cli.setDomicilio(rs.getString("clientes.domicilio_CLI"));
 				 cli.setEmail(rs.getString("clientes.email_CLI"));
 				 cli.setTelefono(rs.getString("clientes.telefono_CLI"));
-				 cli.setNombreUsuario(rs.getString("clientes.nombre_usuario_CLI"));
-				 cli.setContrasena(rs.getString("clientes.contrasena_CLI"));
-				 cli.setTipoUsuario(rs.getBoolean("clientes.tipo_usuario_CLI"));
 				 cli.setEstado(rs.getBoolean("clientes.estado_CLI"));
 				 
 				 Nacionalidad nac = new Nacionalidad();
@@ -89,8 +86,8 @@ public class ClienteDaoImpl implements ClienteDao {
 		cn = new Conexion();
 		cn.Open();	
 
-		String query = "insert into clientes (dni_CLI, cuil_CLI, nombre_CLI, apellido_CLI, fecha_nacimiento_CLI, domicilio_CLI, email_CLI, telefono_CLI, nombre_usuario_CLI, contrasena_CLI, tipo_usuario_CLI, estado_CLI, codigo_nacionalidad_CLI, codigo_localidad_CLI, codigo_provincia_CLI, codigo_genero_CLI) values"
-		+ "("+cliente.getDni()+","+cliente.getCuil()+",'"+cliente.getNombre()+"', '"+cliente.getApellido()+"', '"+cliente.getFechaNacimiento()+"', '"+cliente.getDomicilio()+"', '"+cliente.getEmail()+"', '"+cliente.getTelefono()+"', '"+cliente.getNombreUsuario()+"', '"+cliente.getContrasena()+"', "+cliente.getTipoUsuario()+", "+cliente.getEstado()+", "+cliente.getNacionalidad().getCodigo()+", "+cliente.getLocalidad().getCodigo()+", "+cliente.getProvincia().getCodigo()+", "+cliente.getGenero().getCodigo()+")";
+		String query = "insert into clientes (dni_CLI, cuil_CLI, nombre_CLI, apellido_CLI, fecha_nacimiento_CLI, domicilio_CLI, email_CLI, telefono_CLI, estado_CLI, codigo_nacionalidad_CLI, codigo_localidad_CLI, codigo_provincia_CLI, codigo_genero_CLI) values"
+		+ "("+cliente.getDni()+","+cliente.getCuil()+",'"+cliente.getNombre()+"', '"+cliente.getApellido()+"', '"+cliente.getFechaNacimiento()+"', '"+cliente.getDomicilio()+"', '"+cliente.getEmail()+"', '"+cliente.getTelefono()+"',"+cliente.getEstado()+", "+cliente.getNacionalidad().getCodigo()+", "+cliente.getLocalidad().getCodigo()+", "+cliente.getProvincia().getCodigo()+", "+cliente.getGenero().getCodigo()+")";
 		
 		System.out.println(query);
 		try
@@ -123,9 +120,7 @@ public class ClienteDaoImpl implements ClienteDao {
 				"domicilio_CLI ='"+cliente.getDomicilio()+"',\r\n" + 
 				"email_CLI ='"+cliente.getEmail()+"', \r\n" + 
 				"telefono_CLI ='"+cliente.getTelefono()+"', \r\n" + 
-				"nombre_usuario_CLI ='"+cliente.getNombreUsuario()+"', \r\n"+
-				"contrasena_CLI ='"+cliente.getContrasena()+"', \r\n"+
-				"tipo_usuario_CLI ="+cliente.getTipoUsuario()+", \r\n"+
+				"usuario_CLI ="+cliente.getUsuario().getNombreUsuario()+", \r\n"+
 				"estado_CLI ="+cliente.getEstado()+", \r\n"+
 				"codigo_nacionalidad_CLI ='"+cliente.getNacionalidad().getCodigo()+"', \r\n" + 
 				"codigo_provincia_CLI ='"+cliente.getProvincia().getCodigo()+"', \r\n" + 

@@ -9,21 +9,20 @@ public class Cliente {
 	private String domicilio;
 	private String email;
 	private String telefono;
-	private String nombreUsuario;
-	private String contrasena;
-	private boolean tipoUsuario;
-	private boolean estado;
+	private Usuario usuario;
 	private Nacionalidad nacionalidad;
+
 	private Provincia provincia;
 	private Localidad localidad;
 	private Genero genero;
+	private boolean estado;
 	
 	public Cliente() {
 		
 	}
 
 	public Cliente(int dni, int cuil, String nombre, String apellido, String fechaNacimiento, String domicilio,
-			String email, String telefono, String nombreUsuario, String contrasena, boolean tipoUsuario, boolean estado, Nacionalidad nacionalidad, Provincia provincia, Localidad localidad,
+			String email, String telefono, boolean estado, Usuario usuario, Nacionalidad nacionalidad, Provincia provincia, Localidad localidad,
 			Genero genero) {
 		this.dni = dni;
 		this.cuil = cuil;
@@ -33,10 +32,8 @@ public class Cliente {
 		this.domicilio = domicilio;
 		this.email = email;
 		this.telefono = telefono;
-		this.nombreUsuario = nombreUsuario;
-		this.contrasena = contrasena;
-		this.tipoUsuario = tipoUsuario;
 		this.estado = estado;
+		this.usuario = usuario;
 		this.nacionalidad = nacionalidad;
 		this.provincia = provincia;
 		this.localidad = localidad;
@@ -78,6 +75,14 @@ public class Cliente {
 	public String getFechaNacimiento() {
 		return fechaNacimiento;
 	}
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 
 	public void setFechaNacimiento(String fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
@@ -105,30 +110,6 @@ public class Cliente {
 
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
-	}
-
-	public String getNombreUsuario() {
-		return nombreUsuario;
-	}
-
-	public void setNombreUsuario(String nombreUsuario) {
-		this.nombreUsuario = nombreUsuario;
-	}
-
-	public String getContrasena() {
-		return contrasena;
-	}
-
-	public void setContrasena(String contrasena) {
-		this.contrasena = contrasena;
-	}
-
-	public boolean getTipoUsuario() {
-		return tipoUsuario;
-	}
-
-	public void setTipoUsuario(boolean tipoUsuario) {
-		this.tipoUsuario = tipoUsuario;
 	}
 
 	public boolean getEstado() {
@@ -175,9 +156,8 @@ public class Cliente {
 	public String toString() {
 		return "Cliente [dni=" + dni + ", cuil=" + cuil + ", nombre=" + nombre + ", apellido=" + apellido
 				+ ", fechaNacimiento=" + fechaNacimiento + ", domicilio=" + domicilio + ", email=" + email
-				+ ", telefono=" + telefono + ", nombreUsuario=" + nombreUsuario + ", contrasena=" + contrasena
-				+ ", tipoUsuario=" + tipoUsuario + ", estado=" + estado + ", nacionalidad=" + nacionalidad
-				+ ", provincia=" + provincia + ", localidad=" + localidad + ", genero=" + genero + "]";
+				+ ", telefono=" + telefono + ", nacionalidad=" + nacionalidad
+				+ ", provincia=" + provincia + ", localidad=" + localidad + ", genero=" + genero + ", estado=" + estado
+				+ "]";
 	}
-	
 }
