@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/ServletClientes")
+@WebServlet("/ServletUsuarios")
 public class ServletUsuarios extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

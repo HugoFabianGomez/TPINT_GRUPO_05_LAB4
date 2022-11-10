@@ -19,15 +19,15 @@ public class UsuarioDaoImpl implements UsuarioDao {
 		 try
 		 {
 			 ResultSet rs= cn.query("select * from Usuarios U\r\n" + 
-			 		"inner join TipoUsuarios TU on TU.CodTipoUsuario = U.CodTipoUsuario");
+			 		"inner join TipoUsuarios TUS on TUS.codigo_tipo_usuario_TUS = U.codigo_tipo_usuario_US");
 			 while(rs.next())
 			 {
 				 Usuario u = new Usuario();
-				 u.setNombreUsuario(rs.getString("U.NombreUsuario"));
-				 u.setContrasenia(rs.getString("U.Contrasenia"));
+				 u.setNombreUsuario(rs.getString("U.nombre_usuario_US"));
+				 u.setContrasenia(rs.getString("U.contrasena_US"));
 				 
 				 TipoUsuario tu = new TipoUsuario();
-				 tu.setTipoUsuario(rs.getString("TU.TipoUsuario"));	 
+				 tu.setTipoUsuario(rs.getString("TU.descripcion_TUS"));	 
 				 u.setTipoUsuario(tu);
 				 
 				 list.add(u);
@@ -51,7 +51,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 		cn = new Conexion();
 		cn.Open();	
 
-		String query = "insert into Usuarios (NombreUsuario, Contrasenia, CodTipoUsuario, Estado) values"
+		String query = "insert into Usuarios (nombre_usuario_US, contrasena_US, codigo_tipo_usuario_US, 1) values"
 		+ "("+u.getNombreUsuario()+","+u.getContrasenia()+",'"+u.getTipoUsuario().getCodTipoUsuario()+",1)";
 		
 		System.out.println(query);
@@ -78,10 +78,10 @@ public class UsuarioDaoImpl implements UsuarioDao {
 		cn.Open();	
 
 		String query = "update Usuarios set\r\n" +  
-				"NombreUsuario ="+usuario.getNombreUsuario()+",\r\n" + 
-				"Contrasenia ='"+usuario.getContrasenia()+"', \r\n" + 
-				"CodTipoUsuario ='"+usuario.getTipoUsuario().getCodTipoUsuario()+"',\r\n" + 
-				"where NombreUsuario =" + usuario.getNombreUsuario()+"";
+				"nombre_usuario_US ="+usuario.getNombreUsuario()+",\r\n" + 
+				"contrasena_US ='"+usuario.getContrasenia()+"', \r\n" + 
+				"cod_tipo_usuario_US ='"+usuario.getTipoUsuario().getCodTipoUsuario()+"',\r\n" + 
+				"where nombre_usuario_US =" + usuario.getNombreUsuario()+"";
 		try
 		 {
 			estado=cn.execute(query);
@@ -102,7 +102,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 		boolean estado=true;
 		cn = new Conexion();
 		cn.Open();		 
-		String query = "update usuarios set estado=0 where NombreUsuario = '" + nombreUsuario + "'";
+		String query = "update usuarios set estado_US = 0 where nombre_usuario_US = '" + nombreUsuario + "'";
 		try
 		 {
 			estado=cn.execute(query);
