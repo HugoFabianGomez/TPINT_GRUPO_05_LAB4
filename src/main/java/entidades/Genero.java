@@ -13,6 +13,11 @@ public class Genero {
 		this.descripcion = descripcion;
 	}
 	
+	public Genero(int codigo) {
+		// TODO Auto-generated constructor stub
+		this.codigo=codigo;
+	}
+
 	public int getCodigo() {
 		return codigo;
 	}

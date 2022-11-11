@@ -1,3 +1,13 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="entidades.Nacionalidad"%>
+<%@page import="entidades.Provincia"%>
+<%@page import="entidades.Genero"%>
+<%@page import="entidades.Localidad"%>
+<%@page import="entidades.Cliente"%>
+<%@page import="presentacion.controller.ServletNacionalidades"%>
+<%@page import="presentacion.controller.ServletProvincias"%>
+<%@page import="presentacion.controller.ServletGeneros"%>
+<%@page import="presentacion.controller.ServletLocalidades"%>
 <%@page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -8,9 +18,17 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
+
+<%
+ArrayList<Nacionalidad> list_Nacionalidad = (ArrayList<Nacionalidad>) ServletNacionalidades.obtenerNacionalidades();
+ArrayList<Provincia> list_Provincia = (ArrayList<Provincia>) ServletProvincias.obtenerProvincia();
+ArrayList<Genero> list_Genero = (ArrayList<Genero>) ServletGeneros.obtenerGeneros();
+ArrayList<Localidad> list_Localidad = (ArrayList<Localidad>) ServletLocalidades.obtenerLocalidades();
+
+%>
 	<jsp:include page="Menu.html"></jsp:include>
 	<h3>Alta de Cliente</h3>
-<form action="servletSeguro" method="get">
+<form action="servletClientes" method="post">
 <table>
 	<tr> 
 		<td style="width: 139px; ">DNI</td>
@@ -33,32 +51,33 @@
 	<tr> 
 		<td>Nacionalidad: </td>
 		<td style="height: 0px; ">
-			<select name="txtNACIONALIDAD" >
-				<option value="0" >Seleccione Nacionalidad</option>
-				<option value="1" >Argentino</option>
-				<option value="2" >Brasilero</option>
-					<!-- ACA DESARROLLO LAS OPCIONES -->									 				
+			<select name="txtNACIONALIDAD" required>
+			
+				<%
+				if(list_Genero!=null)
+					for (Genero nac : list_Genero) {
+				%>
+					<option value="<%=nac.getCodigo()%>"><%=nac.getDescripcion()%></option>
+				<%
+					}
+					%>
+								 				
 			 </select>	
 		</td>
 		<td>Fecha de Nacimiento: </td>
-		<td style="height: 0px; "><input type="date" name="txtFECHA_NAC" value="DD/MM/AAAA" /><br></td>
+		<td style="height: 0px; "><input type="date" name="txtFECHA_NAC" value="DD/MM/AAAA" required/><br></td>
 		<td>Género: </td>
 		<td style="height: 0px; ">
-			<select name="txtSEXO" >
-			
-			<option value="1" >Femenino</option>
-			<option value="2" >Masculino</option>
-			<option value="3" >No binario</option>
-			<option value="4" >Transgénero</option>
-			<option value="5" >Transexual</option>
-			<option value="6" >Genero fluido</option>
-			<option value="7" >Poligénero</option>
-			<option value="8" >Agénero</option>
-			<option value="9" >Género neutro</option>
-			<option value="10" >Pangénero</option>
-			
-			
-					<!-- ACA DESARROLLO LAS OPCIONES -->
+			<select name="txtGENERO" required >
+				<%
+				if(list_Genero!=null)
+					for (Genero gen : list_Genero) {
+				%>
+					<option value="<%=gen.getCodigo()%>"><%=gen.getDescripcion()%></option>
+				<%
+					}
+					%>
+
 			 </select>	
 		</td>
 		
@@ -70,12 +89,30 @@
 		<td style="height: 0px; ">
 			<select name="txtLOCALIDAD" >
 			<option value="1" >Localidad: </option>
+			
+				<%
+				if(list_Localidad!=null)
+					for (Localidad loc : list_Localidad) {
+				%>
+					<option value="<%=loc.getCodigo()%>"><%=loc.getDescripcion()%></option>
+				<%
+					}
+					%>
 					<!-- ACA DESARROLLO LAS OPCIONES -->									 				
 			 </select>	
 		</td>
 		<td style="height: 0px; ">
 			<select name="txtPROVINCIA" >
-			<option value="1" >Provincia: </option>
+			
+			<%
+				if(list_Provincia!=null)
+					for (Provincia prov : list_Provincia) {
+				%>
+					<option value="<%=prov.getCodigo()%>"><%=prov.getDescripcion()%></option>
+				<%
+					}
+					%>
+			
 					<!-- ACA DESARROLLO LAS OPCIONES -->									 				
 			 </select>	
 		</td>

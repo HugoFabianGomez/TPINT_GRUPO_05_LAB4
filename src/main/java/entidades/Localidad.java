@@ -16,6 +16,11 @@ public class Localidad {
 		this.provincia = provincia;
 		this.descripcion = descripcion;
 	}
+	public Localidad(int codigo) {
+		// TODO Auto-generated constructor stub
+		this.codigo=codigo;
+	}
+
 	public int getCodigo() {
 		return codigo;
 	}

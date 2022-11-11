@@ -13,6 +13,11 @@ public class Provincia {
 		this.descripcion = descripcion;
 	}
 
+	public Provincia(int codigo) {
+		// TODO Auto-generated constructor stub
+		this.codigo=codigo;
+	}
+
 	public int getCodigo() {
 		return codigo;
 	}
