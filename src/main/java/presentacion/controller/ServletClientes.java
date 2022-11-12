@@ -1,6 +1,7 @@
 package presentacion.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,21 +18,20 @@ import negocioImpl.ClienteNegocioImpl;
 import entidades.Genero;
 import entidades.Localidad;
 
+import daoImpl.ClienteDaoImpl;
+import entidades.Cliente;
+//>>>>>>> 5b4a8aa43b3a66077f920fb03041551279e015b3
+
 @WebServlet("/ServletClientes")
 public class ServletClientes extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	static ClienteNegocio ClienteNeg = new ClienteNegocioImpl();
 
-
-    public ServletClientes() {
-    	super();
-    }
-
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+	public ServletClientes() {
+		super();
 	}
 
+//<<<<<<< HEAD
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		if(request.getParameter("btnAceptar")!=null)
@@ -61,8 +61,21 @@ public class ServletClientes extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/AltaCliente.jsp");   
 	        rd.forward(request, response);
 		}
-
-		
 	}
 
+		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// Lista clientes
+		ClienteDaoImpl cliDao = new ClienteDaoImpl();
+		ArrayList<Cliente> listaClientes = cliDao.obtenerTodos();
+		request.setAttribute("listaClientes", listaClientes);
+		RequestDispatcher rd = request.getRequestDispatcher("/AutorizarPrestamo.jsp");
+		rd.forward(request, response);
+//>>>>>>> 5b4a8aa43b3a66077f920fb03041551279e015b3
+	}
+
+	//protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	//		throws ServletException, IOException {
+	//}
 }

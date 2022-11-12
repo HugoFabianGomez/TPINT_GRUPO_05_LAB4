@@ -11,7 +11,7 @@ public class Cliente {
 	private String telefono;
 	private Usuario usuario;
 	private Nacionalidad nacionalidad;
-
+	private String nombreCompleto;
 	private Provincia provincia;
 	private Localidad localidad;
 	private Genero genero;
@@ -76,6 +76,14 @@ public class Cliente {
 		return fechaNacimiento;
 	}
 	
+	public String getNombreCompleto() {
+		return nombreCompleto;
+	}
+
+	public void setNombreCompleto(String nombreCompleto) {
+		this.nombreCompleto = nombreCompleto;
+	}
+
 	public Usuario getUsuario() {
 		return usuario;
 	}

@@ -17,10 +17,10 @@ public class ClienteDaoImpl implements ClienteDao {
 	private Conexion cn;
 
 	@Override
-	public List<Cliente> obtenerTodos() {
+	public ArrayList<Cliente> obtenerTodos() {
 		cn = new Conexion();
 		cn.Open();
-		 List<Cliente> list = new ArrayList<Cliente>();
+		 ArrayList<Cliente> list = new ArrayList<Cliente>();
 		 try
 		 {
 			 ResultSet rs= cn.query("select * from clientes\r\n" + 
@@ -40,6 +40,7 @@ public class ClienteDaoImpl implements ClienteDao {
 				 cli.setEmail(rs.getString("clientes.email_CLI"));
 				 cli.setTelefono(rs.getString("clientes.telefono_CLI"));
 				 cli.setEstado(rs.getBoolean("clientes.estado_CLI"));
+				 cli.setNombreCompleto(rs.getString("clientes.nombre_CLI")+" "+rs.getString("clientes.apellido_CLI"));
 				 
 				 Nacionalidad nac = new Nacionalidad();
 				 nac.setCodigo(rs.getInt("nacionalidades.codigo_nacionalidad_NAC"));

@@ -1,6 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ page import="java.util.*"%>
+<%@ page import="daoImpl.ClienteDaoImpl"%>
+<%@ page import="entidades.Cliente"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 
@@ -11,8 +13,8 @@
 		var day = date.getDate();
 		var year = date.getFullYear();
 
-		if (document.getElementById('datetext').value == '') {
-			document.getElementById('datetext').value = day + '-' + month + '-'
+		if (document.getElementById('txtFecha').value == '') {
+			document.getElementById('txtFecha').value = day + '-' + month + '-'
 					+ year;
 		}
 	}
@@ -24,66 +26,84 @@
 </head>
 <body onload="addDate();">
 	<jsp:include page="Menu.html"></jsp:include>
-	<h3>AUTORIZAR PRESTAMO</h3>
+	<h2>Autorizacion de prestamos</h2>
 
-	<form action="servletSeguro" method="get">
-		<table>
-			<tr>
-			</tr>
+	<%
+		ClienteDaoImpl cliDao = new ClienteDaoImpl();
+		ArrayList<Cliente> listaClientes = null;
 
-			<tr>
-				<td>Cliente</td>
-				<td style="height: 0px;"><select name="sltCliente">
+		listaClientes = (request.getAttribute("listaClientes") != null)
+				? (ArrayList<Cliente>) request.getAttribute("listaClientes")
+				: cliDao.obtenerTodos();
+	%>
 
-				</select></td>
-				
-				<td>Cuenta</td>
-				<td style="height: 0px;"><select name="sltCuenta">
+	<form>
 
-				</select></td>
-				
-			</tr>
-			<tr>
-				<td>Monto</td>
-				<td style="height: 0px;"><input type="text" name="txtMonto"
-					required maxlength="40" autocomplete="off" /><br></td>
-			</tr>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="mb-3">
+					<label for="ddlClientes" class="form-label">Clientes</label> <select
+						name="ddlClientes" class="form-select">
+						<%
+							for (Cliente c : listaClientes) {
+								dni = String.valueOf(c.getDni());
+						%>
+						<option value="<%=dni%>"><%=c.getNombreCompleto()%>
+						</option>
+						<%
+							}
+						%>
+					</select>
 
-			<tr>
-				<td>Cuotas</td>
-				<td style="height: 0px;"><select name="sltCuotas">
+				</div>
+
+				<div class="mb-3">
+					<label for="ddlCuentas" class="form-label">Cuentas</label> <select
+						class="form-select" name="ddlCuentas">
+					</select>
+				</div>
+
+				<div class="mb-3">
+					<label for="txtMonto" class="form-label">Monto</label> <input
+						type="text" class="form-control" name="txtMonto" required
+						maxlength="40" autocomplete="off" />
+				</div>
+
+				<div class="mb-3">
+					<button type="button" ID="btnAutorizar" class="btn btn-success">Autorizar</button>
+					<button type="button" ID="btnAutorizar" class="btn btn-danger">Cancelar</button>
+				</div>
+			</div>
+
+			<div class="col-md-6">
+
+				<div>
+					<label for="ddlCuotas" class="form-label">Cuotas</label> <select
+						name="ddlCuotas" class="form-select">
 
 						<option value="1">1</option>
 						<option value="2">3</option>
 						<option value="3">6</option>
-						<option value="4">9</option>
 						<option value="5">12</option>
 						<option value="6">18</option>
 						<option value="7">24</option>
 						<option value="8">36</option>
 
-				</select></td>
-			</tr>
+					</select>
+				</div>
 
-			<tr>
-				<td>Intereses</td>
-				<td style="height: 0px;"><input type="text" name="txtIntereses"
-					required maxlength="15" autocomplete="on" /><br></td>
-			</tr>
+				<div class="mb-3">
+					<label for="txtIntereses" class="form-label">Intereses</label> <input
+						type="text" class="form-control" name="txtIntereses" required
+						maxlength="15" autocomplete="on" />
+				</div>
 
-			<tr>
-				<td>Fecha</td>
-				<td style="height: 0px;"><input type="text" id="datetext"><br></td>
-			</tr>
-
-			<tr>
-				<br>
-				<br>
-				<td style="height: 0px;"><input type="submit" name="btnAutorizar"
-					value="Autorizar" /></td>
-			</tr>
-
-		</table>
+				<div class="mb-3">
+					<label for="txtFecha" class="form-label">Fecha</label> <input
+						type="text" class="form-control" id="txtFecha">
+				</div>
+			</div>
+		</div>
 	</form>
 </body>
 </html>
