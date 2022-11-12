@@ -16,6 +16,8 @@ public class GeneroDaoImpl implements GeneroDao{
 	
 	@Override
 	public List<Genero> obtenerTodos() {
+		System.out.println("GENERODAOIMPL");
+		
 		cn = new Conexion();
 		cn.Open();
 		 List<Genero> list = new ArrayList<Genero>();
@@ -30,6 +32,8 @@ public class GeneroDaoImpl implements GeneroDao{
 				 
 				 list.add(gen);
 			 }
+			 /*int cant = list.size();
+			System.out.println("El numero de elementos es de "+cant);*/
 			 
 		 }
 		 catch(Exception e)

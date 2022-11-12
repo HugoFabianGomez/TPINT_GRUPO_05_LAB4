@@ -46,7 +46,7 @@
 						name="ddlClientes" class="form-select">
 						<%
 							for (Cliente c : listaClientes) {
-								dni = String.valueOf(c.getDni());
+								//dni = String.valueOf(c.getDni());
 						%>
 						<option value="<%=dni%>"><%=c.getNombreCompleto()%>
 						</option>

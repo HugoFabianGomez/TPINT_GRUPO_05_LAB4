@@ -33,6 +33,7 @@ public class ServletGeneros extends HttpServlet {
 		
 	}
 	public static ArrayList<Genero> obtenerGeneros() {
+		//System.out.println("LLEGUE EN SERVLETGENERO");
 		return GenNegocio.obtenerTodos();
 	}
 

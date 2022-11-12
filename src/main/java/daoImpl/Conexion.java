@@ -10,7 +10,7 @@ public class Conexion {
 	private String host = "jdbc:mysql://localhost:3306/";
 	private String user = "root";
 	private String pass = "root";
-	private String dbName = "bdbanco??profileSQL=true&useSSL=false";
+	private String dbName = "bdbanco?profileSQL=true&useSSL=false";
 
 	protected Connection connection;
 	
@@ -18,6 +18,7 @@ public class Conexion {
 	{
 		try
 		{
+			System.out.println("llegue aca");
 			Class.forName("com.mysql.jdbc.Driver");
 			this.connection = DriverManager.getConnection(host+dbName, user, pass);
 		}
