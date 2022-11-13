@@ -32,7 +32,7 @@ ArrayList<Localidad> list_Localidad = (ArrayList<Localidad>) ServletLocalidades.
 
 	<jsp:include page="Menu.html"></jsp:include>
 	<h3>Alta de Cliente</h3>
-<form action="servletClientes" method="post">
+<form action="ServletClientes" method="post">
 <table>
 	<tr> 
 		<td style="width: 139px; ">DNI</td>
@@ -47,9 +47,9 @@ ArrayList<Localidad> list_Localidad = (ArrayList<Localidad>) ServletLocalidades.
 	</tr>
 		<tr> 
 		<td>Nombre(s): </td>
-		<td style="height: 0px; "><input type="text" name="txtNOMBRE"/></td>
+		<td style="height: 0px; "><input type="text" name="txtNOMBRE" style="text-transform:uppercase"/></td>
 		<td>Apellido(s): </td>
-		<td style="height: 0px; "><input type="text" name="txtAPELLIDO"/></td>
+		<td style="height: 0px; "><input type="text" name="txtAPELLIDO" style="text-transform:uppercase"/></td>
 	</tr>
 	 
 	<tr> 
@@ -58,8 +58,8 @@ ArrayList<Localidad> list_Localidad = (ArrayList<Localidad>) ServletLocalidades.
 			<select name="txtNACIONALIDAD" required>
 			
 				<%
-				if(list_Genero!=null)
-					for (Genero nac : list_Genero) {
+				if(list_Nacionalidad!=null)
+					for (Nacionalidad nac : list_Nacionalidad) {
 				%>
 					<option value="<%=nac.getCodigo()%>"><%=nac.getDescripcion()%></option>
 				<%
@@ -89,7 +89,7 @@ ArrayList<Localidad> list_Localidad = (ArrayList<Localidad>) ServletLocalidades.
 	
 	<tr>
 		<td>Domicilio: </td>
-		<td style="height: 0px; "><input type="text" name="txtDIRECCION" required  maxlength="40" autocomplete="off" /><br></td>
+		<td style="height: 0px; "><input type="text" name="txtDIRECCION" required  maxlength="40" autocomplete="off" style="text-transform:uppercase"/><br></td>
 		<td style="height: 0px; ">
 			<select name="txtLOCALIDAD" >
 			<option value="1" >Localidad: </option>
@@ -129,6 +129,11 @@ ArrayList<Localidad> list_Localidad = (ArrayList<Localidad>) ServletLocalidades.
 		<td>Teléfono: </td>
 		<td style="height: 0px; "><input type="tel" name="txtTELEFONO"/></td>
 	</tr>
+	<tr>
+		<td>Usuario: </td>
+		<td style="height: 0px; ">  <input type="text" name="textUSUARIO" required /> </td>	
+	</tr>
+	
 	
 	<tr>
 		<td></td>

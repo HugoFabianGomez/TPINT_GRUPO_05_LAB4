@@ -2703,6 +2703,7 @@ create table TiposUsuario(
 insert into TiposUsuario values
 (1, 'Administrador'),
 (2, 'Cliente');
+select * from tiposusuario;
 
 create table Usuarios(
 	nombre_usuario_US varchar(30) not null primary key,
@@ -2711,6 +2712,24 @@ create table Usuarios(
     codigo_tipo_usuario_US int not null,
 	foreign key (codigo_tipo_usuario_US) references TiposUsuario(codigo_tipo_usuario_TUS)
 );
+insert into usuarios(nombre_usuario_us, contrasena_us, estado_us, codigo_tipo_usuario_us)
+values('lemos.h', 'lu8ebuto', true, 1);
+select * from usuarios;
+delete from usuarios where estado_us = 1;
+drop trigger alta_Cliente;
+delimiter //
+create trigger alta_Cliente
+before insert on clientes
+for each row
+begin
+	insert into usuarios(nombre_usuario_us,      contrasena_us,                estado_us, codigo_tipo_usuario_us)
+                  values(new.nombre_usuario_CLI, 'sssss', 1,         2);  
+end//
+delimiter ;
+
+	insert into usuarios(nombre_usuario_us, contrasena_us,  estado_us, codigo_tipo_usuarios_us)
+                  values('aaaaaa',          'sssss',        1,         2); 
+/*(concat('bco-',new.dni_cli))*/
 
 create table Clientes(
     dni_CLI int not null primary key,
@@ -2733,6 +2752,16 @@ create table Clientes(
     foreign key (codigo_genero_CLI) references Generos (codigo_genero_GEN),
     foreign key (nombre_usuario_CLI) references Usuarios (nombre_usuario_US)
 );
+
+insert into clientes (dni_CLI,   cuil_CLI,  nombre_CLI, apellido_CLI, fecha_nacimiento_CLI, domicilio_CLI,      email_CLI,                telefono_CLI,   estado_CLI, codigo_nacionalidad_CLI, codigo_localidad_CLI, codigo_provincia_CLI, codigo_genero_CLI, nombre_usuario_CLI)
+              values ('12345678','12345678','Lucas',    'Zabalett',   curdate(),            'AV Cazon',        'lucaszabalett@gmail.com','1132958543',    1,          1,                       1,                    1,                    1,                 'hfghugo');
+insert into clientes (dni_CLI,   cuil_CLI,  nombre_CLI,  apellido_CLI, fecha_nacimiento_CLI, domicilio_CLI,     email_CLI,                telefono_CLI,   estado_CLI, codigo_nacionalidad_CLI, codigo_localidad_CLI, codigo_provincia_CLI, codigo_genero_CLI, nombre_usuario_CLI)
+              values ('21453904','214539048','Hugo',    'Gomez',       curdate(),            'AV PERON 374',    'lu8ebu@gmail.com',       '1167997295',   1,          1,                       1,                    1,                    1,                 'hfghugo.k');
+insert into clientes (dni_CLI,   cuil_CLI,   nombre_CLI, apellido_CLI, fecha_nacimiento_CLI, domicilio_CLI,      email_CLI,               telefono_CLI,   estado_CLI, codigo_nacionalidad_CLI, codigo_localidad_CLI, codigo_provincia_CLI, codigo_genero_CLI) 
+               values(124539048, 0,          'hugo',     'gomez',      '2002-02-15',         'peron 374 2do a', 'cc@hh.com',              '111',          false,      7,                       130,                  2,                    3);
+insert into clientes (dni_CLI,             cuil_CLI,            nombre_CLI,               apellido_CLI,                 fecha_nacimiento_CLI,              domicilio_CLI,                  email_CLI,               telefono_CLI,               estado_CLI,  codigo_nacionalidad_CLI,                   codigo_localidad_CLI,                  codigo_provincia_CLI,                   codigo_genero_CLI,                  nombre_usuario_CLI) values(15,155,'hh', 'jjjhjhh', '2001-01-01', 'ss', 'kk@jj.com', '125',1,         5, 4, 5, 5,'entidades.Usuario@53438e8a');
+
+select * from clientes;
 
 create table TiposCuenta(
 	codigo_tipo_cuenta_TCU int primary key auto_increment,
@@ -2793,3 +2822,5 @@ create table Prestamos(
     dni_cliente_PRS int not null,
     foreign key (dni_cliente_PRS) references Clientes(dni_CLI)
 );
+
+select 

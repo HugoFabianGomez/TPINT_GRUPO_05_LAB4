@@ -18,7 +18,7 @@ public class Conexion {
 	{
 		try
 		{
-			System.out.println("llegue aca");
+			//System.out.println("llegue aca");
 			Class.forName("com.mysql.jdbc.Driver");
 			this.connection = DriverManager.getConnection(host+dbName, user, pass);
 		}
@@ -37,6 +37,7 @@ public class Conexion {
 		{
 			st= connection.createStatement();
 			rs= st.executeQuery(query);
+			//System.out.println("llegue despues de execute linea 40 conexion");
 		}
 		catch(SQLException e)
 		{

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import entidades.Cliente;
 import entidades.Nacionalidad;
 import entidades.Provincia;
+import entidades.Usuario;
 import negocio.ClienteNegocio;
 import negocioImpl.ClienteNegocioImpl;
 import entidades.Genero;
@@ -36,10 +37,11 @@ public class ServletClientes extends HttpServlet {
 		
 		if(request.getParameter("btnAceptar")!=null)
 		{
+			System.out.println("Entro Servlet");
 			Cliente cliente =  new Cliente();
 			
 			cliente.setDni(Integer.parseInt(request.getParameter("txtDNI")));
-			cliente.setDni(Integer.parseInt(request.getParameter("txtCUIL")));
+			cliente.setCuil(Integer.parseInt(request.getParameter("txtCUIL")));
 			cliente.setNombre(request.getParameter("txtNOMBRE"));
 			cliente.setApellido(request.getParameter("txtAPELLIDO"));
 			cliente.setNacionalidad(new Nacionalidad(Integer.parseInt(request.getParameter("txtNACIONALIDAD"))));
@@ -50,9 +52,10 @@ public class ServletClientes extends HttpServlet {
 			cliente.setProvincia(new Provincia(Integer.parseInt(request.getParameter("txtPROVINCIA"))));
 			cliente.setEmail(request.getParameter("textEMAIL"));
 			cliente.setTelefono(request.getParameter("txtTELEFONO"));
+			cliente.setUsuario(new Usuario(request.getParameter("textUSUARIO")));
 			
-	
 			
+
 			System.out.println(cliente.getFechaNacimiento());
 			
 			Boolean filas=ClienteNeg.agregar(cliente);

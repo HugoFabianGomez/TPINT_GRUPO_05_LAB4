@@ -16,7 +16,7 @@ public class GeneroDaoImpl implements GeneroDao{
 	
 	@Override
 	public List<Genero> obtenerTodos() {
-		System.out.println("GENERODAOIMPL");
+		//System.out.println("GENERODAOIMPL");
 		
 		cn = new Conexion();
 		cn.Open();
