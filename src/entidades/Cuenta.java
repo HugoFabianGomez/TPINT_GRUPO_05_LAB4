@@ -10,7 +10,8 @@ public class Cuenta {
 	private Cliente cliente;
 	
 	public Cuenta() {
-
+		tipoCuenta = new TipoCuenta();
+		cliente = new Cliente();
 	}
 
 	public Cuenta(int numeroCuenta, int cbu, String fechaCreacion, float saldo, boolean estado, TipoCuenta tipoCuenta,

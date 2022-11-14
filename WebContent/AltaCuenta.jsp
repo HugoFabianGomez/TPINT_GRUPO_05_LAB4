@@ -14,7 +14,7 @@
 	<jsp:include page="Menu.html"></jsp:include>
 <h3>Agregar Cuenta</h3>
 
-<form action="servletSeguro" method="get">
+<form action="ServletCuentas" method="post">
 <table>
 	<tr> 
 		<td style="width: 139px; ">Número de Cuenta: </td>
@@ -58,18 +58,26 @@
 		<td style="height: 0px; "><input type="Number" name="txtDNI" min="1" max="99999999"
 		required  maxlength="10" autocomplete="off" onkeypress="return((event.charCode >= 48 && event.charCode <= 57))"
 		value="00.000.000" /><br></td>
-		
-		
+		<td>Saldo: </td>
+		<td><input type="Number" name="txtSaldo"  onkeypress="return((event.charCode >= 48 && event.charCode <= 57))" value="000000" /></td>
 	</tr>
 	
 	
 	<tr> 
 		<br><br>
-		<td style="height: 0px; "><input type="submit" name="btnAceptar" value="Agregar"/></td>
+		<td style="height: 0px; "><input type="submit" name="btnAgregar" value="Agregar"/></td>
 	</tr>
 
 </table>
 </form>
 	
+	<%
+	if(request.getAttribute("filas")!=null){
+	 %>
+		Cuenta agregada exitosamente!
+	<% 
+	}
+	%>
+
 </body>
 </html>

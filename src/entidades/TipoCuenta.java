@@ -8,6 +8,10 @@ public class TipoCuenta {
 	
 	}
 	
+	public TipoCuenta(int codigo) {
+		this.codigo = codigo;
+	}
+	
 	public TipoCuenta(int codigo, String descripcion) {
 		this.codigo = codigo;
 		this.descripcion = descripcion;

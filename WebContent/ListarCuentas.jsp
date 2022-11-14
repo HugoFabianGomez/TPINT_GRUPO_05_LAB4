@@ -1,4 +1,5 @@
 <%@ page import="java.util.ArrayList"%>
+<%@ page import="entidades.Cuenta"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -12,7 +13,16 @@
 	<jsp:include page="Menu.html"></jsp:include>
 	<h1>Lista de Cuentas</h1>
 
-<form method="get" action="ServletListaCuentas">
+<form>
+	<%
+	ArrayList<Cuenta> listaCuentas = new ArrayList<Cuenta>();
+	if(request.getAttribute("listaCuentas")!=null){
+		listaCuentas = (ArrayList<Cuenta>)request.getAttribute("listaCuentas");
+	}
+	
+	%>
+
+
 	 <table>
 	 	<tr>
 	 		<td>Filtrar: </td>
@@ -43,17 +53,24 @@
 			</tr>
 		</thead>
 			<tbody>
+				<% 
+					for(Cuenta cuenta : listaCuentas){
+				%>
 				<tr>
-					<td>		</td>
-					<td>		</td>
-					<td>		</td>
-					<td>		</td>
-					<td>		</td>
-					<td>		</td>
-					<td>		</td>
+				
+					<td><%=cuenta.getNumeroCuenta() %></td>
+					<td><%=cuenta.getCbu() %></td>
+					<td><%=cuenta.getTipoCuenta().getDescripcion() %></td>
+					<td><%=cuenta.getFechaCreacion() %></td>
+					<td><%=cuenta.getCliente().getDni() %></td>
+					<td><%=cuenta.getSaldo() %></td>
+					<td><%=cuenta.getEstado() %></td>
 					<td><input type="submit" name="btnModificar" value="Modificar"/></td>
 					<td><input type="submit" name="btnModificar" value="Eliminar"/></td>	
 				</tr>	
+				<%
+					}
+				%>
 			</tbody>
 		
 	</table>
