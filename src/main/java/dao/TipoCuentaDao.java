@@ -1,8 +1,8 @@
 package dao;
 
-import java.util.List;
+import java.util.ArrayList;
 import entidades.TipoCuenta;
 
 public interface TipoCuentaDao {
-	public List<TipoCuenta> obtenerTodos();
+	public ArrayList<TipoCuenta> obtenerTodos();
 }

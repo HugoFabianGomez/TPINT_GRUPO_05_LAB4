@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="entidades.TipoCuenta"%>
+<%@page import="presentacion.controller.ServletTiposCuenta"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,13 +25,27 @@
 		<td style="height: 0px; "><input type="Number" name="txtCBU" 
 		required  maxlength="22" autocomplete="off" onkeypress="return((event.charCode >= 48 && event.charCode <= 57))"
 		value="0000000000000000000000" /><br></td>
-
+	
+	<% 
+	
+		ArrayList<TipoCuenta> listaTipos = new ArrayList<TipoCuenta>();
+		if(request.getAttribute("listaTipos")!=null){
+			listaTipos = (ArrayList<TipoCuenta>)request.getAttribute("listaTipos");
+		}
+	
+	%>
 	</tr>
 		<tr> 
 		<td>Tipo de Cuenta: </td>
 		<td style="height: 0px; ">
-			<select name="txtNACIONALIDAD" >
-					<!-- DESARROLLO OPCIONES TIPO DE CUENTA -->									 				
+			<select name="txtTipoCuenta" >
+				<%
+					for(TipoCuenta tpCue : listaTipos){					
+				 %>								 		
+					<option value="<%=tpCue.getCodigo()%>"><%=tpCue.getDescripcion() %></option>		
+				 <% 
+					}
+				 %>		
 			 </select>
 		</td>
 		<td>Fecha de Creación: </td>

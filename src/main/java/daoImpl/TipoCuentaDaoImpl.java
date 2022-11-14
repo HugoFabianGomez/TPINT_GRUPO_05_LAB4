@@ -16,10 +16,10 @@ public class TipoCuentaDaoImpl implements TipoCuentaDao{
 	}
 	
 	@Override
-	public List<TipoCuenta> obtenerTodos() {
+	public ArrayList<TipoCuenta> obtenerTodos() {
 		cn = new Conexion();
 		cn.Open();
-		 List<TipoCuenta> list = new ArrayList<TipoCuenta>();
+		 ArrayList<TipoCuenta> list = new ArrayList<TipoCuenta>();
 		 try
 		 {
 			 ResultSet rs= cn.query("select * from tiposcuenta;");
