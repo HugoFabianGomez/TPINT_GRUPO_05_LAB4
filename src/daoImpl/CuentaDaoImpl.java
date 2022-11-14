@@ -90,4 +90,35 @@ public class CuentaDaoImpl implements CuentaDao {
 		 }
 		 return list;
 	}
+
+	@Override
+	public boolean modificar(Cuenta cuenta) {
+		boolean estado=true;
+
+		cn = new Conexion();
+		cn.Open();	
+
+		String query = "update cuentas set\r\n" +  
+				"numero_cuenta_CU ="+cuenta.getNumeroCuenta()+",\r\n" +
+				"cbu_CU ="+cuenta.getCbu()+",\r\n" +
+				"fecha_creacion_CU ='"+cuenta.getFechaCreacion()+"',\r\n" +
+				"saldo_CU ="+cuenta.getSaldo()+",\r\n" +
+				"estado_CU ="+cuenta.getEstado()+",\r\n" +
+				"codigo_tipo_cuenta_CU ="+cuenta.getTipoCuenta().getCodigo()+",\r\n" +
+				"dni_cliente_CU ="+cuenta.getCliente().getDni()+";";
+				
+		try
+		 {
+			estado=cn.execute(query);
+		 }
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			cn.close();
+		}
+		return estado;
+	}
 }

@@ -18,5 +18,10 @@ public class CuentaNegocioImpl implements CuentaNegocio {
 	@Override
 	public ArrayList<Cuenta> obtenerTodos() {
 		return cuDao.obtenerTodos();
+	}
+
+	@Override
+	public boolean modificar(Cuenta cuenta) {		
+		return cuDao.modificar(cuenta);
 	} 
 }

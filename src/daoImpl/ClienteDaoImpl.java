@@ -128,7 +128,7 @@ public class ClienteDaoImpl implements ClienteDao {
 				"codigo_provincia_CLI ='"+cliente.getProvincia().getCodigo()+"', \r\n" + 
 				"codigo_localidad_CLI ='"+cliente.getLocalidad().getCodigo()+"', \r\n" + 
 				"codigo_genero_CLI ='"+cliente.getGenero().getCodigo()+"', \r\n" + 
-				"where dni_CLI ="+cliente.getDni()+"";
+				"where dni_CLI ="+cliente.getDni()+";";
 		try
 		 {
 			estado=cn.execute(query);
