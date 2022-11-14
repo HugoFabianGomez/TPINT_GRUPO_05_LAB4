@@ -26,7 +26,7 @@ public class ServletTiposCuenta extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(request.getParameter("param")!=null) {
-			ArrayList<TipoCuenta> listaTipos = clNeg.obtenerTodos();
+			ArrayList<TipoCuenta> listaTipos = clNeg.obtenerTodos(); 
 			request.setAttribute("listaTipos", listaTipos);
 			RequestDispatcher rd = request.getRequestDispatcher("/AltaCuenta.jsp");   
 	        rd.forward(request, response);			

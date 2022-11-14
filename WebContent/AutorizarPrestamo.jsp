@@ -29,12 +29,11 @@
 	<h2>Autorizacion de prestamos</h2>
 
 	<%
-		ClienteDaoImpl cliDao = new ClienteDaoImpl();
-		ArrayList<Cliente> listaClientes = null;
+		ArrayList<Cliente> listaClientes = new ArrayList<Cliente>();
 
-		listaClientes = (request.getAttribute("listaClientes") != null)
-				? (ArrayList<Cliente>) request.getAttribute("listaClientes")
-				: cliDao.obtenerTodos();
+		if(request.getAttribute("listaClientes") != null){
+			listaClientes = (ArrayList<Cliente>)request.getAttribute("listaClientes");
+		}
 	%>
 
 	<form>
@@ -46,9 +45,8 @@
 						name="ddlClientes" class="form-select">
 						<%
 							for (Cliente c : listaClientes) {
-								//dni = String.valueOf(c.getDni());
 						%>
-						<option value="<%=dni%>"><%=c.getNombreCompleto()%>
+						<option value="<%=c.getDni()%>"><%=c.getNombreCompleto()%>
 						</option>
 						<%
 							}

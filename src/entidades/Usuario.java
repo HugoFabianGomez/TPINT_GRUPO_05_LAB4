@@ -6,6 +6,10 @@ public class Usuario {
 	private TipoUsuario tipoUsuario;
 	private boolean estado;
 	
+	public Usuario() {
+		
+	}
+	
 	public Usuario(String nombreusuario, String contrasenia, TipoUsuario tipousuario, boolean estado) {
 		// TODO Auto-generated constructor stub
 		this.nombreUsuario=nombreusuario;
