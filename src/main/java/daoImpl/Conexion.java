@@ -37,12 +37,12 @@ public class Conexion {
 		{
 			st= connection.createStatement();
 			rs= st.executeQuery(query);
-			//System.out.println("llegue despues de execute linea 40 conexion");
 		}
 		catch(SQLException e)
 		{
 			e.printStackTrace();
 		}
+		System.out.println("llegue despues de execute linea 40 conexion");
 		return rs;
 	}
 	

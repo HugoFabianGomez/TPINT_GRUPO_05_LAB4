@@ -27,7 +27,7 @@ public class ClienteDaoImpl implements ClienteDao {
 			 		"inner join nacionalidades on codigo_nacionalidad_CLI = codigo_nacionalidad_NAC\r\n" + 
 			 		"inner join provincias on codigo_provincia_CLI = codigo_provincia_PRO\r\n" +
 			 		"inner join localidades on codigo_provincia_PRO = codigo_provincia_LOC\r\n" +  
-			 		"inner join generos on codigo_genero_CLI = codigo_genero_GEN;");
+			 		"inner join generos on codigo_genero_CLI = codigo_genero_GEN GROUP BY dni_CLI;");
 			 while(rs.next())
 			 {
 				 Cliente cli = new Cliente();
@@ -163,5 +163,138 @@ public class ClienteDaoImpl implements ClienteDao {
 			cn.close();
 		}
 		return estado;
+	}
+
+	@Override
+	public ArrayList<Cliente> obtenerTodos(int dni) {
+		// TODO Auto-generated method stub
+		cn = new Conexion();
+		cn.Open();
+		 ArrayList<Cliente> list = new ArrayList<Cliente>();
+		 try
+		 {
+			 ResultSet rs= cn.query("select * from clientes\r\n" + 
+			 		"inner join nacionalidades on codigo_nacionalidad_CLI = codigo_nacionalidad_NAC\r\n" + 
+			 		"inner join provincias on codigo_provincia_CLI = codigo_provincia_PRO\r\n" +
+			 		"inner join localidades on codigo_provincia_PRO = codigo_provincia_LOC\r\n" +  
+			 		"inner join generos on codigo_genero_CLI = codigo_genero_GEN GROUP BY dni_CLI where clientes.dni_CLI ="+dni +" ;");
+			 while(rs.next())
+			 {
+				 Cliente cli = new Cliente();
+				 cli.setDni(rs.getInt("clientes.dni_CLI"));
+				 cli.setCuil(rs.getInt("clientes.cuil_CLI"));
+				 cli.setNombre(rs.getString("clientes.nombre_CLI"));
+				 cli.setApellido(rs.getString("clientes.apellido_CLI"));
+				 cli.setFechaNacimiento(rs.getString("clientes.fecha_nacimiento_CLI"));
+				 cli.setDomicilio(rs.getString("clientes.domicilio_CLI"));
+				 cli.setEmail(rs.getString("clientes.email_CLI"));
+				 cli.setTelefono(rs.getString("clientes.telefono_CLI"));
+				 cli.setEstado(rs.getBoolean("clientes.estado_CLI"));
+				 cli.setNombreCompleto(rs.getString("clientes.nombre_CLI")+" "+rs.getString("clientes.apellido_CLI"));
+				 
+				 Nacionalidad nac = new Nacionalidad();
+				 nac.setCodigo(rs.getInt("nacionalidades.codigo_nacionalidad_NAC"));
+				 nac.setAbreviatura(rs.getString("nacionalidades.abreviatura_NAC"));
+				 nac.setDescripcion(rs.getString("nacionalidades.descripcion_NAC"));								
+				 
+				 Provincia pro = new Provincia();
+				 pro.setCodigo(rs.getInt("provincias.codigo_provincia_PRO"));
+				 pro.setDescripcion(rs.getString("provincias.descripcion_PRO"));
+				 
+				 Localidad loc = new Localidad();
+				 loc.setCodigo(rs.getInt("localidades.codigo_localidad_LOC"));
+				 loc.setProvincia(pro);
+				 loc.setDescripcion(rs.getString("localidades.descripcion_LOC"));
+				 
+				 Genero gen = new Genero();
+				 gen.setCodigo(rs.getInt("generos.codigo_genero_GEN"));
+				 gen.setDescripcion(rs.getString("generos.descripcion_GEN")); 
+				 
+				 cli.setNacionalidad(nac);
+				 cli.setProvincia(pro);
+				 cli.setLocalidad(loc);
+				 cli.setGenero(gen);
+				 
+				 list.add(cli);
+			 }
+			 
+		 }
+		 catch(Exception e)
+		 {
+			 e.printStackTrace();
+		 }
+		 finally
+		 {
+			 cn.close();
+		 }
+		 return list;
+		
+	}
+
+	@Override
+	public Cliente obtenerUno(int dni) {
+		// TODO Auto-generated method stub
+		cn = new Conexion();
+		cn.Open();
+
+		Cliente cli = new Cliente();
+		 try
+		 {
+			 ResultSet rs= cn.query("select * from clientes\r\n" + 
+			 		"inner join nacionalidades on codigo_nacionalidad_CLI = codigo_nacionalidad_NAC\r\n" + 
+			 		"inner join provincias on codigo_provincia_CLI = codigo_provincia_PRO\r\n" +
+			 		"inner join localidades on codigo_provincia_PRO = codigo_provincia_LOC\r\n" +  
+			 		"inner join generos on codigo_genero_CLI = codigo_genero_GEN where clientes.dni_CLI ="+dni +" GROUP BY dni_CLI ;");
+			 if(rs.next())
+			 {
+				 System.out.println("Entre en obtenerUno");
+				 cli.setDni(rs.getInt("clientes.dni_CLI"));
+				 cli.setCuil(rs.getInt("clientes.cuil_CLI"));
+				 cli.setNombre(rs.getString("clientes.nombre_CLI"));
+				 cli.setApellido(rs.getString("clientes.apellido_CLI"));
+				 cli.setFechaNacimiento(rs.getString("clientes.fecha_nacimiento_CLI"));
+				 cli.setDomicilio(rs.getString("clientes.domicilio_CLI"));
+				 cli.setEmail(rs.getString("clientes.email_CLI"));
+				 cli.setTelefono(rs.getString("clientes.telefono_CLI"));
+				 cli.setEstado(rs.getBoolean("clientes.estado_CLI"));
+				 cli.setNombreCompleto(rs.getString("clientes.nombre_CLI")+" "+rs.getString("clientes.apellido_CLI"));
+				 
+				 Nacionalidad nac = new Nacionalidad();
+				 nac.setCodigo(rs.getInt("nacionalidades.codigo_nacionalidad_NAC"));
+				 nac.setAbreviatura(rs.getString("nacionalidades.abreviatura_NAC"));
+				 nac.setDescripcion(rs.getString("nacionalidades.descripcion_NAC"));								
+				 
+				 Provincia pro = new Provincia();
+				 pro.setCodigo(rs.getInt("provincias.codigo_provincia_PRO"));
+				 pro.setDescripcion(rs.getString("provincias.descripcion_PRO"));
+				 
+				 Localidad loc = new Localidad();
+				 loc.setCodigo(rs.getInt("localidades.codigo_localidad_LOC"));
+				 loc.setProvincia(pro);
+				 loc.setDescripcion(rs.getString("localidades.descripcion_LOC"));
+				 
+				 Genero gen = new Genero();
+				 gen.setCodigo(rs.getInt("generos.codigo_genero_GEN"));
+				 gen.setDescripcion(rs.getString("generos.descripcion_GEN")); 
+				 
+				 cli.setNacionalidad(nac);
+				 cli.setProvincia(pro);
+				 cli.setLocalidad(loc);
+				 cli.setGenero(gen);
+				 
+				 //list.add(cli);
+			 }
+			 
+		 }
+		 catch(Exception e)
+		 {
+			 e.printStackTrace();
+		 }
+		 finally
+		 {
+			 cn.close();
+		 }
+		
+		return cli;
 	}
 }

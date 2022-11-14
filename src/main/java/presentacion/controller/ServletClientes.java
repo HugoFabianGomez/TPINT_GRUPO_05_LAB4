@@ -26,13 +26,14 @@ import entidades.Cliente;
 @WebServlet("/ServletClientes")
 public class ServletClientes extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
 	static ClienteNegocio ClienteNeg = new ClienteNegocioImpl();
 
 	public ServletClientes() {
 		super();
 	}
 
-//<<<<<<< HEAD
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		if(request.getParameter("btnAceptar")!=null)
@@ -54,28 +55,82 @@ public class ServletClientes extends HttpServlet {
 			cliente.setTelefono(request.getParameter("txtTELEFONO"));
 			cliente.setUsuario(new Usuario(request.getParameter("textUSUARIO")));
 			
-			
-
-			System.out.println(cliente.getFechaNacimiento());
+			//System.out.println(cliente.getFechaNacimiento());
 			
 			Boolean filas=ClienteNeg.agregar(cliente);
 			//REQUESTDISPATCHER
 			request.setAttribute("filas", filas);
-			RequestDispatcher rd = request.getRequestDispatcher("/AltaCliente.jsp");   
+			RequestDispatcher rd = request.getRequestDispatcher("/ListarClientes.jsp");   
 	        rd.forward(request, response);
+	        
+		} else if(request.getParameter("btnModificar")!=null) 
+		{
+			Cliente cl=  new Cliente();
+			int dni = Integer.parseInt(request.getParameter("dni"));
+			
+			cl.setDni(dni);
+			System.out.println("dni= "+dni);
+			cl.setCuil(Integer.parseInt(request.getParameter("txtCUIL")));
+			cl.setNombre(request.getParameter("txtNOMBRE"));
+			cl.setApellido(request.getParameter("txtAPELLIDO"));
+			cl.setNacionalidad(new Nacionalidad(Integer.parseInt(request.getParameter("txtNACIONALIDAD"))));
+			cl.setFechaNacimiento(request.getParameter("txtFECHA_NAC"));
+			cl.setGenero(new Genero(Integer.parseInt(request.getParameter("txtSEXO"))));
+			cl.setDomicilio(request.getParameter("txtDIRECCION"));
+			cl.setLocalidad(new Localidad(Integer.parseInt(request.getParameter("txtLOCALIDAD"))));
+			cl.setProvincia(new Provincia(Integer.parseInt(request.getParameter("txtPROVINCIA"))));
+			cl.setEmail(request.getParameter("textEMAIL"));
+			cl.setTelefono(request.getParameter("txtTELEFONO"));
+
+			int filas = ClienteNeg.modificar(cl);
+			
+			request.setAttribute("filas", filas);
+			request.setAttribute("dni", dni);
+			RequestDispatcher rd = request.getRequestDispatcher("/ModificarCliente.jsp");   
+	        rd.forward(request, response);  
+			
 		}
+		
+		
+	}
+	public static ArrayList<Cliente> obtenerClientes() {
+		return ClienteNeg.obtenerTodos();
+	}
+	
+	public static Cliente obtenerCliente(int dni) {
+		return ClienteNeg.obtenerUno(dni);
 	}
 
 		
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Lista clientes
-		ClienteDaoImpl cliDao = new ClienteDaoImpl();
-		ArrayList<Cliente> listaClientes = cliDao.obtenerTodos();
-		request.setAttribute("listaClientes", listaClientes);
-		RequestDispatcher rd = request.getRequestDispatcher("/AutorizarPrestamo.jsp");
-		rd.forward(request, response);
-//>>>>>>> 5b4a8aa43b3a66077f920fb03041551279e015b3
+		if(request.getParameter("btnModificar")!=null) 
+		{
+			Cliente cl=  new Cliente();
+			int dni = Integer.parseInt(request.getParameter("txtDNI"));
+			
+			cl.setDni(dni);
+			System.out.println("dni= "+dni);
+			cl.setCuil(Integer.parseInt(request.getParameter("txtCUIL")));
+			cl.setNombre(request.getParameter("txtNOMBRE"));
+			cl.setApellido(request.getParameter("txtAPELLIDO"));
+			cl.setNacionalidad(new Nacionalidad(Integer.parseInt(request.getParameter("txtNACIONALIDAD"))));
+			cl.setFechaNacimiento(request.getParameter("txtFECHA_NAC"));
+			cl.setGenero(new Genero(Integer.parseInt(request.getParameter("txtSEXO"))));
+			cl.setDomicilio(request.getParameter("txtDIRECCION"));
+			cl.setLocalidad(new Localidad(Integer.parseInt(request.getParameter("txtLOCALIDAD"))));
+			cl.setProvincia(new Provincia(Integer.parseInt(request.getParameter("txtPROVINCIA"))));
+			cl.setEmail(request.getParameter("textEMAIL"));
+			cl.setTelefono(request.getParameter("txtTELEFONO"));
+
+			int filas = ClienteNeg.modificar(cl);
+			
+			request.setAttribute("filas", filas);
+			request.setAttribute("dni", dni);
+			RequestDispatcher rd = request.getRequestDispatcher("/ModificarCliente.jsp");   
+	        rd.forward(request, response);  
+			
+		}
 	}
 
 	//protected void doPost(HttpServletRequest request, HttpServletResponse response)
