@@ -9,7 +9,7 @@
 </head>
 <body>
 	
-	<jsp:include page="Menu.html"></jsp:include>
+	<jsp:include page="Menu.jsp"></jsp:include>
 <h3>Reportes</h3>
 
 <form action="servletSeguro" method="get">
