@@ -15,7 +15,9 @@ import entidades.Nacionalidad;
 import entidades.Provincia;
 import entidades.Usuario;
 import negocio.ClienteNegocio;
+import negocio.UsuarioNegocio;
 import negocioImpl.ClienteNegocioImpl;
+import negocioImpl.UsuarioNegocioImpl;
 import entidades.Genero;
 import entidades.Localidad;
 
@@ -28,6 +30,7 @@ public class ServletClientes extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	static ClienteNegocio ClienteNeg = new ClienteNegocioImpl();
+	static UsuarioNegocio UsuaNeg = new UsuarioNegocioImpl();
 
 	public ServletClientes() {
 		super();
@@ -38,9 +41,17 @@ public class ServletClientes extends HttpServlet {
 		
 		if(request.getParameter("btnAceptar")!=null)
 		{
+			boolean filas = false;
 			System.out.println("Entro Servlet");
-			Cliente cliente =  new Cliente();
 			
+			Usuario usu = new Usuario();
+			usu.setNombreUsuario(request.getParameter("textUSUARIO"));
+			usu.setContrasenia(request.getParameter("txtDNI"));
+			filas= UsuaNeg.agregar(usu);
+			
+			
+			
+			Cliente cliente =  new Cliente();
 			cliente.setDni(Integer.parseInt(request.getParameter("txtDNI")));
 			cliente.setCuil(Integer.parseInt(request.getParameter("txtCUIL")));
 			cliente.setNombre(request.getParameter("txtNOMBRE"));
@@ -55,10 +66,12 @@ public class ServletClientes extends HttpServlet {
 			cliente.setTelefono(request.getParameter("txtTELEFONO"));
 			cliente.setUsuario(new Usuario(request.getParameter("textUSUARIO")));
 			
+			
 			//System.out.println(cliente.getFechaNacimiento());
 			
-			Boolean filas=ClienteNeg.agregar(cliente);
+			filas=ClienteNeg.agregar(cliente);
 			//REQUESTDISPATCHER
+			
 			request.setAttribute("filas", filas);
 			RequestDispatcher rd = request.getRequestDispatcher("/ListarClientes.jsp");   
 	        rd.forward(request, response);
