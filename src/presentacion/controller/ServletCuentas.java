@@ -35,6 +35,7 @@ public class ServletCuentas extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/ListarCuentas.jsp");   
 	        rd.forward(request, response);	
 		}
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -54,6 +55,42 @@ public class ServletCuentas extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("AltaCuenta.jsp");   
 	        rd.forward(request, response) ;
 		}
+		
+		if(request.getParameter("btnModificar")!=null) {
+				int numeroCuenta = Integer.parseInt(request.getParameter("numeroCuenta"));			
+				Cuenta cuenta = cuNeg.obtenerUno(numeroCuenta);
+				request.setAttribute("cuenta", cuenta);
+				
+				RequestDispatcher rd = request.getRequestDispatcher("ModificarCuenta.jsp");   
+		        rd.forward(request, response) ;
+		}
+		
+		if(request.getParameter("btnConfirmarModificar")!=null) {
+			Cuenta cuenta = new Cuenta();
+			
+			cuenta.setNumeroCuenta(Integer.parseInt(request.getParameter("txtNumeroCuenta")));
+			cuenta.setCbu(Integer.parseInt(request.getParameter("txtCBU")));
+			cuenta.setTipoCuenta(new TipoCuenta(Integer.parseInt(request.getParameter("txtTipoCuenta"))));
+			cuenta.setFechaCreacion(request.getParameter("txtFechaCreacion"));
+			cuenta.setSaldo(Float.parseFloat(request.getParameter("txtSaldo")));
+			cuenta.setCliente(new Cliente(Integer.parseInt(request.getParameter("txtDNI"))));
+			cuenta.setEstado(Boolean.parseBoolean(request.getParameter("comboEstado")));
+			System.out.println("ENTRE MODIFICAR");
+			ArrayList<Cuenta> listaCuentas = cuNeg.obtenerTodos();
+			request.setAttribute("listaCuentas", listaCuentas);
+			RequestDispatcher rd = request.getRequestDispatcher("ListarCuentas.jsp");   
+	        rd.forward(request, response) ;
+		}
+		
+		if(request.getParameter("btnEliminar")!=null) {
+			int numeroCuenta = Integer.parseInt(request.getParameter("numeroCuenta"));
+			cuNeg.eliminar(numeroCuenta);
+			ArrayList<Cuenta> listaCuentas = cuNeg.obtenerTodos();
+			request.setAttribute("listaCuentas", listaCuentas);
+			RequestDispatcher rd = request.getRequestDispatcher("ListarCuentas.jsp");   
+	        rd.forward(request, response) ;
+		}
+		
 	}
 
 }

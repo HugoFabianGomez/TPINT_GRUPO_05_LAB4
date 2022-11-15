@@ -13,7 +13,7 @@
 	<jsp:include page="Menu.html"></jsp:include>
 	<h1>Lista de Cuentas</h1>
 
-<form>
+
 	<%
 	ArrayList<Cuenta> listaCuentas = new ArrayList<Cuenta>();
 	if(request.getAttribute("listaCuentas")!=null){
@@ -65,8 +65,10 @@
 					<td><%=cuenta.getCliente().getDni() %></td>
 					<td><%=cuenta.getSaldo() %></td>
 					<td><%=cuenta.getEstado() %></td>
+					<form action="ServletCuentas?numeroCuenta=<%=cuenta.getNumeroCuenta() %>" method="post">
 					<td><input type="submit" name="btnModificar" value="Modificar"/></td>
-					<td><input type="submit" name="btnModificar" value="Eliminar"/></td>	
+					<td><input type="submit" name="btnEliminar" onclick="return confirm('¿Está seguro que desea eliminar esta cuenta?')" value="Eliminar"/></td>	
+					</form>
 				</tr>	
 				<%
 					}
@@ -78,7 +80,7 @@
 			<a class="btn btn-primary" href="Inicio.jsp">Volver</a>
 		</div>
 	
-</form>
+
 
 </body>
 </html>

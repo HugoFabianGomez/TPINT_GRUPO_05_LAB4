@@ -23,5 +23,15 @@ public class CuentaNegocioImpl implements CuentaNegocio {
 	@Override
 	public boolean modificar(Cuenta cuenta) {		
 		return cuDao.modificar(cuenta);
+	}
+
+	@Override
+	public Cuenta obtenerUno(int numeroCuenta) {		
+		return cuDao.obtenerUno(numeroCuenta);
+	}
+
+	@Override
+	public boolean eliminar(int numeroCuenta) {
+		return cuDao.eliminar(numeroCuenta);
 	} 
 }

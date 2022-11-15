@@ -62,7 +62,7 @@
 	
 	<tr> 
 		<br><br>
-		<td style="height: 0px; "><input type="submit" name="btnAgregar" value="Agregar"/></td>
+		<td style="height: 0px; "><input type="submit" name="btnAgregar" onclick="return confirm('¿Está seguro que desea agregar esta cuenta?')" value="Agregar"/></td>
 	</tr>
 
 </table>

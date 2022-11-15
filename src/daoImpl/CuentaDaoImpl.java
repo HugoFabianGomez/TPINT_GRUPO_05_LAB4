@@ -99,13 +99,89 @@ public class CuentaDaoImpl implements CuentaDao {
 		cn.Open();	
 
 		String query = "update cuentas set\r\n" +  
-				"numero_cuenta_CU ="+cuenta.getNumeroCuenta()+",\r\n" +
 				"cbu_CU ="+cuenta.getCbu()+",\r\n" +
 				"fecha_creacion_CU ='"+cuenta.getFechaCreacion()+"',\r\n" +
 				"saldo_CU ="+cuenta.getSaldo()+",\r\n" +
 				"estado_CU ="+cuenta.getEstado()+",\r\n" +
 				"codigo_tipo_cuenta_CU ="+cuenta.getTipoCuenta().getCodigo()+",\r\n" +
-				"dni_cliente_CU ="+cuenta.getCliente().getDni()+";";
+				"dni_cliente_CU ="+cuenta.getCliente().getDni()+"\r\n"+
+				"where numero_cuenta_CU="+cuenta.getNumeroCuenta();
+				
+		try
+		 {
+			estado=cn.execute(query);
+		 }
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			cn.close();
+		}
+		return estado;
+	}
+
+	@Override
+	public Cuenta obtenerUno(int numeroCuenta) {
+		cn = new Conexion();
+		cn.Open();
+		Cuenta cuenta = new Cuenta();
+		 try
+		 {
+			 ResultSet rs= cn.query("select * from cuentas\r\n" + 
+			 		"inner join tiposcuenta on codigo_tipo_cuenta_CU = codigo_tipo_cuenta_TCU\r\n" + 
+			 		"inner join clientes on dni_cliente_CU = dni_CLI\r\n" +
+			 		"where numero_cuenta_CU = "+numeroCuenta);
+
+			 	 rs.next();
+				 cuenta.setNumeroCuenta(rs.getInt("cuentas.numero_cuenta_CU"));
+				 cuenta.setCbu(rs.getInt("cuentas.cbu_CU"));
+				 cuenta.setFechaCreacion(rs.getString("cuentas.fecha_creacion_CU"));
+				 cuenta.setSaldo(rs.getFloat("cuentas.saldo_CU"));
+				 cuenta.setEstado(rs.getBoolean("cuentas.estado_CU"));				 				 
+				 
+				 TipoCuenta tipoCuenta = new TipoCuenta();
+				 tipoCuenta.setCodigo(rs.getInt("cuentas.codigo_tipo_cuenta_CU"));
+				 tipoCuenta.setDescripcion(rs.getString("tiposcuenta.descripcion_TCU"));
+				 
+				 Cliente cliente = new Cliente();
+				 cliente.setDni(rs.getInt("cuentas.dni_cliente_CU"));
+				 cliente.setCuil(rs.getInt("clientes.cuil_CLI"));
+				 cliente.setNombre(rs.getString("clientes.nombre_CLI"));
+				 cliente.setApellido(rs.getString("clientes.apellido_CLI"));
+				 cliente.setFechaNacimiento(rs.getString("clientes.fecha_nacimiento_CLI"));
+				 cliente.setDomicilio(rs.getString("clientes.domicilio_CLI"));
+				 cliente.setEmail(rs.getString("clientes.email_CLI"));
+				 cliente.setTelefono(rs.getString("clientes.telefono_CLI"));
+				 cliente.setEstado(rs.getBoolean("clientes.estado_CLI"));
+				 cliente.setNombreCompleto(rs.getString("clientes.nombre_CLI")+" "+rs.getString("clientes.apellido_CLI"));
+				 
+				 cuenta.setTipoCuenta(tipoCuenta);
+				 cuenta.setCliente(cliente);
+	
+		 }
+		 catch(Exception e)
+		 {
+			 e.printStackTrace();
+		 }
+		 finally
+		 {
+			 cn.close();
+		 }
+		 return cuenta;
+	}
+
+	@Override
+	public boolean eliminar(int numeroCuenta) {
+		boolean estado=true;
+
+		cn = new Conexion();
+		cn.Open();	
+
+		String query = "update cuentas set\r\n" +  				
+				"estado_CU = 0 \r\n" +
+				"where numero_cuenta_CU="+numeroCuenta;
 				
 		try
 		 {
