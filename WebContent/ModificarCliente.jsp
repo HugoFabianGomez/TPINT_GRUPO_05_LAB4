@@ -127,7 +127,9 @@
 	</tr>
 	<tr> 
 		<br><br>
-		<td style="height: 0px; "><input type="submit" name="btnModificar" value="MODIFICAR"/></td>
+		<form>
+		<td class="common-button secondary"><input type="submit" name="btnModificar" value="MODIFICAR"/></td>
+		</form>
 	</tr>
 
 </table>

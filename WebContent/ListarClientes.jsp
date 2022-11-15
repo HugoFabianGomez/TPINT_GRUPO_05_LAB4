@@ -81,7 +81,7 @@
 					<th></th>
 					<td><%= cl.getEstado() %>		</td>
 					
-					<td><a class="btn btn-primary" href="/TPINT_GRUPO_05_LAB4/ModificarCliente.jsp?dni=<%=cl.getDni()%>">Modificar</a></td>
+					<td><a class="btn btn-primary" href="/TP_INTEGRADOR_GRUPO_5/ModificarCliente.jsp?dni=<%=cl.getDni()%>">Modificar</a></td>
 					<form method= "post" action="ServletClientes?Dni=<%=cl.getDni()%>">
 					<td><input type="submit" name="btnEliminar" value="Eliminar" class="btn btn-danger" /></td>
 					</form>

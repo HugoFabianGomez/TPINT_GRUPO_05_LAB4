@@ -20,9 +20,6 @@ public class Cliente {
 	public Cliente() {
 		
 	}
-	public Cliente(int dni) {
-		this.dni = dni;
-	}
 
 	public Cliente(int dni, int cuil, String nombre, String apellido, String fechaNacimiento, String domicilio,
 			String email, String telefono, boolean estado, Usuario usuario, Nacionalidad nacionalidad, Provincia provincia, Localidad localidad,

@@ -71,6 +71,7 @@ public class ServletClientes extends HttpServlet {
 			cl.setDni(dni);
 			System.out.println("dni= "+dni);
 			cl.setCuil(Integer.parseInt(request.getParameter("txtCUIL")));
+			
 			cl.setNombre(request.getParameter("txtNOMBRE"));
 			cl.setApellido(request.getParameter("txtAPELLIDO"));
 			cl.setNacionalidad(new Nacionalidad(Integer.parseInt(request.getParameter("txtNACIONALIDAD"))));
@@ -162,7 +163,5 @@ public class ServletClientes extends HttpServlet {
 		}
 	}
 
-	//protected void doPost(HttpServletRequest request, HttpServletResponse response)
-	//		throws ServletException, IOException {
-	//}
+
 }
