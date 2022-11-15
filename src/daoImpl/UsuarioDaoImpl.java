@@ -51,8 +51,8 @@ public class UsuarioDaoImpl implements UsuarioDao {
 		cn = new Conexion();
 		cn.Open();	
 
-		String query = "insert into Usuarios (nombre_usuario_US, contrasena_US, codigo_tipo_usuario_US, 1) values"
-		+ "("+u.getNombreUsuario()+","+u.getContrasenia()+",'"+u.getTipoUsuario().getCodTipoUsuario()+",1)";
+		String query = "insert into Usuarios (nombre_usuario_US, contrasena_US, codigo_tipo_usuario_US) " 
+		+ "values('"+u.getNombreUsuario()+"','"+u.getContrasenia()+"',2)";
 		
 		System.out.println(query);
 		try
