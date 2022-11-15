@@ -10,7 +10,7 @@
 </head>
 <body>
 	
-	<jsp:include page="Menu.jsp"></jsp:include>
+	<jsp:include page="Menu.html"></jsp:include>
 <h3>Agregar Cuenta</h3>
 
 <form action="ServletCuentas" method="post">
@@ -57,9 +57,7 @@
 		<td style="height: 0px; "><input type="Number" name="txtDNI" min="1" max="99999999"
 		required  maxlength="10" autocomplete="off" onkeypress="return((event.charCode >= 48 && event.charCode <= 57))"
 		value="00.000.000" /><br></td>
-		<td>Saldo: </td>
-		<td><input type="Number" name="txtSaldo"  onkeypress="return((event.charCode >= 48 && event.charCode <= 57))" value="000000" /></td>
-	</tr>
+		<td>Saldo inicial: $10000</td>
 	
 	
 	<tr> 

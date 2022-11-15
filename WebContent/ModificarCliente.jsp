@@ -26,12 +26,12 @@
 		ArrayList<Localidad> list_Localidad = (ArrayList<Localidad>) ServletLocalidades.obtenerLocalidades();
 		
 		String dni = request.getParameter("dni");
- 		Cliente cl = ServletClientes.obtenerCliente(Integer.parseInt(dni));
+ 		Cliente cl = ServletClientes.obtenerCliente(dni);
  		
 	%>
 
 
-	<jsp:include page="Menu.jsp"></jsp:include>
+	<jsp:include page="Menu.html"></jsp:include>
 <h3>MODIFICAR CLIENTE</h3>
 
 <form action="ServletClientes" method="get">
@@ -48,7 +48,7 @@
 
 	</tr>
 		<tr> 
-		<td>NOMBRE/S </td>
+		<td style="width: 139px; ">NOMBRE/S </td>
 		<td style="height: 0px; "><input type="text" name="txtNOMBRE"  value="<%=cl.getNombre() %>"/></td>
 		<td>APELLIDO/S </td>
 		<td style="height: 0px; "><input type="text" name="txtAPELLIDO"  value="<%=cl.getApellido() %>"/></td>
@@ -63,12 +63,14 @@
 				if(list_Nacionalidad!=null)
 					for (Nacionalidad nac : list_Nacionalidad) {
 				%>
-					<option value="<%=nac.getCodigo()%>"><%=nac.getDescripcion()%></option>
+
+					<option value="<%=nac.getCodigo()%>" <%=nac.getCodigo()==cl.getNacionalidad().getCodigo()?"selected":"" %>><%=nac.getDescripcion()%></option>
+
 				<%}	%>									 				
 			 </select>	
 		</td>
 		<td>FECHA NACIMIENTO</td>
-		<td style="height: 0px; "><input type="date" name="txtFECHA_NAC" value="DD/MM/AAAA" value="<%=cl.getFechaNacimiento() %>"/><br></td>
+		<td style="height: 0px; "><input type="date" name="txtFECHA_NAC"  value="<%=cl.getFechaNacimiento() %>"/><br></td>
 		<td>GENERO </td>
 		<td style="height: 0px; ">
 			<select name="txtSEXO" >
@@ -77,6 +79,7 @@
 					for (Genero gen : list_Genero) {
 				%>
 					<option value="<%=gen.getCodigo()%>"><%=gen.getDescripcion()%></option>
+					<option value="<%=gen.getCodigo()%>" <%=gen.getCodigo()==cl.getGenero().getCodigo()?"selected":"" %>><%=gen.getDescripcion()%></option>
 				<% }%>
 			 </select>	
 		</td>
@@ -92,8 +95,7 @@
 				if(list_Localidad!=null)
 					for (Localidad loc : list_Localidad) {
 				%>
-					<option value="<%=loc.getCodigo()%>"><%=loc.getDescripcion()%></option>
-				
+					<option value="<%=loc.getCodigo()%>" <%=loc.getCodigo()==cl.getLocalidad().getCodigo()?"selected":"" %>><%=loc.getDescripcion()%></option>
 				<%} %>
 												 				
 			 </select>	
@@ -105,6 +107,7 @@
 					for (Provincia prov : list_Provincia) {
 				%>
 					<option value="<%=prov.getCodigo()%>"><%=prov.getDescripcion()%></option>
+					<option value="<%=prov.getCodigo()%>" <%=prov.getCodigo()==cl.getProvincia().getCodigo()?"selected":"" %>><%=prov.getDescripcion()%></option>
 				<% } %>
 
 					<!-- ACA DESARROLLO LAS OPCIONES -->									 				

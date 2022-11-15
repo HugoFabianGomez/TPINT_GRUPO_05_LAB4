@@ -23,14 +23,17 @@ public class ClienteNegocioImpl implements ClienteNegocio{
 	}
 
 	@Override
-	public int modificar(Cliente cliente) {
+	public boolean modificar(Cliente cliente) {
 		// TODO Auto-generated method stub
-		return 0;//clienteDao.editar(cliente);
+		
+		boolean estado = clienteDao.editar(cliente);  
+		return estado;
 	}
 
 	@Override
 	public ArrayList<Cliente> obtenerTodos(int dni) {
 		// TODO Auto-generated method stub
+		//System.out.println("Llegue al clienteNegocioImpl");
 		return clienteDao.obtenerTodos(dni);
 	}
 
@@ -38,6 +41,14 @@ public class ClienteNegocioImpl implements ClienteNegocio{
 	public Cliente obtenerUno(int dni) {
 		// TODO Auto-generated method stub
 		return clienteDao.obtenerUno(dni);
+	}
+
+	@Override
+	public boolean borrar(int dni) {
+		// TODO Auto-generated method stub
+		boolean estado = clienteDao.borrar(dni); 
+		
+		return estado;
 	}
 
 

@@ -27,7 +27,7 @@ public class ClienteDaoImpl implements ClienteDao {
 			 		"inner join nacionalidades on codigo_nacionalidad_CLI = codigo_nacionalidad_NAC\r\n" + 
 			 		"inner join provincias on codigo_provincia_CLI = codigo_provincia_PRO\r\n" +
 			 		"inner join localidades on codigo_provincia_PRO = codigo_provincia_LOC\r\n" +  
-			 		"inner join generos on codigo_genero_CLI = codigo_genero_GEN GROUP BY dni_CLI;");
+			 		"inner join generos on codigo_genero_CLI = codigo_genero_GEN where estado_CLI = 1 GROUP BY dni_CLI;");
 			 while(rs.next())
 			 {
 				 Cliente cli = new Cliente();
@@ -122,13 +122,11 @@ public class ClienteDaoImpl implements ClienteDao {
 				"domicilio_CLI ='"+cliente.getDomicilio()+"',\r\n" + 
 				"email_CLI ='"+cliente.getEmail()+"', \r\n" + 
 				"telefono_CLI ='"+cliente.getTelefono()+"', \r\n" + 
-				"usuario_CLI ="+cliente.getUsuario().getNombreUsuario()+", \r\n"+
-				"estado_CLI ="+cliente.getEstado()+", \r\n"+
-				"codigo_nacionalidad_CLI ='"+cliente.getNacionalidad().getCodigo()+"', \r\n" + 
-				"codigo_provincia_CLI ='"+cliente.getProvincia().getCodigo()+"', \r\n" + 
-				"codigo_localidad_CLI ='"+cliente.getLocalidad().getCodigo()+"', \r\n" + 
-				"codigo_genero_CLI ='"+cliente.getGenero().getCodigo()+"', \r\n" + 
-				"where dni_CLI ="+cliente.getDni()+";";
+				"codigo_nacionalidad_CLI ="+cliente.getNacionalidad().getCodigo()+", \r\n" + 
+				"codigo_provincia_CLI ="+cliente.getProvincia().getCodigo()+", \r\n" + 
+				"codigo_localidad_CLI ="+cliente.getLocalidad().getCodigo()+", \r\n" + 
+				"codigo_genero_CLI ="+cliente.getGenero().getCodigo()+" \r\n" + 
+				"where dni_CLI ="+cliente.getDni()+"";
 		try
 		 {
 			estado=cn.execute(query);
@@ -177,7 +175,8 @@ public class ClienteDaoImpl implements ClienteDao {
 			 		"inner join nacionalidades on codigo_nacionalidad_CLI = codigo_nacionalidad_NAC\r\n" + 
 			 		"inner join provincias on codigo_provincia_CLI = codigo_provincia_PRO\r\n" +
 			 		"inner join localidades on codigo_provincia_PRO = codigo_provincia_LOC\r\n" +  
-			 		"inner join generos on codigo_genero_CLI = codigo_genero_GEN GROUP BY dni_CLI where clientes.dni_CLI ="+dni +" ;");
+			 		"inner join generos on codigo_genero_CLI = codigo_genero_GEN where clientes.dni_CLI ="+dni +" GROUP BY dni_CLI;");
+			 System.out.println("Llegue al ClienteDaoImpl 174");
 			 while(rs.next())
 			 {
 				 Cliente cli = new Cliente();

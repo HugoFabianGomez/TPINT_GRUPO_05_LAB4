@@ -45,7 +45,7 @@ public class ServletCuentas extends HttpServlet {
 			cuenta.setCbu(Integer.parseInt(request.getParameter("txtCBU")));
 			cuenta.setTipoCuenta(new TipoCuenta(Integer.parseInt(request.getParameter("txtTipoCuenta"))));
 			cuenta.setFechaCreacion(request.getParameter("txtFechaCreacion"));
-			cuenta.setSaldo(Float.parseFloat(request.getParameter("txtSaldo")));
+			cuenta.setSaldo(10000);
 			cuenta.setCliente(new Cliente(Integer.parseInt(request.getParameter("txtDNI"))));
 			cuenta.setEstado(true);
 			

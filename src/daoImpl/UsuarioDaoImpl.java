@@ -1,13 +1,8 @@
 package daoImpl;
 
-import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.PreparedStatement;
 
 import dao.UsuarioDao;
 import daoImpl.Conexion;
@@ -122,37 +117,4 @@ public class UsuarioDaoImpl implements UsuarioDao {
 		}
 		return estado;
 	}
-
-	public String Login(String Usuario, String clave) {
-		cn = new Conexion();
-		cn.Open();	
-		String Resultado = "Fallo";
-		try {
-			
-			ResultSet rs= cn.query("select * from usuarios U inner join tiposusuario TUS on TUS.codigo_tipo_usuario_TUS = U.codigo_tipo_usuario_US where nombre_usuario_US = '" + Usuario + "' and contrasena_US = '" + clave + "'");
-			// System.out.println("VERIFICAMOS USUARIO1" + rs);
-			
-				 if(rs.next())
-				 {
-					
-				 return rs.getString("descripcion_TUS");
-				
-				 }
-				 else
-				 {
-					 return Resultado;
-				 }
-				 
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-
-		}
-		
-		 
-		return null; 
-		 
-		
-	}
-	
 }

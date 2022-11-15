@@ -28,7 +28,7 @@ ArrayList<Localidad> list_Localidad = (ArrayList<Localidad>) ServletLocalidades.
 
 %>
 
-	<jsp:include page="Menu.jsp"></jsp:include>
+	<jsp:include page="Menu.html"></jsp:include>
 	<h3>Alta de Cliente</h3>
 <form action="ServletClientes" method="post">
 <table>

@@ -20,7 +20,6 @@ public class Cliente {
 	public Cliente() {
 		
 	}
-	
 	public Cliente(int dni) {
 		this.dni = dni;
 	}

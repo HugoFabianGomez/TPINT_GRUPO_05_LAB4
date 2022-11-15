@@ -25,7 +25,7 @@
 <title>Autorizar prestamo</title>
 </head>
 <body onload="addDate();">
-	<jsp:include page="Menu.jsp"></jsp:include>
+	<jsp:include page="Menu.html"></jsp:include>
 	<h2>Autorizacion de prestamos</h2>
 
 	<%

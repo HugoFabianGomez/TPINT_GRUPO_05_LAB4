@@ -14,24 +14,27 @@
 <body>
 	<%
 	ArrayList<Cliente> lista_cliente;
-	lista_cliente = (ArrayList<Cliente>) ServletClientes.obtenerClientes();
-	%>
-	<jsp:include page="Menu.jsp"></jsp:include>
-	<h1>Lista de Clientes</h1>
+	String legajoaBuscar = request.getParameter("buscarDni"); 
+	if(legajoaBuscar != null && legajoaBuscar !=""){
+		lista_cliente = (ArrayList<Cliente>) ServletClientes.obtenerClientes(legajoaBuscar);
+	}else{
+		lista_cliente = (ArrayList<Cliente>) ServletClientes.obtenerClientes();
 
-<form method="post" action="ListarClientes">
+	}
+	%>
+	<jsp:include page="Menu.html"></jsp:include>
+	<h1>Lista de Clientes</h1>
+	
+	<form action="ListarClientes.jsp" method="get">
+        Buscar por Dni
+        <input type="number" name="buscarDni" value="<%=legajoaBuscar%>" >
+        <button  class="btn btn-primary" type="submit">Buscar</button>
+    </form>
+
+
 	 <table>
-	 	<tr>
-	 		<td>Filtros de Lista de Clientes</td>
-	 		<td><select name="">
-		<option value="" >Todos</option>
-		<!-- ACA  SE DESARROLLARA SEGUN EL FULTRO QUE PIDA LA PROFESORA -->
-	</select></td>
-	 	</tr>
-	 	<tr>
-	 		<td align="right">Búsqueda de Cliente</td>
-	 		<td style="height: 0px;"><input type="text" name="txtBusqueda"/></td>
-	 	</tr>
+
+	 	
 	 </table>
 	
 	<br><br>	
@@ -39,34 +42,49 @@
 	<table border="1" width="900" id="tablacliente">
 		<thead>
 			<tr>
-				<th>DNI</th>
+				<th style="width: 500px; ">...DNI</th>
+				<th></th>
 				<th style="width: 139px; ">CUIL</th>
-				<th>Nombre</th>
-				<th>Apellido</th>
-				<th style="width: 139px; ">Email</th>
-				<th>Telefono</th>
-				<th>Fecha Nac</th>
-				<th>Estado</th>
-
+				<th></th>
+				<th style="width: 800px; ">Nombre</th>
+				<th></th>
+				<th style="width: 800px; ">Apellido</th>
+				<th></th>
+				<th style="width: 1000px; ">Email</th>
+				<th></th>
+				<th style="width: 1000px; ">Telefono</th>
+				<th></th>
+				<th style="width: 2000px; ">Fecha_Nacio</th>
+				<th></th>
+				<th style="width: 139px; ">Estado</th>
 			</tr>
 		</thead>
 			<tbody>
 				<%  
 					if(lista_cliente!=null)
 					for(Cliente cl : lista_cliente) 
-				{
-				%>
+				{%>
 				<tr>
 					<td><%= cl.getDni() %></td>
+					<th></th>
 					<td><%= cl.getCuil() %>		</td>
+					<th></th>
 					<td><%= cl.getNombre() %>		</td>
+					<th></th>
 					<td><%= cl.getApellido() %>		</td>
+					<th></th>
 					<td><%= cl.getEmail() %>		</td>
+					<th></th>
 					<td><%= cl.getTelefono() %>		</td>
-					<td><%= cl.getFechaNacimiento() %>		</td>
+					<th></th>
+					<td ><%= cl.getFechaNacimiento() %>		</td>
+					<th></th>
 					<td><%= cl.getEstado() %>		</td>
+					
 					<td><a class="btn btn-primary" href="/TPINT_GRUPO_05_LAB4/ModificarCliente.jsp?dni=<%=cl.getDni()%>">Modificar</a></td>
-					<td><input type="submit" name="btnEliminar" value="Eliminar"/></td>
+					<form method= "post" action="ServletClientes?Dni=<%=cl.getDni()%>">
+					<td><input type="submit" name="btnEliminar" value="Eliminar" class="btn btn-danger" /></td>
+					</form>
 					
 				</tr>
 				<%  } %>
@@ -76,7 +94,7 @@
 			<a class="btn btn-primary" href="Inicio.jsp">Volver</a>
 		</div>
 	
-</form>
+
 
 </body>
 </html>
