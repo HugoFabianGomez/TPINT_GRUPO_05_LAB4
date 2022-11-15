@@ -111,9 +111,7 @@ ArrayList<Localidad> list_Localidad = (ArrayList<Localidad>) ServletLocalidades.
 					for (Provincia prov : list_Provincia) {
 				%>
 					<option value="<%=prov.getCodigo()%>"><%=prov.getDescripcion()%></option>
-				<%
-					}
-					%>
+				<% } %>
 			
 					<!-- ACA DESARROLLO LAS OPCIONES -->									 				
 			 </select>	
@@ -130,6 +128,7 @@ ArrayList<Localidad> list_Localidad = (ArrayList<Localidad>) ServletLocalidades.
 	<tr>
 		<td>Usuario: </td>
 		<td style="height: 0px; ">  <input type="text" name="textUSUARIO" required /> </td>	
+		<td> <input type="text" readonly value="CLAVE = DNI" /></td>
 	</tr>
 	
 	
