@@ -95,7 +95,7 @@
 		</td>
 	</tr>
 	<tr> 
-		<td style="height: 0px; "><input type="submit" name="btnConfirmarModificar"  value="MODIFICAR"/></td>
+		<td style="height: 0px; "><input type="submit" name="btnConfirmarModificar" onclick="return confirm('¿Está seguro que desea modificar esta cuenta?')" value="MODIFICAR"/></td>
 	</tr>
 
 </table>
