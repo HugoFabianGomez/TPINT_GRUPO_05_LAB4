@@ -48,8 +48,6 @@ public class ServletLogin extends HttpServlet {
 		HttpSession session= request.getSession();
 		
 		String Result = udao.Login(userid,password);
-			//Boolean Admin = udao.ValidarPermiso(userid,password);
-		System.out.println("Devolvio  : " + Result);
 		
 			if(Result!="Fallo")
 			{
@@ -59,16 +57,14 @@ public class ServletLogin extends HttpServlet {
 					System.out.println("ADMIN");
 					session.setAttribute("permiso", "Admin");
 					response.sendRedirect("Menu.jsp");
-					//RequestDispatcher rd = request.getRequestDispatcher("Inicio.jsp");
-					//rd.forward(request, response);
+
 				}
 				else
 				{
 					System.out.println("NO ADMIN");
 					session.setAttribute("permiso", "NoAdmin");
 					response.sendRedirect("Menu.jsp");
-					//RequestDispatcher rd = request.getRequestDispatcher("InicioMedico.jsp");
-					//rd.forward(request, response);
+
 				}
 				
 								

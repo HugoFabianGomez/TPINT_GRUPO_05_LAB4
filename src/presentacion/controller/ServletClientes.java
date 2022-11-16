@@ -15,14 +15,12 @@ import entidades.Nacionalidad;
 import entidades.Provincia;
 import entidades.Usuario;
 import negocio.ClienteNegocio;
-import negocio.UsuarioNegocio;
 import negocioImpl.ClienteNegocioImpl;
 import negocioImpl.UsuarioNegocioImpl;
 import entidades.Genero;
 import entidades.Localidad;
 
-import daoImpl.ClienteDaoImpl;
-import entidades.Cliente;
+
 //>>>>>>> 5b4a8aa43b3a66077f920fb03041551279e015b3
 
 @WebServlet("/ServletClientes")
@@ -30,7 +28,9 @@ public class ServletClientes extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	static ClienteNegocio ClienteNeg = new ClienteNegocioImpl();
-	static UsuarioNegocio UsuaNeg = new UsuarioNegocioImpl();
+	static UsuarioNegocioImpl UsuaNeg = new UsuarioNegocioImpl();
+	
+	
 
 	public ServletClientes() {
 		super();
@@ -47,8 +47,7 @@ public class ServletClientes extends HttpServlet {
 			Usuario usu = new Usuario();
 			usu.setNombreUsuario(request.getParameter("textUSUARIO"));
 			usu.setContrasenia(request.getParameter("txtDNI"));
-			filas= UsuaNeg.agregar(usu);
-			
+			filas= UsuaNeg.agregar(usu);		
 			
 			
 			Cliente cliente =  new Cliente();

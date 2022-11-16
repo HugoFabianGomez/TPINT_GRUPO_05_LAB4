@@ -86,7 +86,7 @@ if(session.getAttribute("userid")==null)
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
           		<% if(session.getAttribute("permiso").equals("Admin"))
            { %>
-            <li><a class="dropdown-item" href="AutorizarPrestamo">Autorizar</a></li>
+            <li><a class="dropdown-item" href="AutorizarPrestamo.jsp">Autorizar</a></li>
             <%} %>
             <li><a class="dropdown-item" href="PagosPrestamos.jsp">Pagar</a></li>
             <li><a class="dropdown-item" href="Prestamos.jsp">Listar</a></li>
@@ -118,7 +118,7 @@ if(session.getAttribute("userid")==null)
           </a>
           
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="Test.jsp">Perfil</a></li>
+            <li><a class="dropdown-item" href="Perfil.jsp">Perfil</a></li>
               <li><a class="dropdown-item" data-toggle="modal" data-target="#myModal">Salir</a></li>  
             
             
