@@ -1,12 +1,20 @@
+<%@page import="daoImpl.LocalidadDaoImpl"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="entidades.Nacionalidad"%>
-<%@page import="entidades.Provincia"%>
 <%@page import="entidades.Genero"%>
+<%@page import="negocio.GeneroNegocio"%>
+<%@page import="negocioImpl.GeneroNegocioImpl"%>
+<%@page import="entidades.Nacionalidad"%>
+<%@page import="negocio.NacionalidadNegocio"%>
+<%@page import="negocioImpl.NacionalidadNegocioImpl"%>
+<%@page import="entidades.Provincia"%>
+<%@page import="negocio.ProvinciaNegocio"%>
+<%@page import="negocioImpl.ProvinciaNegocioImpl"%>
 <%@page import="entidades.Localidad"%>
+<%@page import="negocio.LocalidadNegocio"%>
+<%@page import="negocioImpl.LocalidadNegocioImpl"%>
 <%@page import="entidades.Cliente"%>
 <%@page import="presentacion.controller.ServletNacionalidades"%>
 <%@page import="presentacion.controller.ServletProvincias"%>
-<%@page import="presentacion.controller.ServletGeneros"%>
 <%@page import="presentacion.controller.ServletLocalidades"%>
 <%@page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -21,10 +29,17 @@
 
 <%
 
-ArrayList<Genero> list_Genero = (ArrayList<Genero>) ServletGeneros.obtenerGeneros();
-ArrayList<Nacionalidad> list_Nacionalidad = (ArrayList<Nacionalidad>) ServletNacionalidades.obtenerNacionalidades();
-ArrayList<Provincia> list_Provincia = (ArrayList<Provincia>) ServletProvincias.obtenerProvincia();
-ArrayList<Localidad> list_Localidad = (ArrayList<Localidad>) ServletLocalidades.obtenerLocalidades();
+GeneroNegocio generoNegocio = new GeneroNegocioImpl();
+ArrayList<Genero> list_Genero = generoNegocio.obtenerTodos();
+
+NacionalidadNegocio nacNegocio = new NacionalidadNegocioImpl();
+ArrayList<Nacionalidad> list_Nacionalidad = nacNegocio.obtenerTodos();
+
+ProvinciaNegocio provNegocio = new ProvinciaNegocioImpl();
+ArrayList<Provincia> list_Provincia = provNegocio.obtenerTodos();
+
+LocalidadNegocio locNegocio = new LocalidadNegocioImpl();
+ArrayList<Localidad> list_Localidad = locNegocio.obtenerLocalidad();
 
 %>
 
@@ -54,7 +69,6 @@ ArrayList<Localidad> list_Localidad = (ArrayList<Localidad>) ServletLocalidades.
 		<td>Nacionalidad: </td>
 		<td style="height: 0px; ">
 			<select name="txtNACIONALIDAD" required>
-			
 				<%
 				if(list_Nacionalidad!=null)
 					for (Nacionalidad nac : list_Nacionalidad) {
@@ -62,8 +76,7 @@ ArrayList<Localidad> list_Localidad = (ArrayList<Localidad>) ServletLocalidades.
 					<option value="<%=nac.getCodigo()%>"><%=nac.getDescripcion()%></option>
 				<%
 					}
-					%>
-								 				
+					%>					 				
 			 </select>	
 		</td>
 		<td>Fecha de Nacimiento: </td>
