@@ -65,7 +65,7 @@ public class ServletCuentas extends HttpServlet {
 		        rd.forward(request, response) ;
 		}
 		
-		if(request.getParameter("btnConfirmarModificar")!=null) {
+		else if(request.getParameter("btnConfirmarModificar")!=null) {
 			Cuenta cuenta = new Cuenta();
 			
 			cuenta.setNumeroCuenta(Integer.parseInt(request.getParameter("txtNumeroCuenta")));
@@ -75,14 +75,15 @@ public class ServletCuentas extends HttpServlet {
 			cuenta.setSaldo(Float.parseFloat(request.getParameter("txtSaldo")));
 			cuenta.setCliente(new Cliente(Integer.parseInt(request.getParameter("txtDNI"))));
 			cuenta.setEstado(Boolean.parseBoolean(request.getParameter("comboEstado")));
-			System.out.println("ENTRE MODIFICAR");
+			System.out.println("ESTADO: "+ Boolean.parseBoolean(request.getParameter("comboEstado")));
+			cuNeg.modificar(cuenta);
 			ArrayList<Cuenta> listaCuentas = cuNeg.obtenerTodos();
 			request.setAttribute("listaCuentas", listaCuentas);
 			RequestDispatcher rd = request.getRequestDispatcher("ListarCuentas.jsp");   
 	        rd.forward(request, response) ;
 		}
 		
-		if(request.getParameter("btnEliminar")!=null) {
+		else if(request.getParameter("btnEliminar")!=null) {
 			int numeroCuenta = Integer.parseInt(request.getParameter("numeroCuenta"));
 			cuNeg.eliminar(numeroCuenta);
 			ArrayList<Cuenta> listaCuentas = cuNeg.obtenerTodos();
