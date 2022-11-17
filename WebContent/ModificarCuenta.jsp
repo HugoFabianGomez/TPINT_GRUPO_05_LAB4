@@ -80,14 +80,14 @@
 				<%
 				if(cuenta.getEstado()==true){
 				%>
-					<option value=1 selected> Activa </option>
-					<option value=0> Inactiva </option>
+					<option value=true selected> Activa </option>
+					<option value=false> Inactiva </option>
 				<% 
 				}
 				else{
 				 %>
-				<option value=1> Activa </option>
-				<option value=0 selected> Inactiva </option>
+				<option value=true> Activa </option>
+				<option value=false selected> Inactiva </option>
 				<%
 				}
 				 %>
