@@ -1,13 +1,19 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="entidades.Nacionalidad"%>
+<%@page import="negocio.NacionalidadNegocio"%>
+<%@page import="negocioImpl.NacionalidadNegocioImpl"%>
 <%@page import="entidades.Provincia"%>
+<%@page import="negocio.ProvinciaNegocio"%>
+<%@page import="negocioImpl.ProvinciaNegocioImpl"%>
 <%@page import="entidades.Genero"%>
+<%@page import="negocio.GeneroNegocio"%>
+<%@page import="negocioImpl.GeneroNegocioImpl"%>
 <%@page import="entidades.Localidad"%>
+<%@page import="negocio.LocalidadNegocio"%>
+<%@page import="negocioImpl.LocalidadNegocioImpl"%>
 <%@page import="entidades.Cliente"%>
-<%@page import="presentacion.controller.ServletNacionalidades"%>
-<%@page import="presentacion.controller.ServletProvincias"%>
-<%@page import="presentacion.controller.ServletGeneros"%>
-<%@page import="presentacion.controller.ServletLocalidades"%>
+<%@page import="negocio.ClienteNegocio"%>
+<%@page import="negocioImpl.ClienteNegocioImpl"%>
 <%@page import="presentacion.controller.ServletClientes"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -19,11 +25,24 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
+		<%
+			if(session.getAttribute("userid")==null || session.getAttribute("permiso")=="NoAdmin")
+			{
+				RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+			}
+		%>
 	<%
-		ArrayList<Genero> list_Genero = (ArrayList<Genero>) ServletGeneros.obtenerGeneros();
-		ArrayList<Nacionalidad> list_Nacionalidad = (ArrayList<Nacionalidad>) ServletNacionalidades.obtenerNacionalidades();
-		ArrayList<Provincia> list_Provincia = (ArrayList<Provincia>) ServletProvincias.obtenerProvincia();
-		ArrayList<Localidad> list_Localidad = (ArrayList<Localidad>) ServletLocalidades.obtenerLocalidades();
+	GeneroNegocio generoNegocio = new GeneroNegocioImpl();
+	ArrayList<Genero> list_Genero = generoNegocio.obtenerTodos();
+
+	NacionalidadNegocio nacNegocio = new NacionalidadNegocioImpl();
+	ArrayList<Nacionalidad> list_Nacionalidad = nacNegocio.obtenerTodos();
+
+	ProvinciaNegocio provNegocio = new ProvinciaNegocioImpl();
+	ArrayList<Provincia> list_Provincia = provNegocio.obtenerTodos();
+
+	LocalidadNegocio locNegocio = new LocalidadNegocioImpl();
+	ArrayList<Localidad> list_Localidad = locNegocio.obtenerLocalidad();
 		
 		String dni = request.getParameter("dni");
  		Cliente cl = ServletClientes.obtenerCliente(dni);

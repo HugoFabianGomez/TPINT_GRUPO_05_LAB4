@@ -1,5 +1,8 @@
+<%@page import="negocio.ClienteNegocio"%>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="entidades.Cliente" %>
+<%@ page import="negocio.ClienteNegocio" %>
+<%@ page import="negocioImpl.ClienteNegocioImpl" %>
 <%@ page import="presentacion.controller.ServletClientes" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
@@ -12,13 +15,22 @@
 </head>
 
 <body>
+		<%
+			if(session.getAttribute("userid")==null || session.getAttribute("permiso")=="NoAdmin")
+			{
+				RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+			}
+		%>
 	<%
+	ClienteNegocio cliNegocio = new ClienteNegocioImpl();
 	ArrayList<Cliente> lista_cliente;
-	String legajoaBuscar = request.getParameter("buscarDni"); 
-	if(legajoaBuscar != null && legajoaBuscar !=""){
-		lista_cliente = (ArrayList<Cliente>) ServletClientes.obtenerClientes(legajoaBuscar);
+	
+	
+	String DniaBuscar = request.getParameter("buscarDni"); 
+	if(DniaBuscar != null && DniaBuscar !=""){
+		lista_cliente = cliNegocio.obtenerTodos(Integer.parseInt(DniaBuscar));
 	}else{
-		lista_cliente = (ArrayList<Cliente>) ServletClientes.obtenerClientes();
+		lista_cliente = cliNegocio.obtenerTodos();
 
 	}
 	%>
@@ -27,7 +39,7 @@
 	
 	<form action="ListarClientes.jsp" method="get">
         Buscar por Dni
-        <input type="number" name="buscarDni" value="<%=legajoaBuscar%>" >
+        <input type="number" name="buscarDni" value="<%=DniaBuscar%>" >
         <button  class="btn btn-primary" type="submit">Buscar</button>
     </form>
 
