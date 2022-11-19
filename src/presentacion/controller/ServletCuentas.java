@@ -65,7 +65,7 @@ public class ServletCuentas extends HttpServlet {
 		        rd.forward(request, response) ;
 		}
 		
-		else if(request.getParameter("btnConfirmarModificar")!=null) {
+		if(request.getParameter("btnConfirmarModificar")!=null) {
 			Cuenta cuenta = new Cuenta();
 			
 			cuenta.setNumeroCuenta(Integer.parseInt(request.getParameter("txtNumeroCuenta")));
@@ -83,13 +83,26 @@ public class ServletCuentas extends HttpServlet {
 	        rd.forward(request, response) ;
 		}
 		
-		else if(request.getParameter("btnEliminar")!=null) {
+		if(request.getParameter("btnEliminar")!=null) {
 			int numeroCuenta = Integer.parseInt(request.getParameter("numeroCuenta"));
 			cuNeg.eliminar(numeroCuenta);
 			ArrayList<Cuenta> listaCuentas = cuNeg.obtenerTodos();
 			request.setAttribute("listaCuentas", listaCuentas);
 			RequestDispatcher rd = request.getRequestDispatcher("ListarCuentas.jsp");   
 	        rd.forward(request, response) ;
+		}
+		
+		if(request.getParameter("btnFiltrarCuenta")!=null) {
+			ArrayList<Cuenta> listaCuentas;
+			if(request.getParameter("txtBusqueda").isEmpty()) {
+				listaCuentas = cuNeg.obtenerTodos();
+			}
+			else {				
+				listaCuentas = cuNeg.obtenerxNumero(Integer.parseInt(request.getParameter("txtBusqueda")));
+			}
+			request.setAttribute("listaCuentas", listaCuentas);
+			RequestDispatcher rd = request.getRequestDispatcher("/ListarCuentas.jsp");   
+	        rd.forward(request, response);
 		}
 		
 	}

@@ -9,5 +9,6 @@ public interface CuentaDao {
 	public boolean modificar(Cuenta cuenta);
 	public boolean eliminar(int numeroCuenta);
 	public Cuenta obtenerUno(int numeroCuenta);
+	public ArrayList<Cuenta> busquedaxNumero(int numeroCuenta);
 	public ArrayList<Cuenta> obtenerTodos();
 }
