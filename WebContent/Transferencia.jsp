@@ -25,9 +25,17 @@
 				if(currentUser.getNombreUsuario() != "lemos.h")
 				{
 					ClienteNegocio clienteNegocio = new ClienteNegocioImpl();
-					Cliente cl = clienteNegocio.obtenerUno(currentUser.getNombreUsuario());
-					//CuentaNegocio ctaNegocio = new CuentaNegocioImpl();
-					//Cuenta ct = ctaNegocio.ob
+					String Usuario = currentUser.getNombreUsuario();
+					Cliente cl = clienteNegocio.obtenerUno(Usuario);
+					
+					CuentaNegocio ctaNegocio = new CuentaNegocioImpl();
+					int dni = cl.getDni();
+					ArrayList<Cuenta> ctLista = ctaNegocio.obtenerTodos(dni);
+					
+					for(Cuenta cta : ctLista)
+					{
+						System.out.println(cta.toString());
+					}
 				%>
 				  	<header class="card shadows">
 					 	<h1>Bienvenido <%=currentUser.getNombreUsuario()%></h1>
@@ -57,57 +65,36 @@
 							<td style="height: 0px; "><input type="text" name="txtNOMBRE"  value="<%=cl.getDni() %>" readonly /></td>
 							</TR>
 							<tr>
-							<td style="width: 139px; ">Cuentas:</td>
+							<td style="width: 139px; ">Cuentas:</td> 
+							</tr>
+							<tr>
+							<td style="width: 139px; ">Cuentas Origen</td> 
 							<td style="height: 0px; ">
 							<select name="txtNACIONALIDAD" >
 								<%				
-								if(list_Nacionalidad!=null)
-									for (Nacionalidad nac : list_Nacionalidad) {
+								if(ctLista !=null)
+									for (Cuenta cta : ctLista) {
 								%>
-				
-									<option value="<%=nac.getCodigo()%>" <%=nac.getCodigo()==cl.getNacionalidad().getCodigo()?"selected":"" %>><%=nac.getDescripcion()%></option>
-				
+									<option value="<%=cta.getNumeroCuenta()%>"  ><%= cta.getNumeroCuenta()+"-" +cta.getTipoCuenta().getDescripcion() +" Saldo:  $ "+ cta.getSaldo()%></option>
 								<%}	%>									 				
 							 </select>	
-		</td>
+							</td>							
 							
 							</tr>
+							<tr>
+							<td style="width: 139px; ">Cuentas Destino</td>
+							<tr>
+							<td style="width: 139px; ">C.B.U.:</td>
+							<td style="height: 0px; "><input type="text" name="txtCbuDestino" /></td>
+							<td>Importe a Transferir: </td>
+								<td style="height: 0px; ">  <input type="number" name="textMONTO" required /></td>	
+							</tr>
+						
+							<br />
 							
-						
-
-						
-						
-						
-							<td style="width: 139px; "></td>
-						<tr> 
-							<td>Desde: </td>
-							<td style="height: 0px; ">
-								<select name="txtSEXO" >
-								<option value="0" >Seleccione la Cuenta Origen</option>
-								<option value="2" >Cuenta.....</option>
-								<!-- ACA DESARROLLO LAS OPCIONES -->
-								</select>	
-							</td>
+							<br>
 							
-						</tr>
-						<tr> 
-							<td>Hacia: </td>
-							<td style="height: 0px; ">
-								<select name="txtSEXO" >
-								
-								<option value="1" >Cuenta 1</option>
-								<option value="2" >Cuenta 2</option>
-								<!-- ACA DESARROLLO LAS OPCIONES -->
-								</select>	
-							</td>
-							
-						</tr>
-						<tr>
-							<td>Monto: </td>
-							<td style="height: 0px; ">  <input type="number" name="textMONTO" required /></td>	
-						</tr>	
-						<br />
-						<tr>
+							<tr>
 							<td style="height: 0px; "><input type="submit" name="btnConfirmar" value="Confirmar"/></td>
 						</tr>
 					

@@ -11,4 +11,5 @@ public interface CuentaNegocio {
 	public Cuenta obtenerUno(int numeroCuenta);
 	public ArrayList<Cuenta> obtenerxNumero(int numeroCuenta);
 	public ArrayList<Cuenta> obtenerTodos();
+	public ArrayList<Cuenta> obtenerTodos(int dni);
 }

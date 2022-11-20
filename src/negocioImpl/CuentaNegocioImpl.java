@@ -40,4 +40,11 @@ public class CuentaNegocioImpl implements CuentaNegocio {
 		return cuDao.busquedaxNumero(numeroCuenta);
 	}
 
+	@Override
+	public ArrayList<Cuenta> obtenerTodos(int dni) {
+		// TODO Auto-generated method stub
+		
+		return cuDao.busquedaxDni(dni);
+	}
+
 }

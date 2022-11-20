@@ -413,9 +413,9 @@ public class ClienteDaoImpl implements ClienteDao {
 				 gen.setDescripcion(rs.getString("generos.descripcion_GEN")); 
 
 				 Usuario usu = new Usuario();
-				 usu.setNombreUsuario(rs.getString("usuario.nombre_usuario_US"));
-				 usu.setContrasenia(rs.getString("usuario.contrasena_US"));
-				 usu.setEstado(rs.getBoolean("usuario.estado_US"));
+				 usu.setNombreUsuario(rs.getString("usuarios.nombre_usuario_US"));
+				 usu.setContrasenia(rs.getString("usuarios.contrasena_US"));
+				 usu.setEstado(rs.getBoolean("usuarios.estado_US"));
 				 
 				 TipoUsuario tipousu = new TipoUsuario();
 				 tipousu.setCodTipoUsuario(rs.getInt("tiposusuario.codigo_tipo_usuario_TUS"));
