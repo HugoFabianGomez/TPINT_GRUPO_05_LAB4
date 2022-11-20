@@ -78,9 +78,8 @@
 	</tr>	
 	<tr>
 		<td>DOMICILIO </td>
-		<td style="height: 0px; "><input readonly type="text" name="txtDIRECCION" required  maxlength="40" autocomplete="off" value="<%=cl.getDomicilio() %>"/><br></td>
+		<td style="height: 0px; "><input readonly type="text" name="txtDIRECCION"  value="<%=cl.getDomicilio() %>"/><br></td>
 		<td style="height: 0px; "><input readonly type="text" name="txtLOCALIDAD"  value="<%=cl.getLocalidad().getDescripcion() %>"/></td>
-		
 		<td style="height: 0px; "><input readonly type="text" name="txtPROVINCIA"  value="<%=cl.getProvincia().getDescripcion()  %>"/></td>
 	</tr>
 	<tr>
@@ -91,12 +90,11 @@
 		<td>TELEFONO </td>
 		<td style="height: 0px; "><input readonly type="tel" name="txtTELEFONO" value="<%=cl.getTelefono() %>"/></td>
 	</tr>
-	<tr> 
-		<form>
-		<td class="common-button secondary"><input type="submit" name="btnModificar" value="MODIFICAR"/></td>
-		</form>
-	</tr>
+
 </table>
+		<div>
+			<a class="btn btn-primary" href="Inicio.jsp">Volver</a>
+		</div>
 </form>
 
 </body>

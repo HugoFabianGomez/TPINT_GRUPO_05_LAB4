@@ -1,19 +1,7 @@
 <%@page import="java.util.ArrayList"%>
-<%@page import="entidades.Nacionalidad"%>
-<%@page import="negocio.NacionalidadNegocio"%>
-<%@page import="negocioImpl.NacionalidadNegocioImpl"%>
-<%@page import="entidades.Provincia"%>
-<%@page import="negocio.ProvinciaNegocio"%>
-<%@page import="negocioImpl.ProvinciaNegocioImpl"%>
-<%@page import="entidades.Genero"%>
-<%@page import="negocio.GeneroNegocio"%>
-<%@page import="negocioImpl.GeneroNegocioImpl"%>
-<%@page import="entidades.Localidad"%>
-<%@page import="negocio.LocalidadNegocio"%>
-<%@page import="negocioImpl.LocalidadNegocioImpl"%>
-<%@page import="entidades.Cliente"%>
-<%@page import="negocio.ClienteNegocio"%>
-<%@page import="negocioImpl.ClienteNegocioImpl"%>
+<%@page import="entidades.*"%>
+<%@page import="negocio.*"%>
+<%@page import="negocioImpl.*"%>
 <%@page import="presentacion.controller.ServletClientes"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -97,7 +85,6 @@
 				if(list_Genero!=null)
 					for (Genero gen : list_Genero) {
 				%>
-					<option value="<%=gen.getCodigo()%>"><%=gen.getDescripcion()%></option>
 					<option value="<%=gen.getCodigo()%>" <%=gen.getCodigo()==cl.getGenero().getCodigo()?"selected":"" %>><%=gen.getDescripcion()%></option>
 				<% }%>
 			 </select>	
@@ -125,7 +112,6 @@
 				if(list_Provincia!=null)
 					for (Provincia prov : list_Provincia) {
 				%>
-					<option value="<%=prov.getCodigo()%>"><%=prov.getDescripcion()%></option>
 					<option value="<%=prov.getCodigo()%>" <%=prov.getCodigo()==cl.getProvincia().getCodigo()?"selected":"" %>><%=prov.getDescripcion()%></option>
 				<% } %>
 

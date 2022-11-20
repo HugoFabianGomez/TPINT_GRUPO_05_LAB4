@@ -11,6 +11,8 @@ import entidades.Genero;
 import entidades.Localidad;
 import entidades.Nacionalidad;
 import entidades.Provincia;
+import entidades.Usuario;
+import entidades.TipoUsuario;
 
 
 public class ClienteDaoImpl implements ClienteDao {
@@ -361,5 +363,87 @@ public class ClienteDaoImpl implements ClienteDao {
 		 }
 		
 		return cli;
+	}
+
+	@Override
+	public Cliente obtenerUno(String usuario) {
+		// TODO Auto-generated method stub
+		cn = new Conexion();
+		cn.Open();
+		//ArrayList<Cliente> list = new ArrayList<Cliente>();
+		Cliente cli = new Cliente();
+		 try
+		 {
+			 ResultSet rs= cn.query("select * from clientes inner join nacionalidades on codigo_nacionalidad_CLI = codigo_nacionalidad_NAC\r\n"
+			 		+ "inner join provincias on codigo_provincia_CLI = codigo_provincia_PRO\r\n"
+			 		+ "inner join localidades on codigo_provincia_PRO = codigo_provincia_LOC\r\n"
+			 		+ "inner join generos on codigo_genero_CLI = codigo_genero_GEN \r\n"
+			 		+ "inner join usuarios on nombre_usuario_CLI = nombre_usuario_US\r\n"
+			 		+ "where nombre_usuario_CLI = '"+ usuario +"' GROUP BY dni_CLI;");
+			 if(rs.next())
+			 {
+				 System.out.println("Entre en obtenerUno usuario");
+				 cli.setDni(rs.getInt("clientes.dni_CLI"));
+				 cli.setCuil(rs.getInt("clientes.cuil_CLI"));
+				 cli.setNombre(rs.getString("clientes.nombre_CLI"));
+				 cli.setApellido(rs.getString("clientes.apellido_CLI"));
+				 cli.setFechaNacimiento(rs.getString("clientes.fecha_nacimiento_CLI"));
+				 cli.setDomicilio(rs.getString("clientes.domicilio_CLI"));
+				 cli.setEmail(rs.getString("clientes.email_CLI"));
+				 cli.setTelefono(rs.getString("clientes.telefono_CLI"));
+				 cli.setEstado(rs.getBoolean("clientes.estado_CLI"));
+				 cli.setNombreCompleto(rs.getString("clientes.nombre_CLI")+" "+rs.getString("clientes.apellido_CLI"));
+				 
+				 Nacionalidad nac = new Nacionalidad();
+				 nac.setCodigo(rs.getInt("nacionalidades.codigo_nacionalidad_NAC"));
+				 nac.setAbreviatura(rs.getString("nacionalidades.abreviatura_NAC"));
+				 nac.setDescripcion(rs.getString("nacionalidades.descripcion_NAC"));								
+				 
+				 Provincia pro = new Provincia();
+				 pro.setCodigo(rs.getInt("provincias.codigo_provincia_PRO"));
+				 pro.setDescripcion(rs.getString("provincias.descripcion_PRO"));
+				 
+				 Localidad loc = new Localidad();
+				 loc.setCodigo(rs.getInt("localidades.codigo_localidad_LOC"));
+				 loc.setProvincia(pro);
+				 loc.setDescripcion(rs.getString("localidades.descripcion_LOC"));
+				 
+				 Genero gen = new Genero();
+				 gen.setCodigo(rs.getInt("generos.codigo_genero_GEN"));
+				 gen.setDescripcion(rs.getString("generos.descripcion_GEN")); 
+
+				 Usuario usu = new Usuario();
+				 usu.setNombreUsuario(rs.getString("usuario.nombre_usuario_US"));
+				 usu.setContrasenia(rs.getString("usuario.contrasena_US"));
+				 usu.setEstado(rs.getBoolean("usuario.estado_US"));
+				 
+				 TipoUsuario tipousu = new TipoUsuario();
+				 tipousu.setCodTipoUsuario(rs.getInt("tiposusuario.codigo_tipo_usuario_TUS"));
+				 tipousu.setTipoUsuario(rs.getString("tiposusuario.descripcion_TUS"));				 
+				 usu.getTipoUsuario(tipousu);
+				 
+				 
+				 cli.setNacionalidad(nac);
+				 cli.setProvincia(pro);
+				 cli.setLocalidad(loc);
+				 cli.setGenero(gen);
+				 cli.setUsuario(usu);	
+				 
+				 //list.add(cli);
+			}
+			 
+		 }
+		 catch(Exception e)
+		 {
+			 System.out.println("Error en Obtener uno usuario");
+			 e.printStackTrace();
+		 }
+		 finally
+		 {
+			 cn.close();
+		 }
+		
+		return cli;
+		
 	}
 }

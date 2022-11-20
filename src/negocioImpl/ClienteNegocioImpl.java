@@ -51,5 +51,13 @@ public class ClienteNegocioImpl implements ClienteNegocio{
 		return estado;
 	}
 
+	@Override
+	public Cliente obtenerUno(String usuario) {
+		// TODO Auto-generated method stub
+		
+		
+		return clienteDao.obtenerUno(usuario);
+	}
+
 
 }

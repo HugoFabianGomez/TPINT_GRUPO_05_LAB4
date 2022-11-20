@@ -45,4 +45,18 @@ public class Usuario {
 	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
+
+	@Override
+	public String toString() {
+		return "Usuario [nombreUsuario=" + nombreUsuario + ", contrasenia=" + contrasenia + ", tipoUsuario="
+				+ tipoUsuario + ", estado=" + estado + "]";
+	}
+
+	public void getTipoUsuario(TipoUsuario tipousu) {
+		// TODO Auto-generated method stub
+		this.tipoUsuario = tipousu;
+		
+	}
+	
+	
 }

@@ -18,4 +18,10 @@ public class UsuarioNegocioImpl implements UsuarioNegocio {
 		return usuDao.insertar(usuario);
 	}
 
+	@Override
+	public Usuario login(String usuario, String contrasenia) {
+		// TODO Auto-generated method stub
+		return usuDao.login(usuario, contrasenia);
+	}
+
 }

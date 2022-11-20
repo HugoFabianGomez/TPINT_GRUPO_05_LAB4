@@ -7,6 +7,7 @@ import java.util.List;
 
 import dao.UsuarioDao;
 import daoImpl.Conexion;
+import entidades.Nacionalidad;
 import entidades.TipoUsuario;
 import entidades.Usuario;
 
@@ -75,7 +76,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 		cn.Open();	
 		String Resultado = "Fallo";
 		try {
-			
+						
 			ResultSet rs= cn.query("select * from bdbanco.usuarios U inner join bdbanco.tiposusuario TUS on TUS.codigo_tipo_usuario_TUS = U.codigo_tipo_usuario_US where nombre_usuario_US = '" + Usuario + "' and contrasena_US = '" + clave + "'");
 			// System.out.println("VERIFICAMOS USUARIO1" + rs);
 			
@@ -146,5 +147,44 @@ public class UsuarioDaoImpl implements UsuarioDao {
 			cn.close();
 		}
 		return estado;
+	}
+
+	@Override
+	public Usuario login(String usuario, String pass) {
+		// TODO Auto-generated method stub
+		cn = new Conexion();
+		cn.Open();		 
+		Usuario user = new Usuario();
+		try
+		 {
+			 ResultSet rs= cn.query("select * from bdbanco.usuarios U inner join bdbanco.tiposusuario TUS on TUS.codigo_tipo_usuario_TUS = U.codigo_tipo_usuario_US where nombre_usuario_US = '" + usuario + "' and contrasena_US = '" + pass + "'");
+
+			 if(rs.next()) {
+				 user.setNombreUsuario(rs.getString("nombre_usuario_US"));
+				 user.setContrasenia(rs.getString("contrasena_US"));
+				 user.setEstado(rs.getBoolean("estado_US"));
+				 
+				 TipoUsuario tup = new TipoUsuario();
+				 tup.setCodTipoUsuario(rs.getInt("TUS.codigo_tipo_usuario_TUS"));
+				 tup.setTipoUsuario(rs.getString("TUS.descripcion_TUS"));
+				 
+				 user.setTipoUsuario(tup);
+				 //System.out.println("Entre en login: "+tup.toString());
+				 
+			 } else {
+				 user = null;
+			 }
+		 }
+		 catch(Exception e)
+		 {
+			 System.out.println("Error en login");
+			 e.printStackTrace();
+		 }
+		 finally
+		 {
+			 cn.close();
+		 }
+		return user;
+		
 	}
 }

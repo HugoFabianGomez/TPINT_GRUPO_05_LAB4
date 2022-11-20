@@ -8,4 +8,5 @@ public interface UsuarioDao {
 	public boolean insertar(Usuario usuario);
 	public boolean editar(Usuario usuario);
 	public boolean borrar(String nombreUsuario);
+	public Usuario login(String usuario, String pass);
 }

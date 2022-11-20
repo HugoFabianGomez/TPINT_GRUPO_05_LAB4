@@ -114,8 +114,7 @@ public class ServletClientes extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/ListarClientes.jsp");   
 	        rd.forward(request, response);
 			
-			
-		}
+		} 
 		
 		
 	}
@@ -131,8 +130,7 @@ public class ServletClientes extends HttpServlet {
 	public static Cliente obtenerCliente(String dni) {
 		return ClienteNeg.obtenerUno(Integer.parseInt(dni));
 	}
-
-		
+			
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		if(request.getParameter("btnModificar")!=null) 
