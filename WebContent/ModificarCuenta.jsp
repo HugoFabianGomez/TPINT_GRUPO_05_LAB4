@@ -24,9 +24,7 @@
 <table>
 	<tr> 
 		<td style="width: 169px; ">NUMERO DE CUENTA</td>
-		<td style="height: 0px; "><input type="Number" name="txtNumeroCuenta"
-		required  maxlength="10" autocomplete="off" onkeypress="return((event.charCode >= 48 && event.charCode <= 57))"
-		value="<%=cuenta.getNumeroCuenta() %>" /><br></td>
+		<td style="height: 0px; "><input type="text" readonly="readonly" name="txtNumeroCuenta" value="<%=cuenta.getNumeroCuenta() %>" /><br></td>
 		<td>CBU  </td>
 		<td style="height: 0px; "><input type="Number" name="txtCBU" 
 		required  maxlength="22" autocomplete="off" onkeypress="return((event.charCode >= 48 && event.charCode <= 57))"

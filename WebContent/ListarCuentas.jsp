@@ -22,22 +22,24 @@
 	
 	%>
 
-
+<form action="ServletCuentas" method="post">
 	 <table>
 	 	<tr>
 	 		<td>Filtrar: </td>
 	 		<td><select name="filtros">
 		<option value="" >Todos</option>
 		<!-- ACA  SE DESARROLLARA SEGUN EL FULTRO QUE PIDA LA PROFESORA -->
-		
 	</select></td>
 	 	</tr>
 	 	<tr>
 	 		<td align="right">Búsqueda de Cuenta: </td>
 	 		<td style="height: 0px;"><input type="text" name="txtBusqueda"/></td>
 	 	</tr>
+	 	<tr>
+	 		<td><input type="submit" name="btnFiltrarCuenta" value="Buscar"/></td>
+	 	</tr>
 	 </table>
-	
+</form>
 	<br><br>	
 	
 	<table border="1" width="900">

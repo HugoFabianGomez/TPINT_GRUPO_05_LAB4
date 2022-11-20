@@ -33,5 +33,11 @@ public class CuentaNegocioImpl implements CuentaNegocio {
 	@Override
 	public boolean eliminar(int numeroCuenta) {
 		return cuDao.eliminar(numeroCuenta);
-	} 
+	}
+
+	@Override
+	public ArrayList<Cuenta> obtenerxNumero(int numeroCuenta) {
+		return cuDao.busquedaxNumero(numeroCuenta);
+	}
+
 }
