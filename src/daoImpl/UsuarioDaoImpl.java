@@ -187,4 +187,25 @@ public class UsuarioDaoImpl implements UsuarioDao {
 		return user;
 		
 	}
+	
+	public int obtenerDniUser(String user) {
+		int dni = 0;
+		cn = new Conexion();
+		cn.Open();
+		try {
+			ResultSet rs = cn.query("select * from Usuarios U\r\n"
+					+ "inner join TipoUsuarios TUS on TUS.codigo_tipo_usuario_TUS = U.codigo_tipo_usuario_US\r\n"
+					+ "inner join Clientes C on C.nombre_usuario_CLI = U.nombre_usuario_US\r\n"
+					+ "WHERE U.nombre_usuario_US = " + user);
+			while (rs.next()) {
+				dni = (rs.getInt("C.dni_CLI"));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			cn.close();
+		}
+		return dni;
+	}
 }

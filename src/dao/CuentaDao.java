@@ -13,5 +13,5 @@ public interface CuentaDao {
 	public ArrayList<Cuenta> busquedaxDni(int dni);
 	public ArrayList<Cuenta> busquedaxNumero(int numeroCuenta);
 	public ArrayList<Cuenta> obtenerTodos();
-	
+	public ArrayList<Cuenta> obtenerCuentasCliente(int dni);
 }

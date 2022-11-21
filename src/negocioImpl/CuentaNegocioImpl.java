@@ -52,5 +52,9 @@ public class CuentaNegocioImpl implements CuentaNegocio {
 		// TODO Auto-generated method stub
 		return cuDao.obtenerUnoxCbu(cbu);
 	}
-
+	
+	@Override
+	public ArrayList<Cuenta> obtenerCuentasCliente(int dni) {
+		return cuDao.obtenerCuentasCliente(dni);
+	}
 }

@@ -23,5 +23,9 @@ public class UsuarioNegocioImpl implements UsuarioNegocio {
 		// TODO Auto-generated method stub
 		return usuDao.login(usuario, contrasenia);
 	}
-
+	
+	@Override
+	public int obtenerDniUsuario(String user) {
+		return usuDao.obtenerDniUser(user);
+	}
 }

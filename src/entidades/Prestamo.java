@@ -12,6 +12,7 @@ public class Prestamo {
 	private boolean estado;
 	private String motivoRechazo;
 	private Cliente cliente;
+	private Cuenta cuenta;
 	
 	public Prestamo() {
 		
@@ -32,6 +33,14 @@ public class Prestamo {
 		this.cliente = cliente;
 	}
 
+	public Cuenta getCuenta() {
+		return cuenta;
+	}
+
+	public void setCuenta(Cuenta cuenta) {
+		this.cuenta = cuenta;
+	}
+	
 	public int getCodigo() {
 		return codigo;
 	}
