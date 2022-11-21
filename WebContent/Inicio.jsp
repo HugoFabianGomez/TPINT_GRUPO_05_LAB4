@@ -15,46 +15,9 @@
 </head>
 
 <body>
-	<% 
-		Usuario currentUser = (Usuario)(session.getAttribute("usuario"));
-		if(currentUser==null){
-			response.sendRedirect("/TP_INTEGRADOR_GRUPO_5/Login2.jsp");
-			//System.out.println("No hay usuario");
-		} else {%>
-  	<header class="card shadows">
-  		<p></p>
-	 	<h1>Bienvenido <%=currentUser.getNombreUsuario()%></h1>
-	 	<form action="/TP_INTEGRADOR_GRUPO_5/ServletLogin" method="POST">
-			<button type="submit" name="cerrarSesion" class="common-button danger">Cerrar Sesion</button>
-		</form>
-	 	
-	 </header>
-	 
-	 
-	 <section id="inicio" class="row">	 
-		<div class="col card shadows">
-			<div class="row-center ">
-				<% 
-				if(currentUser.getNombreUsuario() == "lemos.h")
-				{%>
-					
-				
-				
-				<%} else
-				{ %>
-				
-				<%} %>
-			</div>
-		</div>
-	 </section>
+
 </body>
-<%  } %>
-	 	
-	 	
-	 
-
-
-	<jsp:include page="Menu.html"></jsp:include>
+	<jsp:include page="Menu.jsp"></jsp:include>
 	<h1>Soy la página de inicio</h1>
 </body>
 </html>

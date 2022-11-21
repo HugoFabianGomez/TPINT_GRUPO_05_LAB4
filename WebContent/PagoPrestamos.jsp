@@ -23,7 +23,7 @@
 <title>Solicitud Prestamo</title>
 </head>
 <body onload="addDate();">
-	<jsp:include page="Menu.html"></jsp:include>
+	<jsp:include page="Menu.jsp"></jsp:include>
 	<h3>SOLICITUD PRESTAMO</h3>
 
 	<form action="servletSeguro" method="get">

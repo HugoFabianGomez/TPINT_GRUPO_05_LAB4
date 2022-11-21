@@ -46,7 +46,7 @@ ArrayList<Localidad> list_Localidad = locNegocio.obtenerLocalidad();
 
 %>
 
-	<jsp:include page="Menu.html"></jsp:include>
+	<jsp:include page="Menu.jsp"></jsp:include>
 	<h3>Alta de Cliente</h3>
 <form action="ServletClientes" method="post">
 <table>

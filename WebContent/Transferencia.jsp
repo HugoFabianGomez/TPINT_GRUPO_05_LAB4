@@ -44,7 +44,7 @@
 					 <section id="inicio" class="row">	 
 						<div class="col card shadows">
 							<div class="row-center ">
-									<jsp:include page="Menu.html"></jsp:include>
+	<jsp:include page="Menu.jsp"></jsp:include>
 									<h1>Nueva Transferencia</h1>				
 							</div>
 						</div>

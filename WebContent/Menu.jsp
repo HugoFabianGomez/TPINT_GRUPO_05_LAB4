@@ -88,7 +88,7 @@ if(session.getAttribute("userid")==null)
            { %>
             <li><a class="dropdown-item" href="AutorizarPrestamo.jsp">Autorizar</a></li>
             <%} %>
-            <li><a class="dropdown-item" href="PagosPrestamos.jsp">Pagar</a></li>
+            <li><a class="dropdown-item" href="PagoPrestamos.jsp">Pagar</a></li>
             <li><a class="dropdown-item" href="Prestamos.jsp">Listar</a></li>
           </ul>
         </li>

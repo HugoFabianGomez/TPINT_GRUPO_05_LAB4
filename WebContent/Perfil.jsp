@@ -11,25 +11,18 @@
 </head>
 <body>
 	<jsp:include page="Menu.jsp"></jsp:include>
-	<%		
-	
-		String user = session.getAttribute("userid").toString();
-
- 		
+	<%			
+		String user = session.getAttribute("userid").toString(); 		
 	%>
 
 <div class="container">
             <form class="user">
-
                 <div class="col-9 row justify-content-center">
                     <div class="align-items-center col-auto">
                         <fieldset>
                             <legend>
                                 <i class="fa fa-database">Cambio de clave</i>
                             </legend>
-
-
-
                             <div class="form-group row" runat="server">
                             <div class="col-sm-7 mb-3 mb-sm-3">
                             <div class="form-floating mb-3">
@@ -43,8 +36,7 @@
                                     <label for="floatingInput">Contraseña</label>
                                 </div>
                                 </div>
-                            </div>
-						
+                            </div>						
                             </fieldset>
                                      <td class="common-button secondary"><input type="submit" name="btnModificar" value="MODIFICAR"/></td>
                                      	</div>
