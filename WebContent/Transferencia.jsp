@@ -32,10 +32,6 @@
 					int dni = cl.getDni();
 					ArrayList<Cuenta> ctLista = ctaNegocio.obtenerTodos(dni);
 					
-					for(Cuenta cta : ctLista)
-					{
-						System.out.println(cta.toString());
-					}
 				%>
 				  	<header class="card shadows">
 					 	<h1>Bienvenido <%=currentUser.getNombreUsuario()%></h1>
@@ -53,16 +49,17 @@
 							</div>
 						</div>
 					 </section>
-					<form action="servletSeguro" method="get">
+					<form action="ServletMovimientos" method="get">
 					<table>
 							<tr>
 							<td style="width: 139px; ">	TITULAR:</td>
 							</tr>
 							<TR>
 							<td style="width: 139px; ">Nombre y Apellido </td>
-							<td style="height: 0px; "><input type="text" name="txtNOMBRE"  value="<%=cl.getApellido() +", "+cl.getNombre() %>" readonly /></td>
+							<td style="height: 0px; "><input type="text" name="txtNOMBRE"  value="<%= cl.getNombre() %>" readonly /></td>
+							<td style="height: 0px; "><input type="text" name="txtAPELLIDO"  value="<%= cl.getApellido() %>" readonly /></td>
 							<td style="width: 139px; ">Dni.</td>
-							<td style="height: 0px; "><input type="text" name="txtNOMBRE"  value="<%=cl.getDni() %>" readonly /></td>
+							<td style="height: 0px; "><input type="text" name="txtDNI"  value="<%=cl.getDni() %>" readonly /></td>
 							</TR>
 							<tr>
 							<td style="width: 139px; ">Cuentas:</td> 
@@ -70,7 +67,7 @@
 							<tr>
 							<td style="width: 139px; ">Cuentas Origen</td> 
 							<td style="height: 0px; ">
-							<select name="txtNACIONALIDAD" >
+							<select name="txtCuenta" >
 								<%				
 								if(ctLista !=null)
 									for (Cuenta cta : ctLista) {
@@ -87,15 +84,13 @@
 							<td style="width: 139px; ">C.B.U.:</td>
 							<td style="height: 0px; "><input type="text" name="txtCbuDestino" /></td>
 							<td>Importe a Transferir: </td>
-								<td style="height: 0px; ">  <input type="number" name="textMONTO" required /></td>	
-							</tr>
-						
-							<br />
-							
-							<br>
+								<td style="height: 0px; ">  <input type="number" name="textImporteTransferencia" required /></td>	
+							<tr>
+							<td style="width: 139px; ">Detalle:</td>
+							<td style="height: 0px; "><input type="text" name="txtDetalle" /></td>
 							
 							<tr>
-							<td style="height: 0px; "><input type="submit" name="btnConfirmar" value="Confirmar"/></td>
+							<td style="height: 0px; "><input type="submit" name="btnTranferencia" value="Confirmar"/></td>
 						</tr>
 					
 					</table>

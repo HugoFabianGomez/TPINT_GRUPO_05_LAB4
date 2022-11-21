@@ -54,8 +54,6 @@ public class ClienteNegocioImpl implements ClienteNegocio{
 	@Override
 	public Cliente obtenerUno(String usuario) {
 		// TODO Auto-generated method stub
-		
-		
 		return clienteDao.obtenerUno(usuario);
 	}
 

@@ -13,6 +13,11 @@ public class TipoMovimiento {
 		this.descripcion = descripcion;
 	}
 
+	public TipoMovimiento(int i) {
+		// TODO Auto-generated constructor stub
+		this.codigo = i;
+	}
+
 	public int getCodigo() {
 		return codigo;
 	}

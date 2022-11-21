@@ -1,4 +1,13 @@
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="entidades.Cuenta" %>
+<%@ page import="negocio.CuentaNegocio" %>
+<%@ page import="negocioImpl.CuentaNegocioImpl" %>
+
+<%@ page import="entidades.Movimiento" %>
+<%@ page import="negocio.MovimientoNegocio" %>
+<%@ page import="negocioImpl.MovimientoNegocioImpl" %>
+
+<%@ page import="presentacion.controller.ServletCuentas" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -11,6 +20,20 @@
 <body>
 	<jsp:include page="Menu.html"></jsp:include>
 	<h1>Lista de Movimientos</h1>
+		<%
+			MovimientoNegocio mtoNegocio = new MovimientoNegocioImpl();
+			ArrayList<Movimiento> lista_movimiento;
+	
+	
+			String DniaBuscar = request.getParameter("buscarDni"); 
+			if(DniaBuscar != null && DniaBuscar !=""){
+				lista_movimiento = mtoNegocio.obtenerTodos();
+			}else{
+				lista_movimiento = mtoNegocio.obtenerTodos();
+		
+			}
+	%>
+
 
 <form method="get" action="ServletListaMovimientos">
 	 <table>
@@ -32,25 +55,30 @@
 	<table border="1" width="900">
 		<thead>
 			<tr>
-				<th style="width: 162px; ">Código</th>
-				<th style="width: 136px; ">Tipo</th>
-				<th style="width: 139px; ">Nro. de cuenta</th>
-				<th>Fecha</th>
-				<th>Detalle</th>
-				<th>Importe</th>
-
+				<th style="width: 200px; ">Código_Mov</th>
+				<th style="width: 200px; ">Fecha</th>
+				<th style="width: 200px; ">Detalle</th>
+				<th style="width: 200px; ">Tipo_Movimiento</th>
+				<th style="width: 200px; ">Importe</th>
+				<th style="width: 200px; ">CBU</th>
 			</tr>
 		</thead>
 			<tbody>
+				<%
+					if(lista_movimiento !=null)
+					for(Movimiento mv : lista_movimiento) 
+				{%>
 				<tr>
-					<td>		</td>
-					<td>		</td>
-					<td>		</td>
-					<td>		</td>
-					<td>		</td>
+					<td><%= mv.getCodigo() %>		</td>
+					<td><%= mv.getFecha() %>		</td>
+					<td><%= mv.getDetalle() %>		</td>
+					<td><%= mv.getTipoMovimiento().getDescripcion() %>		</td>
+					<td><%= mv.getImporte() %>		</td>
+					<td><%= mv.getCuenta().getCbu() %>		</td>
 					<td>		</td>					
 				
 				</tr>
+				<%} %>
 			
 			</tbody>
 		

@@ -347,11 +347,8 @@ public class ClienteDaoImpl implements ClienteDao {
 				 cli.setNacionalidad(nac);
 				 cli.setProvincia(pro);
 				 cli.setLocalidad(loc);
-				 cli.setGenero(gen);
-				 
-				 //list.add(cli);
-			 }
-			 
+				 cli.setGenero(gen);				 //list.add(cli);
+			 } 
 		 }
 		 catch(Exception e)
 		 {
@@ -361,7 +358,6 @@ public class ClienteDaoImpl implements ClienteDao {
 		 {
 			 cn.close();
 		 }
-		
 		return cli;
 	}
 
@@ -374,12 +370,21 @@ public class ClienteDaoImpl implements ClienteDao {
 		Cliente cli = new Cliente();
 		 try
 		 {
+			 String querys = "select * from clientes inner join nacionalidades on codigo_nacionalidad_CLI = codigo_nacionalidad_NAC\r\n"
+				 		+ "inner join provincias on codigo_provincia_CLI = codigo_provincia_PRO\r\n"
+				 		+ "inner join localidades on codigo_provincia_PRO = codigo_provincia_LOC\r\n"
+				 		+ "inner join generos on codigo_genero_CLI = codigo_genero_GEN \r\n"
+				 		+ "inner join usuarios on nombre_usuario_CLI = nombre_usuario_US\r\n"
+				 		+ "where nombre_usuario_CLI = '"+ usuario +"' GROUP BY dni_CLI;";
+			 System.out.println("Querys: "+querys);
 			 ResultSet rs= cn.query("select * from clientes inner join nacionalidades on codigo_nacionalidad_CLI = codigo_nacionalidad_NAC\r\n"
 			 		+ "inner join provincias on codigo_provincia_CLI = codigo_provincia_PRO\r\n"
 			 		+ "inner join localidades on codigo_provincia_PRO = codigo_provincia_LOC\r\n"
 			 		+ "inner join generos on codigo_genero_CLI = codigo_genero_GEN \r\n"
 			 		+ "inner join usuarios on nombre_usuario_CLI = nombre_usuario_US\r\n"
 			 		+ "where nombre_usuario_CLI = '"+ usuario +"' GROUP BY dni_CLI;");
+			 
+			 
 			 if(rs.next())
 			 {
 				 System.out.println("Entre en obtenerUno usuario");
@@ -416,34 +421,29 @@ public class ClienteDaoImpl implements ClienteDao {
 				 usu.setNombreUsuario(rs.getString("usuarios.nombre_usuario_US"));
 				 usu.setContrasenia(rs.getString("usuarios.contrasena_US"));
 				 usu.setEstado(rs.getBoolean("usuarios.estado_US"));
+				 //usu.setTipoUsuario(rs.getInt("tiposusuario.codigo_tipo_usuario_TUS"));
 				 
-				 TipoUsuario tipousu = new TipoUsuario();
+				 /*TipoUsuario tipousu = new TipoUsuario();
 				 tipousu.setCodTipoUsuario(rs.getInt("tiposusuario.codigo_tipo_usuario_TUS"));
-				 tipousu.setTipoUsuario(rs.getString("tiposusuario.descripcion_TUS"));				 
-				 usu.getTipoUsuario(tipousu);
-				 
+				 tipousu.setTipoUsuario(rs.getString("tiposusuario.descripcion_TUS"));
+				 usu.getTipoUsuario(tipousu);				 */
 				 
 				 cli.setNacionalidad(nac);
 				 cli.setProvincia(pro);
 				 cli.setLocalidad(loc);
 				 cli.setGenero(gen);
-				 cli.setUsuario(usu);	
-				 
-				 //list.add(cli);
+				 cli.setUsuario(usu);				 //list.add(cli);
 			}
-			 
 		 }
 		 catch(Exception e)
 		 {
-			 System.out.println("Error en Obtener uno usuario");
+			 System.out.println("Error en Obtener uno usuario.....");
 			 e.printStackTrace();
 		 }
 		 finally
 		 {
 			 cn.close();
 		 }
-		
 		return cli;
-		
 	}
 }

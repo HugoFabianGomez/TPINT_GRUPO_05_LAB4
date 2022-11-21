@@ -282,25 +282,11 @@ public class CuentaDaoImpl implements CuentaDao {
 				 
 				 Cliente cliente = new Cliente();
 				 cliente.setDni(rs.getInt("cuentas.dni_cliente_CU"));
-				 
-				 /*
-				 cliente.setDni(rs.getInt("cuentas.dni_cliente_CU"));
-				 cliente.setCuil(rs.getInt("clientes.cuil_CLI"));
-				 cliente.setNombre(rs.getString("clientes.nombre_CLI"));
-				 cliente.setApellido(rs.getString("clientes.apellido_CLI"));
-				 cliente.setFechaNacimiento(rs.getString("clientes.fecha_nacimiento_CLI"));
-				 cliente.setDomicilio(rs.getString("clientes.domicilio_CLI"));
-				 cliente.setEmail(rs.getString("clientes.email_CLI"));
-				 cliente.setTelefono(rs.getString("clientes.telefono_CLI"));
-				 cliente.setEstado(rs.getBoolean("clientes.estado_CLI"));
-				 cliente.setNombreCompleto(rs.getString("clientes.nombre_CLI")+" "+rs.getString("clientes.apellido_CLI"));*/
-				 
 				 cuenta.setTipoCuenta(tipoCuenta);
 				 cuenta.setCliente(cliente);
 				 
 				 list.add(cuenta);
 			 }
-			 
 		 }
 		 catch(Exception e)
 		 {
@@ -312,6 +298,31 @@ public class CuentaDaoImpl implements CuentaDao {
 		 }
 		 return list;
 		
+	}
+
+	@Override
+	public Cuenta obtenerUnoxCbu(int cbu) {
+		// TODO Auto-generated method stub
+		cn = new Conexion();
+		cn.Open();
+		Cuenta cuenta = new Cuenta();
+		 try
+		 {
+			 ResultSet rs= cn.query("select * from cuentas where cbu_CU = "+ cbu +";");
+
+			 	 rs.next();
+				 cuenta.setNumeroCuenta(rs.getInt("cuentas.numero_cuenta_CU"));
+				 cuenta.setCbu(rs.getInt("cuentas.cbu_CU"));
+		 }
+		 catch(Exception e)
+		 {
+			 e.printStackTrace();
+		 }
+		 finally
+		 {
+			 cn.close();
+		 }
+		 return cuenta;
 	}
 
 }

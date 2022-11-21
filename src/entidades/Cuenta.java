@@ -25,6 +25,11 @@ public class Cuenta {
 		this.cliente = cliente;
 	}
 
+	public Cuenta(int cuenta) {
+		// TODO Auto-generated constructor stub
+		this.numeroCuenta = cuenta;
+	}
+
 	public int getNumeroCuenta() {
 		return numeroCuenta;
 	}

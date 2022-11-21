@@ -47,4 +47,10 @@ public class CuentaNegocioImpl implements CuentaNegocio {
 		return cuDao.busquedaxDni(dni);
 	}
 
+	@Override
+	public Cuenta obtenerUnoxCbu(int cbu) {
+		// TODO Auto-generated method stub
+		return cuDao.obtenerUnoxCbu(cbu);
+	}
+
 }
