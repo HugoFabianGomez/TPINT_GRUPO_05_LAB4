@@ -50,7 +50,7 @@ public class ServletLogin extends HttpServlet {
 		
 		HttpSession session= request.getSession();
 		
-		String Result = udao.Login(userid,password);
+		String Result = udao.Login2(userid,password);
 			//Boolean Admin = udao.ValidarPermiso(userid,password);
 		System.out.println("Devolvio  : " + Result);
 		

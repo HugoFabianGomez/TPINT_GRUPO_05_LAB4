@@ -20,7 +20,7 @@
 		}
 	%>
 
-	<jsp:include page="Menu.html"></jsp:include>
+	<jsp:include page="Menu.jsp"></jsp:include>
 	<h1>Lista de Préstamos</h1>
 
 	<form method="get" action="ServletPrestamos">

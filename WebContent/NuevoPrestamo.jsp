@@ -9,7 +9,7 @@
 <%@ page import="presentacion.controller.ServletPrestamos"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 
 <!DOCTYPE html>
 <html>
@@ -57,7 +57,7 @@
 <title>Nuevo prestamo</title>
 </head>
 <body onload="addDate();">
-	<jsp:include page="Menu.html" />
+	<jsp:include page="Menu.jsp"></jsp:include>
 
 	<h2>Nuevo prestamo</h2>
 
