@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import daoImpl.UsuarioDaoImpl;
+import entidades.TipoUsuario;
 import entidades.Usuario;
 import negocio.UsuarioNegocio;
 
@@ -50,14 +51,18 @@ public class ServletLogin extends HttpServlet {
 		
 		HttpSession session= request.getSession();
 		
-		String Result = udao.Login2(userid,password);
-			//Boolean Admin = udao.ValidarPermiso(userid,password);
-		System.out.println("Devolvio  : " + Result);
+
+		Ousuario = udao.login(userid, password) ;
+
 		
-			if(Result!="Fallo")
+			if(Ousuario!=null)
 			{
 				session.setAttribute("userid", userid);
-				if(Result.equals("Administrador"))
+				
+				TipoUsuario tup = new TipoUsuario();
+				Ousuario.getTipoUsuario();
+				System.out.println("Devolvio  : " + Ousuario.getTipoUsuario().getTipoUsuario());
+				if(Ousuario.getTipoUsuario().getTipoUsuario().equals("Administrador"))
 				{
 					System.out.println("ADMIN");
 					session.setAttribute("permiso", "Admin");
