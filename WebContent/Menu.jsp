@@ -17,13 +17,10 @@
 </head>
 <body>
 <%
-if(session.getAttribute("userid")==null)
-	{
-	
-		
-		response.sendRedirect("Login.jsp");
-		
-			}
+		if(session.getAttribute("userid")==null)
+		{
+			response.sendRedirect("Login.jsp");		
+		}
 
 %>
 
