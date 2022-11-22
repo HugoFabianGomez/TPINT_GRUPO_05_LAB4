@@ -83,10 +83,9 @@
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
           		<% if(session.getAttribute("permiso").equals("Admin"))
            { %>
-            <li><a class="dropdown-item" href="AutorizarPrestamo.jsp">Autorizar</a></li>
             <%} %>
-            <li><a class="dropdown-item" href="PagoPrestamos.jsp">Pagar</a></li>
-            <li><a class="dropdown-item" href="Prestamos.jsp">Listar</a></li>
+            <li><a class="dropdown-item" href="ServletPrestamos?lp=1">Lista Prestamos</a></li>
+            <li><a class="dropdown-item" href="ServletPrestamos?mp=1">Mis Prestamos</a></li>
           </ul>
         </li>
       </ul>

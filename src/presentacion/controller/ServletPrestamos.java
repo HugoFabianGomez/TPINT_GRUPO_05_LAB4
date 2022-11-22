@@ -40,16 +40,12 @@ public class ServletPrestamos extends HttpServlet {
 		if (request.getParameter("mp") != null) {
 			Cliente cli = new Cliente();
 			HttpSession session = request.getSession();
-			Usuario currentUser = (Usuario)(session.getAttribute("usuario"));
-			currentUser = (Usuario) session.getAttribute("usuario");
+			String currentUser = (String)(session.getAttribute("userid"));
 			
-			System.out.println("Llegue linea 46 servletprestamos" + currentUser.getNombreUsuario());
-
- 			int dni = userNeg.obtenerDniUsuario(currentUser.getNombreUsuario());
- 			String dniString = String.valueOf(userNeg.obtenerDniUsuario(currentUser.getNombreUsuario()));
+ 			int dni = userNeg.obtenerDniUsuario(currentUser);
 			cli = clNeg.obtenerUno(dni);
 			request.setAttribute("labelCliente", cli.getNombreCompleto());
-			request.setAttribute("dniActual", dniString);
+			request.setAttribute("dniActual", dni);
 			ArrayList<Prestamo> listaMisPrestamos = presNeg.obtenerPrestamosCliente(dni);
 			request.setAttribute("listaMisPrestamos", listaMisPrestamos);
 			RequestDispatcher rd = request.getRequestDispatcher("MisPrestamos.jsp");   

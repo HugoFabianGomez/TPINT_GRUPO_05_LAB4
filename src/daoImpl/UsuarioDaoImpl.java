@@ -167,7 +167,6 @@ public class UsuarioDaoImpl implements UsuarioDao {
 		cn.Open();
 		try {
 			ResultSet rs = cn.query("select * from Usuarios U\r\n"
-					+ "inner join TipoUsuarios TUS on TUS.codigo_tipo_usuario_TUS = U.codigo_tipo_usuario_US\r\n"
 					+ "inner join TiposUsuario TUS on TUS.codigo_tipo_usuario_TUS = U.codigo_tipo_usuario_US\r\n"
 					+ "inner join Clientes C on C.nombre_usuario_CLI = U.nombre_usuario_US\r\n"
 					+ "WHERE U.nombre_usuario_US = '" + user + "'");
