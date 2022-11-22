@@ -5,13 +5,12 @@ import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import daoImpl.PrestamoDaoImpl;
 import entidades.Cliente;
 import entidades.Cuenta;
 import entidades.Prestamo;
@@ -38,17 +37,26 @@ public class ServletPrestamos extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
-		if (request.getParameter("listaMisPrestamos") != null) {
-			int dni = 0;
-			dni = userNeg.obtenerDniUsuario(request.getParameter("userBuscar"));
+		if (request.getParameter("mp") != null) {
+			Cliente cli = new Cliente();
+			HttpSession session = request.getSession();
+			Usuario currentUser = (Usuario)(session.getAttribute("usuario"));
+			currentUser = (Usuario) session.getAttribute("usuario");
 			
+			System.out.println("Llegue linea 46 servletprestamos" + currentUser.getNombreUsuario());
+
+ 			int dni = userNeg.obtenerDniUsuario(currentUser.getNombreUsuario());
+ 			String dniString = String.valueOf(userNeg.obtenerDniUsuario(currentUser.getNombreUsuario()));
+			cli = clNeg.obtenerUno(dni);
+			request.setAttribute("labelCliente", cli.getNombreCompleto());
+			request.setAttribute("dniActual", dniString);
 			ArrayList<Prestamo> listaMisPrestamos = presNeg.obtenerPrestamosCliente(dni);
 			request.setAttribute("listaMisPrestamos", listaMisPrestamos);
 			RequestDispatcher rd = request.getRequestDispatcher("MisPrestamos.jsp");   
 	        rd.forward(request, response);	       
 		}
-		
-		if (request.getParameter("listaPrestamos") != null) {
+			
+		if (request.getParameter("lp") != null) {
 			ArrayList<Prestamo> listaPrestamos = presNeg.obtenerTodos();
 			request.setAttribute("listaPrestamos", listaPrestamos);
 			RequestDispatcher rd = request.getRequestDispatcher("ListaPrestamos.jsp");   

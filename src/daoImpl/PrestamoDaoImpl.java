@@ -44,6 +44,7 @@ public class PrestamoDaoImpl implements PrestamoDao {
 					+ "inner join clientes on dni_cliente_PRS = dni_CLI \r\n" + "WHERE estado_PRS = 1");
 			while (rs.next()) {
 				Prestamo prestamo = new Prestamo();
+				prestamo.setCodigo(rs.getInt("codigo_prestamo_PRS"));
 				prestamo.setFecha(rs.getString("fecha_PRS"));
 				prestamo.setImportePagar(rs.getFloat("importa_pagar_PRS"));
 				prestamo.setImportePedido(rs.getFloat("importe_pedido_PRS"));
@@ -52,10 +53,13 @@ public class PrestamoDaoImpl implements PrestamoDao {
 				prestamo.setImporteCuota(rs.getFloat("importe_cuota_PRS"));
 
 				Cuenta cuenta = new Cuenta();
-				cuenta.setNumeroCuenta(rs.getInt("numero_cuenta_CU"));
+				cuenta.setNumeroCuenta(rs.getInt("cuenta_cliente_PRS"));
+				prestamo.setCuenta(cuenta);
 
 				Cliente cliente = new Cliente();
-				cliente.setDni(rs.getInt("dni_cliente_CU"));
+				cliente.setDni(rs.getInt("dni_cliente_PRS"));
+				cliente.setNombreCompleto(rs.getString("clientes.nombre_CLI")+" "+rs.getString("clientes.apellido_CLI"));
+				prestamo.setCliente(cliente);
 
 				list.add(prestamo);
 			}
@@ -74,9 +78,10 @@ public class PrestamoDaoImpl implements PrestamoDao {
 		ArrayList<Prestamo> list = new ArrayList<Prestamo>();
 		try {
 			ResultSet rs = cn.query("select * from prestamos\r\n"
-					+ "inner join clientes on dni_cliente_PRS = dni_CLI \r\n" + "WHERE estado_PRS = 1");
+					+ "inner join clientes on dni_cliente_PRS = dni_CLI \r\n" + "WHERE estado_PRS = 1 AND dni_CLI = " + dni);
 			while (rs.next()) {
 				Prestamo prestamo = new Prestamo();
+				prestamo.setCodigo(rs.getInt("codigo_prestamo_PRS"));
 				prestamo.setFecha(rs.getString("fecha_PRS"));
 				prestamo.setImportePagar(rs.getFloat("importa_pagar_PRS"));
 				prestamo.setImportePedido(rs.getFloat("importe_pedido_PRS"));
@@ -85,10 +90,10 @@ public class PrestamoDaoImpl implements PrestamoDao {
 				prestamo.setImporteCuota(rs.getFloat("importe_cuota_PRS"));
 
 				Cuenta cuenta = new Cuenta();
-				cuenta.setNumeroCuenta(rs.getInt("numero_cuenta_CU"));
+				cuenta.setNumeroCuenta(rs.getInt("cuenta_cliente_PRS"));
 
 				Cliente cliente = new Cliente();
-				cliente.setDni(rs.getInt("dni_cliente_CU"));
+				cliente.setDni(rs.getInt("dni_CLI"));
 
 				list.add(prestamo);
 			}
