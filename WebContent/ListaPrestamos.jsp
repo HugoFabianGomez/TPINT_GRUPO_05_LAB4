@@ -11,55 +11,78 @@
 <title>Lista Prestamos</title>
 </head>
 <body>
-	<%
-		ArrayList<Prestamo> listaPrestamos = new ArrayList<Prestamo>();
-
-		if (request.getAttribute("listaPrestamos") != null) {
-			listaPrestamos = (ArrayList<Prestamo>) request.getAttribute("listaPrestamos");
-		}
-	%>
-
 	<jsp:include page="Menu.jsp"></jsp:include>
-	<h1>Lista de Préstamos</h1>
-
 	<form method="get" action="ServletPrestamos">
 
-		Buscar Cliente: <input type="text" name="txtBuscarCliente" /> <br>
-		<br>
+		<%
+			ArrayList<Prestamo> listaPrestamos = new ArrayList<Prestamo>();
 
-		<table border="1" width="900">
-			<thead>
-				<tr>
-					<th>Nro. de Préstamo</th>
-					<th style="width: 139px;">Cliente</th>
-					<th>Cuenta</th>
-					<th>Monto</th>
-					<th style="width: 139px;">Saldo</th>
-					<th>Acción 1</th>
-					<th>Acción 2</th>
-				</tr>
-			</thead>
-			<tbody>
-				<%  
-					if(listaPrestamos!=null)
-					for(Prestamo p : listaPrestamos) 
-				{%>
-				<tr>
-					<td><%=p.getCodigo() %></td>
-					<td><%=p.getCliente().getNombreCompleto() %></td>
-					<td><%=p.getCuenta().getNumeroCuenta() %></td>
-					<td><%=p.getImportePedido() %></td>
-					<td><%=p.getImportePagar() %></td>
-					<td><input type="submit" name="btnAutorizar"
-						class="btn btn-success" value="Autorizar" /></td>
-					<td><input type="submit" name="btnRechazar"
-						class="btn btn-danger" value="Rechazar" /></td>
-				</tr>
-				<%  } %>
-			</tbody>
-		</table>
-		<div>
-			<a class="btn btn-primary" href="Inicio.jsp">Volver</a>
+			if (request.getAttribute("listaPrestamos") != null) {
+				listaPrestamos = (ArrayList<Prestamo>) request.getAttribute("listaPrestamos");
+			}
+		%>
+
+		<div style="text-align: center">
+
+			<table style="width: 100%" class="table table-striped table-bordered">
+				<tbody>
+					<tr>
+						<td style="width: 60%">
+							<div class="form-group">
+								<div class="col-md-6">
+									<label style="font-size: 20px;" class="form-label">Lista
+										de Préstamos</label>
+								</div>
+							</div>
+						</td>
+						<td style="width: 40%">
+							<div class="col-md-10">
+								<div class="div-inline">
+									<label for="txtBuscarCliente" style="margin-right: 7px; font-size: 20px;">Buscar cliente:</label> <input
+										type="text" id="txtBuscarCliente" name="txtBuscarCliente">
+								</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<table class="table table-dark table-hover" border="1" width="900">
+				<thead>
+					<tr>
+						<th style="text-align: center">Nro. de Préstamo</th>
+						<th style="text-align: center">Cliente</th>
+						<th style="text-align: center">Cuenta</th>
+						<th style="text-align: center">Monto</th>
+						<th style="text-align: center">Saldo</th>
+						<th style="text-align: center;">Acción 1</th>
+						<th style="text-align: center;">Acción 2</th>
+					</tr>
+				</thead>
+				<tbody>
+					<%
+						if (listaPrestamos != null)
+							for (Prestamo p : listaPrestamos) {
+					%>
+					<tr>
+						<td style="text-align: center"><%=p.getCodigo()%></td>
+						<td style="text-align: center"><%=p.getCliente().getNombreCompleto()%></td>
+						<td style="text-align: center"><%=p.getCuenta().getNumeroCuenta()%></td>
+						<td style="text-align: center"><%=p.getImportePedido()%></td>
+						<td style="text-align: center"><%=p.getImportePagar()%></td>
+						<td style="text-align: center;"><input type="submit"
+							name="btnAutorizar" class="btn btn-success" value="Autorizar" /></td>
+						<td style="text-align: center;"><input type="submit"
+							name="btnRechazar" class="btn btn-danger" value="Rechazar" /></td>
+					</tr>
+					<%
+						}
+					%>
+				</tbody>
+			</table>
+			<div>
+				</br> <a class="btn btn-primary" href="Inicio.jsp">Volver</a>
+			</div>
 		</div>
 	</form>
 

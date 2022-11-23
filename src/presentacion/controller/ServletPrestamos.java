@@ -14,7 +14,6 @@ import javax.servlet.http.HttpSession;
 import entidades.Cliente;
 import entidades.Cuenta;
 import entidades.Prestamo;
-import entidades.Usuario;
 import negocio.ClienteNegocio;
 import negocio.CuentaNegocio;
 import negocio.PrestamoNegocio;
