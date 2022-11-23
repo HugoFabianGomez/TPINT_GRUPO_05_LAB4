@@ -12,8 +12,10 @@
 </head>
 <body>
 	<%
+		ArrayList<Prestamo> listaPrestamos = new ArrayList<Prestamo>();
+
 		if (request.getAttribute("listaPrestamos") != null) {
-			ArrayList<Prestamo> listaPrestamos = (ArrayList<Prestamo>) request.getAttribute("listaPrestamos");
+			listaPrestamos = (ArrayList<Prestamo>) request.getAttribute("listaPrestamos");
 		}
 	%>
 
@@ -38,15 +40,22 @@
 				</tr>
 			</thead>
 			<tbody>
+				<%  
+					if(listaPrestamos!=null)
+					for(Prestamo p : listaPrestamos) 
+				{%>
 				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td><input type="submit" name="btnModificar" value="Autorizar" /></td>
-					<td><input type="submit" name="btnEliminar" value="Rechazar" /></td>
+					<td><%=p.getCodigo() %></td>
+					<td><%=p.getCliente().getNombreCompleto() %></td>
+					<td><%=p.getCuenta().getNumeroCuenta() %></td>
+					<td><%=p.getImportePedido() %></td>
+					<td><%=p.getImportePagar() %></td>
+					<td><input type="submit" name="btnAutorizar"
+						class="btn btn-success" value="Autorizar" /></td>
+					<td><input type="submit" name="btnRechazar"
+						class="btn btn-danger" value="Rechazar" /></td>
 				</tr>
+				<%  } %>
 			</tbody>
 		</table>
 		<div>
