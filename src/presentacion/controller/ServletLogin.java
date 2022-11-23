@@ -43,40 +43,34 @@ public class ServletLogin extends HttpServlet {
 		{
 		String userid = request.getParameter("txtusuario");
 		String password = request.getParameter("txtclave");
+		//System.out.println("userid= "+userid+" pass= "+password);
 		if(userid!=null || password!=null )
 		{
-
-		
-		
-		
-		HttpSession session= request.getSession();
-		
-
-		Ousuario = udao.login(userid, password) ;
-
-		
+			HttpSession session= request.getSession();
+			Ousuario = udao.login(userid, password) ;
 			if(Ousuario!=null)
 			{
-				session.setAttribute("userid", userid);
+				session.setAttribute("userid", Ousuario);
 				
 				TipoUsuario tup = new TipoUsuario();
-				Ousuario.getTipoUsuario();
-				System.out.println("Devolvio  : " + Ousuario.getTipoUsuario().getTipoUsuario());
+				//Ousuario.getTipoUsuario();
+				
+				System.out.println("Devolvio  : " + Ousuario.getTipoUsuario().getTipoUsuario()); //Cliente
 				if(Ousuario.getTipoUsuario().getTipoUsuario().equals("Administrador"))
 				{
 					System.out.println("ADMIN");
 					session.setAttribute("permiso", "Admin");
 					response.sendRedirect("Menu.jsp");
 				}
-				else
+				else if(Ousuario.getTipoUsuario().getTipoUsuario().equals("Cliente"))
 				{
+					System.out.println("ServletLogin - Devolvio  : NoAdmin " + Ousuario.getNombreUsuario().toString());
 					System.out.println("NO ADMIN");
 					session.setAttribute("permiso", "NoAdmin");
+					session.setAttribute("userid", userid);
+					session.setAttribute("usuario", Ousuario);
 					response.sendRedirect("Menu.jsp");
 				}
-				
-								
-
 			}
 			else
 			{

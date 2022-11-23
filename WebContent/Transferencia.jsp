@@ -8,24 +8,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-
 	<meta charset="UTF-8">
 	<title>Nueva Transferencia</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 	<% 
 		Usuario currentUser = (Usuario)(session.getAttribute("usuario"));
-		if(currentUser==null){
-			response.sendRedirect("/TP_INTEGRADOR_GRUPO_5/Login2.jsp");
+		if(session.getAttribute("usuario") !=null){
+		System.out.println("currentUser= " + currentUser.getNombreUsuario());
+		} else if(currentUser ==null){
+			
+			response.sendRedirect("/TP_INTEGRADOR_GRUPO_5/Login.jsp");
 			System.out.println("No hay usuario");
-		} else {%>
+		} else %>
 <body>
 				<% 
-				if(currentUser.getNombreUsuario() != "lemos.h")
+				//System.out.println("Que tengo en Transferencia ln.29= "+loginUser.getNombreUsuario());
+				if(session.getAttribute("permiso").equals("NoAdmin"))
 				{
 					ClienteNegocio clienteNegocio = new ClienteNegocioImpl();
 					String Usuario = currentUser.getNombreUsuario();
+					System.out.println("Usuario ln 31= "+Usuario);
 					Cliente cl = clienteNegocio.obtenerUno(Usuario);
 					
 					CuentaNegocio ctaNegocio = new CuentaNegocioImpl();
@@ -34,7 +37,7 @@
 					
 				%>
 				  	<header class="card shadows">
-					 	<h1>Bienvenido <%=currentUser.getNombreUsuario()%></h1>
+					 	<h1>Bienvenido </h1>
 					 	<form action="/TP_INTEGRADOR_GRUPO_5/ServletLogin" method="POST">
 							<button type="submit" name="cerrarSesion" class="common-button danger">Cerrar sesion</button>
 						</form>
@@ -44,7 +47,7 @@
 					 <section id="inicio" class="row">	 
 						<div class="col card shadows">
 							<div class="row-center ">
-	<jsp:include page="Menu.jsp"></jsp:include>
+							<jsp:include page="Menu.jsp"></jsp:include>
 									<h1>Nueva Transferencia</h1>				
 							</div>
 						</div>
@@ -103,7 +106,7 @@
 				
 				<%} 
 				
-				}%>
+				%>
 				
 
 

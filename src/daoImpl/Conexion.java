@@ -42,7 +42,6 @@ public class Conexion {
 		{
 			e.printStackTrace();
 		}
-		System.out.println("llegue despues de execute linea 40 conexion");
 		return rs;
 	}
 	

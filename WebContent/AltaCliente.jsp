@@ -1,17 +1,7 @@
 <%@page import="java.util.ArrayList"%>
-<%@page import="entidades.Genero"%>
-<%@page import="negocio.GeneroNegocio"%>
-<%@page import="negocioImpl.GeneroNegocioImpl"%>
-<%@page import="entidades.Nacionalidad"%>
-<%@page import="negocio.NacionalidadNegocio"%>
-<%@page import="negocioImpl.NacionalidadNegocioImpl"%>
-<%@page import="entidades.Provincia"%>
-<%@page import="negocio.ProvinciaNegocio"%>
-<%@page import="negocioImpl.ProvinciaNegocioImpl"%>
-<%@page import="entidades.Localidad"%>
-<%@page import="negocio.LocalidadNegocio"%>
-<%@page import="negocioImpl.LocalidadNegocioImpl"%>
-<%@page import="entidades.Cliente"%>
+<%@page import="entidades.*"%>
+<%@page import="negocio.*"%>
+<%@page import="negocioImpl.*"%>
 <%@page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -28,8 +18,6 @@
 				RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
 			}
 		%>
-
-
 <%
 
 GeneroNegocio generoNegocio = new GeneroNegocioImpl();
@@ -127,9 +115,7 @@ ArrayList<Localidad> list_Localidad = locNegocio.obtenerLocalidad();
 					for (Provincia prov : list_Provincia) {
 				%>
 					<option value="<%=prov.getCodigo()%>"><%=prov.getDescripcion()%></option>
-				<% } %>
-			
-					<!-- ACA DESARROLLO LAS OPCIONES -->									 				
+				<% } %>								 				
 			 </select>	
 		</td>
 	</tr>

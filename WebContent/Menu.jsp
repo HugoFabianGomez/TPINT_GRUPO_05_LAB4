@@ -16,15 +16,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%
-		if(session.getAttribute("userid")==null)
-		{
-			response.sendRedirect("Login.jsp");		
-		}
-
-%>
-
-
+		<%
+			if(session.getAttribute("userid")==null)
+			{
+				response.sendRedirect("Login.jsp");		
+			}
+		%>
 <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Nuestro Banco</a>
@@ -33,7 +30,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-		<% if(session.getAttribute("permiso").equals("Admin"))
+		<% if(session.getAttribute("permiso").equals("Admin"));
            { %>
 		        <li class="nav-item dropdown">
 		          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -81,7 +78,7 @@
             Prestamos
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          		<% if(session.getAttribute("permiso").equals("Admin"))
+          		<% if(session.getAttribute("permiso").equals("Admin"));
            { %>
             <li><a class="dropdown-item" href="AutorizarPrestamo.jsp">Autorizar</a></li>
             <%} %>

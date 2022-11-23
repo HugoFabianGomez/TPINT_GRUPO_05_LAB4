@@ -15,7 +15,12 @@
 </head>
 
 <body>
-
+	<%
+		if(session.getAttribute("userid")==null)
+		{
+			response.sendRedirect("Login.jsp");		
+		}
+	%>
 </body>
 	<jsp:include page="Menu.jsp"></jsp:include>
 	<h1>Soy la página de inicio</h1>
