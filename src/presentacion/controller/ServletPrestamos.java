@@ -67,10 +67,10 @@ public class ServletPrestamos extends HttpServlet {
 			NuevoPrestamo.setImporteCuota((Float.parseFloat(request.getParameter("txtMonto"))+Float.parseFloat(request.getParameter("txtIntereses"))/Integer.valueOf(request.getParameter("cuotas"))));
 			
 			Cliente c = new Cliente();
-			c.setDni(Integer.valueOf(request.getParameter("dni")));
+			c.setDni(Integer.valueOf(request.getParameter("txtDni")));
 			
 			Cuenta cu = new Cuenta();
-			cu.setNumeroCuenta(Integer.valueOf(request.getParameter("ddCuentas")));
+			cu.setNumeroCuenta(Integer.valueOf(request.getParameter("ddlCuentas")));
 			NuevoPrestamo.setCliente(c);
 			NuevoPrestamo.setCuenta(cu);
 

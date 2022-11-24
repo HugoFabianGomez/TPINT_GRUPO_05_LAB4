@@ -91,9 +91,12 @@ public class PrestamoDaoImpl implements PrestamoDao {
 
 				Cuenta cuenta = new Cuenta();
 				cuenta.setNumeroCuenta(rs.getInt("cuenta_cliente_PRS"));
+				prestamo.setCuenta(cuenta);
 
 				Cliente cliente = new Cliente();
+				cliente.setNombreCompleto(rs.getString("clientes.nombre_CLI")+" "+rs.getString("clientes.apellido_CLI"));
 				cliente.setDni(rs.getInt("dni_CLI"));
+				prestamo.setCliente(cliente);
 
 				list.add(prestamo);
 			}

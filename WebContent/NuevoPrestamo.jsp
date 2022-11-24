@@ -33,7 +33,7 @@
 		var monto = document.getElementById('txtMonto');
 		var intereses = document.getElementById('txtIntereses');
 		var cuotas = document.getElementById('ddlCuotas');
-		
+
 		if (cuotas.value == 1) {
 			intereses.value = (parseFloat(monto.value) * 1.1).toFixed(2);
 		} else if (cuotas.value == 3) {
@@ -48,7 +48,7 @@
 			intereses.value = (parseFloat(monto.value) * 3.4).toFixed(2);
 		} else if (cuotas.value == 36) {
 			intereses.value = (parseFloat(monto.value) * 4.6).toFixed(2);
-		}		
+		}
 	}
 </script>
 
@@ -59,35 +59,49 @@
 <body onload="addDate();">
 	<jsp:include page="Menu.jsp"></jsp:include>
 
-	<h2>Nuevo prestamo</h2>
-
 	<%
+		ArrayList<Cuenta> listaCuentas = new ArrayList<Cuenta>();
+
 		if (request.getAttribute("listaCuentas") != null) {
-			ArrayList<Cuenta> listaCuentas = (ArrayList<Cuenta>) request.getAttribute("listaCuentas");
+			listaCuentas = (ArrayList<Cuenta>) request.getAttribute("listaCuentas");
 		}
+		
+		String dni = String.valueOf(request.getAttribute("dniCliente"));
 	%>
+
 	<form>
+		<h2>Nuevo prestamo</h2>
+
 		<div class="row">
 			<div class="col-md-6">
 				<div class="mb-3">
 					<label class="form-label">Cliente: <%=request.getAttribute("labelCliente")%></label>
 				</div>
+				
+				<div class="mb-3">
+					<label for="txtDni" class="form-label">Dni</label> <input
+						type="text" class="form-control" id="txtDni" name="txtDni" value="<%=String.valueOf(request.getAttribute("dniCliente"))%>">
+				</div>
 
 				<div class="mb-3">
 					<label for="ddlCuentas" class="form-label">Cuentas</label> <select
-						name="ddCuentas" class="form-select">
-
-						<c:forEach items="${listaCuentas}" var="ddlCuentas">
-							<option value="${ddlCuentas.numeroCuenta}">${ddlCuentas.numeroCuenta}</option>
-						</c:forEach>
+						name="ddlCuentas" class="form-select">
+						<%
+							if (listaCuentas != null)
+								for (Cuenta c : listaCuentas) {
+						%>
+						<option value="<%=c.getNumeroCuenta()%>"><%=c.getNumeroCuenta()%></option>
+						<%
+							}
+						%>
 					</select>
 
 				</div>
 
 				<div class="mb-3">
 					<label for="txtMonto" class="form-label">Monto</label> <input
-						type="text" class="form-control" id="txtMonto" name="txtMonto" required
-						maxlength="40" autocomplete="off" onchange="update();"
+						type="text" class="form-control" id="txtMonto" name="txtMonto"
+						required maxlength="40" autocomplete="off" onchange="update();"
 						oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
 				</div>
 
@@ -116,8 +130,8 @@
 
 				<div class="mb-3">
 					<label for="txtIntereses" class="form-label">Intereses</label> <input
-						type="text" class="form-control" id="txtIntereses" name="txtIntereses" required
-						maxlength="15" autocomplete="on" 
+						type="text" class="form-control" id="txtIntereses"
+						name="txtIntereses" required maxlength="15" autocomplete="on"
 						oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
 				</div>
 
@@ -129,13 +143,12 @@
 		</div>
 
 		<%
-	if(request.getAttribute("filas")!=null){
-	 %>
+			if (request.getAttribute("filas") != null) {
+		%>
 		Prestamo agregado exitosamente!
-	<% 
-	}
-	%>
-
+		<%
+			}
+		%>
 	</form>
 </body>
 </html>

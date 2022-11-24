@@ -19,7 +19,6 @@
 
 			if (request.getAttribute("listaMisPrestamos") != null) {
 				listaMisPrestamos = (ArrayList<Prestamo>) request.getAttribute("listaMisPrestamos");
-				String dni = String.valueOf(request.getAttribute("dniActual"));
 			}
 		%>
 
@@ -29,7 +28,8 @@
 					<td style="width: 99%">
 						<div class="form-group">
 							<div class="col-md-6">
-								<label style="font-size: 20px;" class="form-label">Cliente: <%=request.getAttribute("labelCliente")%></label>
+								<label style="font-size: 20px;" class="form-label">Cliente:
+									<%=request.getAttribute("labelCliente")%></label>
 							</div>
 						</div>
 					</td>
@@ -60,8 +60,8 @@
 						<th style="text-align: center">Cuenta</th>
 						<th style="text-align: center">Monto</th>
 						<th style="text-align: center">Saldo</th>
-						<th style="text-align: center;">Acción 1</th>
-						<th style="text-align: center;">Acción 2</th>
+						<th style="text-align: center">Accion</th>
+
 					</tr>
 				</thead>
 				<tbody>
@@ -75,10 +75,12 @@
 						<td style="text-align: center"><%=p.getCuenta().getNumeroCuenta()%></td>
 						<td style="text-align: center"><%=p.getImportePedido()%></td>
 						<td style="text-align: center"><%=p.getImportePagar()%></td>
-						<td style="text-align: center;"><input type="submit"
-							name="btnAutorizar" class="btn btn-success" value="Autorizar" /></td>
-						<td style="text-align: center;"><input type="submit"
-							name="btnRechazar" class="btn btn-danger" value="Rechazar" /></td>
+						<td class="text-center" style="width: 100px;">
+							<button type="submit" id="btnVisualizar" class="btn btn-info"
+								OnClick="openModal();">
+								<i class="fa-solid fa-magnifying-glass"></i>
+							</button>
+						</td>
 					</tr>
 					<%
 						}
