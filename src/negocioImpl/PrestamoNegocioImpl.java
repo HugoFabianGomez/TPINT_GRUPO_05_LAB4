@@ -22,7 +22,7 @@ public class PrestamoNegocioImpl implements PrestamoNegocio {
 	}
 	
 	@Override
-	public boolean insertar(Prestamo prestamo) {
+	public int insertar(Prestamo prestamo) {
 		return pDao.insertar(prestamo);
 	}
 }

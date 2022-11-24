@@ -1,37 +1,48 @@
 package daoImpl;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+
+import com.mysql.jdbc.PreparedStatement;
+import com.mysql.jdbc.Statement;
 
 import dao.PrestamoDao;
 import entidades.Cliente;
 import entidades.Cuenta;
 import entidades.Prestamo;
-import entidades.TipoCuenta;
 
 public class PrestamoDaoImpl implements PrestamoDao {
-
 	Conexion cn = new Conexion();
 
 	@Override
-	public boolean insertar(Prestamo prestamo) {
-		boolean estado = true;
-		cn.Open();
-		String query = "insert into Prestamos (fecha_PRS,importa_pagar_PRS,importe_pedido_PRS,plazo_meses_PRS,intereses_PRS,"
-				+ "importe_cuota_PRS,otorgado_PRS,motivo_rechazo_PRS,estado_PRS,dni_cliente_PRS,cuenta_cliente_PRS) VALUES (CURDATE(), "
-				+ prestamo.getImportePagar() + " , " + prestamo.getImportePedido() + " , " + prestamo.getPlazoMeses()
-				+ " , " + prestamo.getIntereses() + " , " + prestamo.getImporteCuota() + " , 0, '', 1, "
-				+ prestamo.getCliente().getDni() + " , " + prestamo.getCuenta().getNumeroCuenta() + ")";
-
-		System.out.println(query);
+	public int insertar(Prestamo prestamo) {
+		int id = 0;
 		try {
-			estado = cn.execute(query);
+			String query = "insert into Prestamos (fecha_PRS,importa_pagar_PRS,importe_pedido_PRS,plazo_meses_PRS,intereses_PRS,"
+					+ "importe_cuota_PRS,otorgado_PRS,motivo_rechazo_PRS,estado_PRS,dni_cliente_PRS,cuenta_cliente_PRS) VALUES (CURDATE(), "
+					+ prestamo.getImportePagar() + " , " + prestamo.getImportePedido() + " , "
+					+ prestamo.getPlazoMeses() + " , " + prestamo.getIntereses() + " , " + prestamo.getImporteCuota()
+					+ " , 0, '', 1, " + prestamo.getCliente().getDni() + " , " + prestamo.getCuenta().getNumeroCuenta()
+					+ ")";
+			PreparedStatement statement = (PreparedStatement) cn.Open().prepareStatement(query,
+					Statement.RETURN_GENERATED_KEYS);
+			int affectedRows = statement.executeUpdate();
+			if (affectedRows == 0) {
+				throw new SQLException("No se pudo guardar");
+			}
+			ResultSet generatedKeys = statement.getGeneratedKeys();
+			if (generatedKeys.next()) {
+				id = generatedKeys.getInt(1);
+			}
+			System.out.println(query);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			cn.close();
 		}
-		return estado;
+		return id;
 	}
 
 	@Override
@@ -41,7 +52,7 @@ public class PrestamoDaoImpl implements PrestamoDao {
 		ArrayList<Prestamo> list = new ArrayList<Prestamo>();
 		try {
 			ResultSet rs = cn.query("select * from prestamos\r\n"
-					+ "inner join clientes on dni_cliente_PRS = dni_CLI \r\n" + "WHERE estado_PRS = 1");
+					+ "inner join clientes on dni_cliente_PRS = dni_CLI \r\n" + "WHERE estado_PRS = 1 ORDER BY codigo_prestamo_PRS DESC");
 			while (rs.next()) {
 				Prestamo prestamo = new Prestamo();
 				prestamo.setCodigo(rs.getInt("codigo_prestamo_PRS"));
@@ -58,7 +69,8 @@ public class PrestamoDaoImpl implements PrestamoDao {
 
 				Cliente cliente = new Cliente();
 				cliente.setDni(rs.getInt("dni_cliente_PRS"));
-				cliente.setNombreCompleto(rs.getString("clientes.nombre_CLI")+" "+rs.getString("clientes.apellido_CLI"));
+				cliente.setNombreCompleto(
+						rs.getString("clientes.nombre_CLI") + " " + rs.getString("clientes.apellido_CLI"));
 				prestamo.setCliente(cliente);
 
 				list.add(prestamo);
@@ -77,8 +89,9 @@ public class PrestamoDaoImpl implements PrestamoDao {
 		cn.Open();
 		ArrayList<Prestamo> list = new ArrayList<Prestamo>();
 		try {
-			ResultSet rs = cn.query("select * from prestamos\r\n"
-					+ "inner join clientes on dni_cliente_PRS = dni_CLI \r\n" + "WHERE estado_PRS = 1 AND dni_CLI = " + dni);
+			ResultSet rs = cn
+					.query("select * from prestamos\r\n" + "inner join clientes on dni_cliente_PRS = dni_CLI \r\n"
+							+ "WHERE estado_PRS = 1 AND dni_CLI = " + dni + " ORDER BY codigo_prestamo_PRS DESC");
 			while (rs.next()) {
 				Prestamo prestamo = new Prestamo();
 				prestamo.setCodigo(rs.getInt("codigo_prestamo_PRS"));
@@ -94,7 +107,8 @@ public class PrestamoDaoImpl implements PrestamoDao {
 				prestamo.setCuenta(cuenta);
 
 				Cliente cliente = new Cliente();
-				cliente.setNombreCompleto(rs.getString("clientes.nombre_CLI")+" "+rs.getString("clientes.apellido_CLI"));
+				cliente.setNombreCompleto(
+						rs.getString("clientes.nombre_CLI") + " " + rs.getString("clientes.apellido_CLI"));
 				cliente.setDni(rs.getInt("dni_CLI"));
 				prestamo.setCliente(cliente);
 

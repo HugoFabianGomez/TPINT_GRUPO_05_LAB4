@@ -65,6 +65,7 @@
 						<th style="text-align: center; width: 150px;">Nro. de
 							Préstamo</th>
 						<th style="text-align: center">Cliente</th>
+						<th style="text-align: center">Dni</th>
 						<th style="text-align: center">Cuenta</th>
 						<th style="text-align: center">Monto</th>
 						<th style="text-align: center">Saldo</th>
@@ -79,13 +80,11 @@
 					<tr>
 						<td style="text-align: center"><%=p.getCodigo()%></td>
 						<td style="text-align: center"><%=p.getCliente().getNombreCompleto()%></td>
+						<td style="text-align: center"><%=p.getCliente().getDni()%></td>
 						<td style="text-align: center"><%=p.getCuenta().getNumeroCuenta()%></td>
-						<td style="text-align: center"><%=p.getImportePedido()%></td>
 						<td style="text-align: center"><%=p.getImportePagar()%></td>
-						<td class="text-center"><a id="btnVisualizar"
-							class="btn btn-info"> <i
-								class="fa-sharp fa-solid fa-magnifying-glass"></i>
-						</a> <a id="btnAutorizar" class="btn btn-info" data-toggle="modal"
+						<td style="text-align: center"><%=p.getImportePagar()%></td>
+						<td class="text-center"><a id="btnAutorizar" class="btn btn-info" data-toggle="modal"
 							data-target="#modalAutorizar"> <i class="fa-solid fa-check"></i>
 						</a> <a id="btnRechazar" class="btn btn-info" data-toggle="modal"
 							data-target="#modalRechazar"> <i class="fa-solid fa-xmark"></i>

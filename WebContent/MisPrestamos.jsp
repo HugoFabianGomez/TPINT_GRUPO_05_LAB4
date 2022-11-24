@@ -57,6 +57,7 @@
 					<tr>
 						<th style="text-align: center">Nro. de Préstamo</th>
 						<th style="text-align: center">Cliente</th>
+						<th style="text-align: center">Dni</th>
 						<th style="text-align: center">Cuenta</th>
 						<th style="text-align: center">Monto</th>
 						<th style="text-align: center">Saldo</th>
@@ -72,14 +73,17 @@
 					<tr>
 						<td style="text-align: center"><%=p.getCodigo()%></td>
 						<td style="text-align: center"><%=p.getCliente().getNombreCompleto()%></td>
+						<td style="text-align: center"><%=p.getCliente().getDni()%></td>
 						<td style="text-align: center"><%=p.getCuenta().getNumeroCuenta()%></td>
-						<td style="text-align: center"><%=p.getImportePedido()%></td>
+						<td style="text-align: center"><%=p.getImportePagar()%></td>
 						<td style="text-align: center"><%=p.getImportePagar()%></td>
 						<td class="text-center" style="width: 100px;">
-							<button type="submit" id="btnVisualizar" class="btn btn-info"
-								OnClick="openModal();">
+							<button type="submit" id="btnVisualizar" class="btn btn-info">
 								<i class="fa-solid fa-magnifying-glass"></i>
-							</button>
+							</button> <a class="btn btn-primary"
+							href="/TP_INTEGRADOR_GRUPO_5/ServletPrestamos?nroPre=<%=p.getCodigo()%>">
+								<i class="fa-solid fa-dollar-sign"></i>
+						</a>
 						</td>
 					</tr>
 					<%
