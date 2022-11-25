@@ -19,11 +19,11 @@
 		<td style="width: 139px; ">Número de Cuenta: </td>
 		<td style="height: 0px; "><input type="Number" name="txtNumeroCuenta"
 		required  maxlength="10" autocomplete="off" onkeypress="return((event.charCode >= 48 && event.charCode <= 57))"
-		value="0000000000" /><br></td>
+		placeholder="0000000000" /><br></td>
 		<td>CBU  </td>
 		<td style="height: 0px; "><input type="Number" name="txtCBU" 
 		required  maxlength="22" autocomplete="off" onkeypress="return((event.charCode >= 48 && event.charCode <= 57))"
-		value="0000000000000000000000" /><br></td>
+		placeholder="0000000000000000000000" /><br></td>
 	
 	<% 
 	
@@ -48,15 +48,15 @@
 			 </select>
 		</td>
 		<td>Fecha de Creación: </td>
-		<td style="height: 0px; "><input type="date" name="txtFechaCreacion" value="DD/MM/AAAA"/></td>
+		<td style="height: 0px; "><input type="date" name="txtFechaCreacion" required autocomplete="off" placeholder="DD/MM/AAAA"/></td>
 		
 	</tr>
 	 
 	<tr> 
 		<td>DNI del Cliente: </td>
 		<td style="height: 0px; "><input type="Number" name="txtDNI" min="1" max="99999999"
-		required  maxlength="10" autocomplete="off" onkeypress="return((event.charCode >= 48 && event.charCode <= 57))"
-		value="00.000.000" /><br></td>
+		required  maxlength="10" autocomplete="off" onkeypress="return((event.charCode >= 48 && event.charCode <= 57))" 
+		placeholder="00000000"/><br></td>
 		<td>Saldo inicial: $10000</td>
 	
 	
