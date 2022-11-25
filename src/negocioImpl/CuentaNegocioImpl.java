@@ -57,4 +57,9 @@ public class CuentaNegocioImpl implements CuentaNegocio {
 	public ArrayList<Cuenta> obtenerCuentasCliente(int dni) {
 		return cuDao.obtenerCuentasCliente(dni);
 	}
+
+	@Override
+	public int cantidadCuentas(int dni) {
+		return cuDao.cantidadCuentas(dni);
+	}
 }

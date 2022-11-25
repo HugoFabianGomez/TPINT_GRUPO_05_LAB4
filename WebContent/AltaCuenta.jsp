@@ -68,8 +68,13 @@
 </table>
 </form>
 	
-	<%
-	if(request.getAttribute("filas")!=null){
+	<% 
+	if(request.getAttribute("exceso")!=null){
+		%>
+		Excede cantidad de cuentas..
+		<% 
+	}
+	else if(request.getAttribute("filas")!=null){
 	 %>
 		Cuenta agregada exitosamente!
 	<% 
