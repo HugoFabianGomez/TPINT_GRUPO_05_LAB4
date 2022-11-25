@@ -1,9 +1,14 @@
-<%@page import="negocio.ClienteNegocio"%>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="entidades.Cliente" %>
-<%@ page import="negocio.ClienteNegocio" %>
-<%@ page import="negocioImpl.ClienteNegocioImpl" %>
-<%@ page import="presentacion.controller.ServletClientes" %>
+<%@ page import="entidades.Usuario" %>
+<%@ page import="entidades.Cuenta" %>
+<%@ page import="negocio.CuentaNegocio" %>
+<%@ page import="negocioImpl.CuentaNegocioImpl" %>
+
+<%@ page import="entidades.Movimiento" %>
+<%@ page import="negocio.MovimientoNegocio" %>
+<%@ page import="negocioImpl.MovimientoNegocioImpl" %>
+
+<%@ page import="presentacion.controller.ServletCuentas" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,76 +31,67 @@
             border-radius: 10px;
         }
     </style>
-    <title>MovGeneral</title>
+    <title>MOvCliente</title>
 </head>
 <body>
-	<%
-			if(session.getAttribute("userid")==null || session.getAttribute("permiso")=="NoAdmin")
-			{
-				RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
-			}
-		
-			ClienteNegocio cliNegocio = new ClienteNegocioImpl();
-			ArrayList<Cliente> lista_cliente;
-			
-			
+	<% 
+		Usuario currentUser = (Usuario)(session.getAttribute("usuario"));
+		if(session.getAttribute("usuario") !=null){
+			String Usuario = currentUser.getNombreUsuario(); 
+		} else if(currentUser ==null){
+			response.sendRedirect("/TP_INTEGRADOR_GRUPO_5/Login.jsp");
+			System.out.println("No hay usuario");
+		} 
+			MovimientoNegocio mtoNegocio = new MovimientoNegocioImpl();
+			ArrayList<Movimiento> lista_movimiento;	
 			String DniaBuscar = request.getParameter("buscarDni"); 
 			if(DniaBuscar != null && DniaBuscar !=""){
-				lista_cliente = cliNegocio.obtenerTodos(Integer.parseInt(DniaBuscar));
+				System.out.println("Entre en Buscar por dni");
+				lista_movimiento = mtoNegocio.obtenerTodos();
 			}else{
-				lista_cliente = cliNegocio.obtenerTodos();
+				//String Usuario = currentUser.getNombreUsuario();
+				lista_movimiento = mtoNegocio.obtenerTodosUsuario(currentUser.getNombreUsuario());
 			}
 	%>
 	
-		<!--  -->  
-	<h1>Lista de Clientes</h1>
+	<!--  -->  
+	<h1>Lista de Movimientos Cliente</h1>
     <div class="container" style="margin-top: 10px;padding: 5px">
-    <table id="tablax" class="table table-striped table-bordered" style="width:100%">
-        <thead>
-        	<tr>
-            <th>DNI</th>
-            <th>CUIL</th>
-            <th> Nombre</th>
-            <th> Apellido</th>
-            <th>Email</th>
-            <th>Telefono</th>
-            <th>Fecha_Nacim</th>
-            <th>Estado</th>
-            <th></th>
-            <th></th>
-            <tr> 
-        </thead>
-        <tbody>
-        		<%  
-					if(lista_cliente!=null)
-					for(Cliente cl : lista_cliente) 
+    <table id="tablax2" class="table table-striped table-bordered" style="width:100%">
+		<thead>
+			<tr>
+				<th style="width: 200px; ">Código_Mov</th>
+				<th style="width: 200px; ">Fecha</th>
+				<th style="width: 200px; ">Detalle</th>
+				<th style="width: 200px; ">Tipo_Movimiento</th>
+				<th style="width: 200px; ">Importe</th>
+				<th style="width: 200px; ">CBU</th>
+			</tr>
+		</thead>
+			<tbody>
+				<%
+					if(lista_movimiento !=null)
+					for(Movimiento mv : lista_movimiento) 
 				{%>
-            <tr>
-            		<td><%= cl.getDni() %></td>
-					<td><%= cl.getCuil() %>		</td>
-					<td><%= cl.getNombre() %>		</td>
-					<td><%= cl.getApellido() %>		</td>
-					<td><%= cl.getEmail() %>		</td>
-					<td><%= cl.getTelefono() %>		</td>
-					<td ><%= cl.getFechaNacimiento() %>		</td>
-					<td><%= cl.getEstado() %>		</td>
-					
-					<td><a class="btn btn-primary" href="/TP_INTEGRADOR_GRUPO_5/ModificarCliente.jsp?dni=<%=cl.getDni()%>">Modificar</a></td>
-					<form method= "post" action="ServletClientes?Dni=<%=cl.getDni()%>">
-					<td><input type="submit" name="btnEliminar" value="Eliminar" class="btn btn-danger" /></td>
-					</form>
-                
-            </tr>
-            <%  } %>
-            
-        </tbody>
-    </table>
-        <div>
-			<a class="btn btn-primary" href="Inicio.jsp" >Volver</a>
+				<tr>
+					<td><%= mv.getCodigo() %>		</td>
+					<td><%= mv.getFecha() %>		</td>
+					<td><%= mv.getDetalle() %>		</td>
+					<td><%= mv.getTipoMovimiento().getDescripcion() %>		</td>
+					<td><%= mv.getImporte() %>		</td>
+					<td><%= mv.getCuenta().getCbu() %>		</td>					
+				
+				</tr>
+				<%} %>
+			
+			</tbody>
+		
+	</table>
+		<div>
+			<a class="btn btn-primary" href="Inicio.jsp">Volver</a>
 		</div>
-</div>
-
-
+	</div>
+	
     <!-- JQUERY -->
     <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
@@ -108,7 +104,7 @@
     </script>
     <script>
         $(document).ready(function () {
-            $('#tablax').DataTable({
+            $('#tablax2').DataTable({
                 language: {
                     processing: "Tratamiento en curso...",
                     search: "Buscar&nbsp;:",

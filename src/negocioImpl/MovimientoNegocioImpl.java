@@ -20,5 +20,11 @@ public class MovimientoNegocioImpl implements MovimientoNegocio {
 		// TODO Auto-generated method stub
 		return movimientoDao.agregar(movi);
 	}
+	
+	@Override
+	public ArrayList<Movimiento> obtenerTodosUsuario(String Usuario) {
+		// TODO Auto-generated method stub
+		return movimientoDao.obtenerTodosUsuario(Usuario);
+	}
 
 }
