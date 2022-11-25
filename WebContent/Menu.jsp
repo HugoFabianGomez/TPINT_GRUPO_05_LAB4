@@ -68,6 +68,7 @@
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="Transferencia.jsp">Nuevo</a></li>
             <li><a class="dropdown-item" href="ListarMovimientos.jsp">Listar</a></li>
+            <li><a class="dropdown-item" href="ListarMovimientosCliente.jsp">Listar Cliente Usuario</a></li>
           </ul>
         </li>
      
