@@ -6,8 +6,7 @@ import entidades.Prestamo;
 
 public interface PrestamoDao {
 
-	boolean insertar(Prestamo prestamo);
-
+	int insertar(Prestamo prestamo);
 	ArrayList<Prestamo> obtenerTodos();
 	ArrayList<Prestamo> obtenerPrestamosCliente(int dni);
 

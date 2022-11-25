@@ -213,7 +213,7 @@ public class CuentaDaoImpl implements CuentaDao {
 			 {
 				 Cuenta cuenta = new Cuenta();
 				 cuenta.setNumeroCuenta(rs.getInt("cuentas.numero_cuenta_CU"));
-				 cuenta.setCbu(rs.getInt("cuentas.cbu_CU"));
+				 cuenta.setCbu(Integer.parseInt(rs.getString("cuentas.cbu_CU")));
 				 cuenta.setFechaCreacion(rs.getString("cuentas.fecha_creacion_CU"));
 				 cuenta.setSaldo(rs.getFloat("cuentas.saldo_CU"));
 				 cuenta.setEstado(rs.getBoolean("cuentas.estado_CU"));				 				 
@@ -340,7 +340,7 @@ public class CuentaDaoImpl implements CuentaDao {
 			 {
 				 Cuenta cuenta = new Cuenta();
 				 cuenta.setNumeroCuenta(rs.getInt("cuentas.numero_cuenta_CU"));
-				 cuenta.setCbu(rs.getInt("cuentas.cbu_CU"));
+				 cuenta.setCbu(Integer.parseInt(rs.getString("cuentas.cbu_CU")));
 				 cuenta.setFechaCreacion(rs.getString("cuentas.fecha_creacion_CU"));
 				 cuenta.setSaldo(rs.getFloat("cuentas.saldo_CU"));
 				 cuenta.setEstado(rs.getBoolean("cuentas.estado_CU"));				 				 

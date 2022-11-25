@@ -33,22 +33,22 @@
 		var monto = document.getElementById('txtMonto');
 		var intereses = document.getElementById('txtIntereses');
 		var cuotas = document.getElementById('ddlCuotas');
-		
+
 		if (cuotas.value == 1) {
-			intereses.value = (parseFloat(monto.value) * 1.1).toFixed(2);
+			intereses.value = ((parseFloat(monto.value) * 1.1) - monto.value).toFixed(2);
 		} else if (cuotas.value == 3) {
-			intereses.value = (parseFloat(monto.value) * 1.3).toFixed(2);
+			intereses.value = ((parseFloat(monto.value) * 1.3) - monto.value).toFixed(2);
 		} else if (cuotas.value == 6) {
-			intereses.value = (parseFloat(monto.value) * 1.6).toFixed(2);
+			intereses.value = ((parseFloat(monto.value) * 1.6) - monto.value).toFixed(2);
 		} else if (cuotas.value == 12) {
-			intereses.value = (parseFloat(monto.value) * 2.2).toFixed(2);
+			intereses.value = ((parseFloat(monto.value) * 2.2) - monto.value).toFixed(2);
 		} else if (cuotas.value == 18) {
-			intereses.value = (parseFloat(monto.value) * 2.8).toFixed(2);
+			intereses.value = ((parseFloat(monto.value) * 2.8) - monto.value).toFixed(2);
 		} else if (cuotas.value == 24) {
-			intereses.value = (parseFloat(monto.value) * 3.4).toFixed(2);
+			intereses.value = ((parseFloat(monto.value) * 3.4) - monto.value).toFixed(2);
 		} else if (cuotas.value == 36) {
-			intereses.value = (parseFloat(monto.value) * 4.6).toFixed(2);
-		}		
+			intereses.value = ((parseFloat(monto.value) * 4.6) - monto.value).toFixed(2);
+		}
 	}
 </script>
 
@@ -59,14 +59,19 @@
 <body onload="addDate();">
 	<jsp:include page="Menu.jsp"></jsp:include>
 
-	<h2>Nuevo prestamo</h2>
-
 	<%
+		ArrayList<Cuenta> listaCuentas = new ArrayList<Cuenta>();
+
 		if (request.getAttribute("listaCuentas") != null) {
-			ArrayList<Cuenta> listaCuentas = (ArrayList<Cuenta>) request.getAttribute("listaCuentas");
+			listaCuentas = (ArrayList<Cuenta>) request.getAttribute("listaCuentas");
 		}
+
+		String dni = String.valueOf(request.getAttribute("dniCliente"));
 	%>
+
 	<form>
+		<h2>Nuevo prestamo</h2>
+
 		<div class="row">
 			<div class="col-md-6">
 				<div class="mb-3">
@@ -74,20 +79,30 @@
 				</div>
 
 				<div class="mb-3">
-					<label for="ddlCuentas" class="form-label">Cuentas</label> <select
-						name="ddCuentas" class="form-select">
+					<label for="txtDni" class="form-label">Dni</label> <input
+						type="text" class="form-control" id="txtDni" name="txtDni"
+						value="<%=String.valueOf(request.getAttribute("dniCliente"))%>">
+				</div>
 
-						<c:forEach items="${listaCuentas}" var="ddlCuentas">
-							<option value="${ddlCuentas.numeroCuenta}">${ddlCuentas.numeroCuenta}</option>
-						</c:forEach>
+				<div class="mb-3">
+					<label for="ddlCuentas" class="form-label">Cuentas</label> <select
+						name="ddlCuentas" class="form-select">
+						<%
+							if (listaCuentas != null)
+								for (Cuenta c : listaCuentas) {
+						%>
+						<option value="<%=c.getNumeroCuenta()%>"><%=c.getNumeroCuenta()%></option>
+						<%
+							}
+						%>
 					</select>
 
 				</div>
 
 				<div class="mb-3">
 					<label for="txtMonto" class="form-label">Monto</label> <input
-						type="text" class="form-control" id="txtMonto" name="txtMonto" required
-						maxlength="40" autocomplete="off" onchange="update();"
+						type="text" class="form-control" id="txtMonto" name="txtMonto"
+						required maxlength="40" autocomplete="off" onchange="update();"
 						oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
 				</div>
 
@@ -102,7 +117,6 @@
 				<div>
 					<label for="ddlCuotas" class="form-label">Cuotas</label> <select
 						id="ddlCuotas" name="cuotas" class="form-select">
-
 						<option value="1">1</option>
 						<option value="3">3</option>
 						<option value="6">6</option>
@@ -110,14 +124,13 @@
 						<option value="18">18</option>
 						<option value="24">24</option>
 						<option value="36">36</option>
-
 					</select>
 				</div>
 
 				<div class="mb-3">
 					<label for="txtIntereses" class="form-label">Intereses</label> <input
-						type="text" class="form-control" id="txtIntereses" name="txtIntereses" required
-						maxlength="15" autocomplete="on" 
+						type="text" class="form-control" id="txtIntereses"
+						name="txtIntereses" required maxlength="15" autocomplete="on"
 						oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
 				</div>
 
@@ -129,13 +142,12 @@
 		</div>
 
 		<%
-	if(request.getAttribute("filas")!=null){
-	 %>
+			if (request.getAttribute("filas") != null) {
+		%>
 		Prestamo agregado exitosamente!
-	<% 
-	}
-	%>
-
+		<%
+			}
+		%>
 	</form>
 </body>
 </html>
