@@ -29,8 +29,8 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-		<% if(session.getAttribute("permiso").equals("Admin"));
-           { %>
+       <% if(session.getAttribute("permiso").equals("Admin"))
+        	{ %>
 		        <li class="nav-item dropdown">
 		          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 		            Clientes
@@ -65,7 +65,7 @@
             Movimientos
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="Transferencia.jsp">Nuevo</a></li>
+            <li><a class="dropdown-item" href="Transferencia.jsp">Transferencia</a></li>
             <li><a class="dropdown-item" href="ListarMovimientos.jsp">Listar</a></li>
             <li><a class="dropdown-item" href="ListarMovimientosCliente.jsp">Listar Cliente Usuario</a></li>
           </ul>
@@ -78,8 +78,9 @@
             Prestamos
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          		<% if(session.getAttribute("permiso").equals("Admin"));
+          		<% if(session.getAttribute("permiso").equals("Admin"))
            { %>
+           <%= session.getAttribute("permiso").equals("Admin")%> <!--  -->
             <%} %>
             <li><a class="dropdown-item" href="ServletPrestamos?lp=1">Lista Prestamos</a></li>
             <li><a class="dropdown-item" href="ServletPrestamos?mp=1">Mis Prestamos</a></li>
