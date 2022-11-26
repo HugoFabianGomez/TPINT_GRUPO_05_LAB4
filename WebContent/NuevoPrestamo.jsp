@@ -9,49 +9,8 @@
 <%@ page import="presentacion.controller.ServletPrestamos"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
-
 <!DOCTYPE html>
 <html>
-
-<script>
-	function addDate() {
-		date = new Date();
-		var month = date.getMonth() + 1;
-		var day = date.getDate();
-		var year = date.getFullYear();
-
-		if (document.getElementById('txtFecha').value == '') {
-			document.getElementById('txtFecha').value = day + '-' + month + '-'
-					+ year;
-		}
-	}
-</script>
-
-<script type="text/javascript">
-	function update() {
-		var monto = document.getElementById('txtMonto');
-		var intereses = document.getElementById('txtIntereses');
-		var cuotas = document.getElementById('ddlCuotas');
-
-		if (cuotas.value == 1) {
-			intereses.value = ((parseFloat(monto.value) * 1.1) - monto.value).toFixed(2);
-		} else if (cuotas.value == 3) {
-			intereses.value = ((parseFloat(monto.value) * 1.3) - monto.value).toFixed(2);
-		} else if (cuotas.value == 6) {
-			intereses.value = ((parseFloat(monto.value) * 1.6) - monto.value).toFixed(2);
-		} else if (cuotas.value == 12) {
-			intereses.value = ((parseFloat(monto.value) * 2.2) - monto.value).toFixed(2);
-		} else if (cuotas.value == 18) {
-			intereses.value = ((parseFloat(monto.value) * 2.8) - monto.value).toFixed(2);
-		} else if (cuotas.value == 24) {
-			intereses.value = ((parseFloat(monto.value) * 3.4) - monto.value).toFixed(2);
-		} else if (cuotas.value == 36) {
-			intereses.value = ((parseFloat(monto.value) * 4.6) - monto.value).toFixed(2);
-		}
-	}
-</script>
-
 <head>
 <meta charset="UTF-8">
 <title>Nuevo prestamo</title>
@@ -69,7 +28,7 @@
 		String dni = String.valueOf(request.getAttribute("dniCliente"));
 	%>
 
-	<form>
+	<form method="get" action="ServletPrestamos">
 		<h2>Nuevo prestamo</h2>
 
 		<div class="row">
@@ -149,5 +108,51 @@
 			}
 		%>
 	</form>
+
+	<script>
+		function addDate() {
+			date = new Date();
+			var month = date.getMonth() + 1;
+			var day = date.getDate();
+			var year = date.getFullYear();
+
+			if (document.getElementById('txtFecha').value == '') {
+				document.getElementById('txtFecha').value = day + '-' + month
+						+ '-' + year;
+			}
+		}
+	</script>
+
+	<script type="text/javascript">
+		function update() {
+			var monto = document.getElementById('txtMonto');
+			var intereses = document.getElementById('txtIntereses');
+			var cuotas = document.getElementById('ddlCuotas');
+
+			if (cuotas.value == 1) {
+				intereses.value = ((parseFloat(monto.value) * 1.1) - monto.value)
+						.toFixed(2);
+			} else if (cuotas.value == 3) {
+				intereses.value = ((parseFloat(monto.value) * 1.3) - monto.value)
+						.toFixed(2);
+			} else if (cuotas.value == 6) {
+				intereses.value = ((parseFloat(monto.value) * 1.6) - monto.value)
+						.toFixed(2);
+			} else if (cuotas.value == 12) {
+				intereses.value = ((parseFloat(monto.value) * 2.2) - monto.value)
+						.toFixed(2);
+			} else if (cuotas.value == 18) {
+				intereses.value = ((parseFloat(monto.value) * 2.8) - monto.value)
+						.toFixed(2);
+			} else if (cuotas.value == 24) {
+				intereses.value = ((parseFloat(monto.value) * 3.4) - monto.value)
+						.toFixed(2);
+			} else if (cuotas.value == 36) {
+				intereses.value = ((parseFloat(monto.value) * 4.6) - monto.value)
+						.toFixed(2);
+			}
+		}
+	</script>
+
 </body>
 </html>

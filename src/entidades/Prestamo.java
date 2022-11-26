@@ -9,7 +9,7 @@ public class Prestamo {
 	private float intereses;
 	private float importeCuota;
 	private boolean otorgado;
-	private boolean estado;
+	private String estado;
 	private String motivoRechazo;
 	private Cliente cliente;
 	private Cuenta cuenta;
@@ -19,7 +19,7 @@ public class Prestamo {
 	}
 
 	public Prestamo(int codigo, String fecha, float importePagar, float importePedido, int plazoMeses, float intereses,
-			float importeCuota, boolean otorgado, boolean estado, String motivoRechazo, Cliente cliente) {
+			float importeCuota, boolean otorgado, String estado, String motivoRechazo, Cliente cliente) {
 		this.codigo = codigo;
 		this.fecha = fecha;
 		this.importePagar = importePagar;
@@ -105,11 +105,11 @@ public class Prestamo {
 		this.otorgado = otorgado;
 	}
 
-	public boolean getEstado() {
+	public String getEstado() {
 		return estado;
 	}
 
-	public void setEstado(boolean estado) {
+	public void setEstado(String estado) {
 		this.estado = estado;
 	}
 

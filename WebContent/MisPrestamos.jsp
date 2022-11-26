@@ -55,12 +55,13 @@
 			<table class="table table-dark table-hover" border="1" width="900">
 				<thead>
 					<tr>
-						<th style="text-align: center">Nro. de Préstamo</th>
+						<th style="text-align: center; height: 70px;">Nro. de Préstamo</th>
 						<th style="text-align: center">Cliente</th>
 						<th style="text-align: center">Dni</th>
 						<th style="text-align: center">Cuenta</th>
 						<th style="text-align: center">Monto</th>
 						<th style="text-align: center">Saldo</th>
+						<th style="text-align: center">Estado</th>
 						<th style="text-align: center">Accion</th>
 
 					</tr>
@@ -71,12 +72,13 @@
 							for (Prestamo p : listaMisPrestamos) {
 					%>
 					<tr>
-						<td style="text-align: center"><%=p.getCodigo()%></td>
+						<td style="text-align: center; height: 70px;"><%=p.getCodigo()%></td>
 						<td style="text-align: center"><%=p.getCliente().getNombreCompleto()%></td>
 						<td style="text-align: center"><%=p.getCliente().getDni()%></td>
 						<td style="text-align: center"><%=p.getCuenta().getNumeroCuenta()%></td>
 						<td style="text-align: center"><%=p.getImportePagar()%></td>
 						<td style="text-align: center"><%=p.getImportePagar()%></td>
+						<td style="text-align: center"><%=p.getEstado()%></td>
 						<td class="text-center" style="width: 100px;">
 							<button type="submit" id="btnVisualizar" class="btn btn-info">
 								<i class="fa-solid fa-magnifying-glass"></i>
