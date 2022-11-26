@@ -50,12 +50,12 @@ public class ServletLogin extends HttpServlet {
 			Ousuario = udao.login(userid, password) ;
 			if(Ousuario!=null)
 			{
-				session.setAttribute("userid", Ousuario);
+				session.setAttribute("userid", userid);
 				
 				TipoUsuario tup = new TipoUsuario();
 				//Ousuario.getTipoUsuario();
 				
-				System.out.println("Devolvio  : " + Ousuario.getTipoUsuario().getTipoUsuario()); //Cliente
+				System.out.println("Devolvio  : " + Ousuario.getTipoUsuario().getTipoUsuario()); //Cliente o Administrador
 				if(Ousuario.getTipoUsuario().getTipoUsuario().equals("Administrador"))
 				{
 					System.out.println("ADMIN");

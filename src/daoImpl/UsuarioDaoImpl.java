@@ -132,9 +132,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 		cn.Open();
 		Usuario user = new Usuario();
 		try {
-			ResultSet rs = cn.query(
-					"select * from bdbanco.usuarios U inner join bdbanco.tiposusuario TUS on TUS.codigo_tipo_usuario_TUS = U.codigo_tipo_usuario_US where nombre_usuario_US = '"
-							+ usuario + "' and contrasena_US = '" + pass + "'");
+			ResultSet rs = cn.query("select * from usuarios inner join tiposusuario on codigo_tipo_usuario_US = codigo_tipo_usuario_TUS  where nombre_usuario_US = '" + usuario + "' and contrasena_US = '"+pass+"';");
 
 			if (rs.next()) {
 				user.setNombreUsuario(rs.getString("nombre_usuario_US"));
@@ -142,11 +140,11 @@ public class UsuarioDaoImpl implements UsuarioDao {
 				user.setEstado(rs.getBoolean("estado_US"));
 
 				TipoUsuario tup = new TipoUsuario();
-				tup.setCodTipoUsuario(rs.getInt("TUS.codigo_tipo_usuario_TUS"));
-				tup.setTipoUsuario(rs.getString("TUS.descripcion_TUS"));
+				tup.setCodTipoUsuario(rs.getInt("codigo_tipo_usuario_TUS"));
+				tup.setTipoUsuario(rs.getString("descripcion_TUS"));
 
 				user.setTipoUsuario(tup);
-				// System.out.println("Entre en login: "+tup.toString());
+				 System.out.println("Entre en login: "+tup.toString());
 
 			} else {
 				user = null;
