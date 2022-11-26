@@ -81,7 +81,7 @@ body>div {
 							<th style="text-align: center">Monto</th>
 							<th style="text-align: center">Saldo</th>
 							<th style="text-align: center">Estado</th>
-							<th style="text-align: center; width: 180px;">Accion</th>
+							<th style="text-align: center; width: 200px;">Accion</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -97,7 +97,7 @@ body>div {
 							<td style="text-align: center"><%=p.getImportePagar()%></td>
 							<td style="text-align: center"><%=p.getImportePagar()%></td>
 							<td style="text-align: center"><%=p.getEstado()%></td>
-							<td style="text-align: center; width: 180px;">
+							<td style="text-align: center; width: 200px;">
 								<button type="button" id="DatosModalVerPrestamo"
 									class="btn btn-primary" data-toggle="modal"
 									data-target="#modalPrestamo"
@@ -109,10 +109,10 @@ body>div {
 									data-estadoprestamo="<%=p.getEstado()%>"
 									data-motivorechazo="<%=p.getMotivoRechazo()%>"
 									data-cuotas="<%=p.getPlazoMeses()%>">
-									<i class="fa-solid fa-search"></i>
+									<i class="fa-sharp fa-solid fa-eye"></i>
 								</button> <a class="btn btn-primary"
 								href="/TP_INTEGRADOR_GRUPO_5/ServletPrestamos?nroPre=<%=p.getCodigo()%>">
-									<i class="fa-solid fa-dollar-sign"></i>
+									<i class="fa-solid fa-money-bill"></i>
 							</a> <%
  	if (p.getEstado() == "Pendiente") {
  %>
@@ -126,7 +126,7 @@ body>div {
 									class="btn btn-danger" data-toggle="modal"
 									data-target="#modalRechazar"
 									data-nroprestamo2="<%=p.getCodigo()%>">
-									<i class="fa-solid fa-xmark"></i>
+									<i class="fa-solid fa-trash"></i>
 								</button> <%
  	}
  %>
