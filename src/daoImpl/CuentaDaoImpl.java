@@ -378,4 +378,29 @@ public class CuentaDaoImpl implements CuentaDao {
 		 }
 		 return list;
 	}
+
+	@Override
+	public int cantidadCuentas(int dni) {
+		// TODO Auto-generated method stub
+		cn = new Conexion();
+		cn.Open();
+		int cantidad = 0;
+			 try
+			 {
+				 ResultSet rs= cn.query("select count(*) as cantidad from cuentas where dni_cliente_CU = "+dni+";");
+	
+				 	 rs.next();
+					 cantidad = rs.getInt("cantidad");
+					 
+			 }
+			 catch(Exception e)
+			 {
+				 e.printStackTrace();
+			 }
+			 finally
+			 {
+				 cn.close();
+			 }
+		 return cantidad;
+	}
 }

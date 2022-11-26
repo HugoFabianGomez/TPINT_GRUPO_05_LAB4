@@ -55,8 +55,8 @@
             Cuentas
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="AltaCuenta.jsp">Nuevo</a></li>
-            <li><a class="dropdown-item" href="ListarCuentas.jsp">Listar</a></li>
+            <li><a class="dropdown-item" href="ServletTiposCuenta?param=1">Nuevo</a></li>
+            <li><a class="dropdown-item" href="ServletCuentas?listar=1">Listar</a></li>
           </ul>
         </li>
 <%} %>

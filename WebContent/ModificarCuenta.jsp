@@ -55,7 +55,7 @@
 			 </select>
 		</td>
 		<td>FECHA DE CREACION </td>
-		<td style="height: 0px; "><input type="date" name="txtFechaCreacion" value="<%=cuenta.getFechaCreacion() %>"/></td>
+		<td style="height: 0px; "><input type="date" readonly="readonly" name="txtFechaCreacion" value="<%=cuenta.getFechaCreacion() %>"/></td>
 		
 	</tr>
 	 
@@ -70,7 +70,7 @@
 	<tr>
 		<td>SALDO</td>
 		<td><input type="Number" name="txtSaldo"
-		autocomplete="off" onkeypress="return((event.charCode >= 48 && event.charCode <= 57))" value="<%=cuenta.getSaldo() %>"/></td>
+		autocomplete="off" required onkeypress="return((event.charCode >= 48 && event.charCode <= 57))" value="<%=cuenta.getSaldo() %>"/></td>
 		<td>ESTADO</td>
 		<td>
 			<select name="comboEstado">
