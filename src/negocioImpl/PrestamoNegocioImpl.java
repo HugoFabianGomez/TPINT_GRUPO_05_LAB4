@@ -25,4 +25,14 @@ public class PrestamoNegocioImpl implements PrestamoNegocio {
 	public int insertar(Prestamo prestamo) {
 		return pDao.insertar(prestamo);
 	}
+	
+	@Override
+	public boolean actualizar(int estado, int nroprestamo) {		
+		return pDao.actualizar(estado,nroprestamo);
+	}
+	
+	@Override
+	public boolean rechazar(int estado, int nroprestamo, String motivoRechazo) {		
+		return pDao.rechazar(estado,nroprestamo,motivoRechazo);
+	}
 }

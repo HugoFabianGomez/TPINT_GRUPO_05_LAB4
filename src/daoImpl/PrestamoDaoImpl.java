@@ -10,6 +10,7 @@ import com.mysql.jdbc.Statement;
 import dao.PrestamoDao;
 import entidades.Cliente;
 import entidades.Cuenta;
+import entidades.Nacionalidad;
 import entidades.Prestamo;
 
 public class PrestamoDaoImpl implements PrestamoDao {
@@ -51,8 +52,9 @@ public class PrestamoDaoImpl implements PrestamoDao {
 		cn.Open();
 		ArrayList<Prestamo> list = new ArrayList<Prestamo>();
 		try {
-			ResultSet rs = cn.query("select * from prestamos\r\n"
-					+ "inner join clientes on dni_cliente_PRS = dni_CLI \r\n" + "WHERE estado_PRS = 1 ORDER BY codigo_prestamo_PRS DESC");
+			ResultSet rs = cn
+					.query("select * from prestamos\r\n" + "inner join clientes on dni_cliente_PRS = dni_CLI \r\n"
+							+ "WHERE estado_PRS = 1 ORDER BY codigo_prestamo_PRS DESC");
 			while (rs.next()) {
 				Prestamo prestamo = new Prestamo();
 				prestamo.setCodigo(rs.getInt("codigo_prestamo_PRS"));
@@ -62,6 +64,14 @@ public class PrestamoDaoImpl implements PrestamoDao {
 				prestamo.setPlazoMeses(rs.getInt("plazo_meses_PRS"));
 				prestamo.setIntereses(rs.getFloat("intereses_PRS"));
 				prestamo.setImporteCuota(rs.getFloat("importe_cuota_PRS"));
+				prestamo.setMotivoRechazo(rs.getString("motivo_rechazo_PRS"));
+				if (rs.getInt("otorgado_PRS") == 0) {
+					prestamo.setEstado("Pendiente");
+				} else if (rs.getInt("otorgado_PRS") == 1) {
+					prestamo.setEstado("Autorizado");
+				} else if (rs.getInt("otorgado_PRS") == 2) {
+					prestamo.setEstado("Rechazado");
+				}
 
 				Cuenta cuenta = new Cuenta();
 				cuenta.setNumeroCuenta(rs.getInt("cuenta_cliente_PRS"));
@@ -101,6 +111,14 @@ public class PrestamoDaoImpl implements PrestamoDao {
 				prestamo.setPlazoMeses(rs.getInt("plazo_meses_PRS"));
 				prestamo.setIntereses(rs.getFloat("intereses_PRS"));
 				prestamo.setImporteCuota(rs.getFloat("importe_cuota_PRS"));
+				prestamo.setMotivoRechazo(rs.getString("motivo_rechazo_PRS"));
+				if (rs.getInt("otorgado_PRS") == 0) {
+					prestamo.setEstado("Pendiente");
+				} else if (rs.getInt("otorgado_PRS") == 1) {
+					prestamo.setEstado("Autorizado");
+				} else if (rs.getInt("otorgado_PRS") == 2) {
+					prestamo.setEstado("Rechazado");
+				}
 
 				Cuenta cuenta = new Cuenta();
 				cuenta.setNumeroCuenta(rs.getInt("cuenta_cliente_PRS"));
@@ -120,5 +138,43 @@ public class PrestamoDaoImpl implements PrestamoDao {
 			cn.close();
 		}
 		return list;
+	}
+
+	@Override
+	public boolean actualizar(int estadoPrestamo, int nroPrestamo) {
+		boolean estado = true;
+
+		cn = new Conexion();
+		cn.Open();
+
+		String query = "UPDATE Prestamos SET otorgado_PRS = " + estadoPrestamo + " WHERE codigo_prestamo_PRS = "
+				+ nroPrestamo;
+		try {
+			estado = cn.execute(query);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			cn.close();
+		}
+		return estado;
+	}
+	
+	@Override
+	public boolean rechazar(int estadoPrestamo, int nroPrestamo, String motivoRechazo) {
+		boolean estado = true;
+
+		cn = new Conexion();
+		cn.Open();
+
+		String query = "UPDATE Prestamos SET otorgado_PRS = " + estadoPrestamo + ", motivo_rechazo_PRS = " + motivoRechazo + " WHERE codigo_prestamo_PRS = "
+				+ nroPrestamo;
+		try {
+			estado = cn.execute(query);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			cn.close();
+		}
+		return estado;
 	}
 }
