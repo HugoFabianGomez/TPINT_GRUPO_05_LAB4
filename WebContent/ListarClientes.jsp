@@ -23,7 +23,7 @@
         body>div {
             box-shadow: 10px 10px 8px #888888;
             border: 2px solid black;
-            border-radius: 10px;
+            border-radius: 15px;
         }
     </style>
     <title>MovGeneral</title>
@@ -53,17 +53,17 @@
     <table id="tablax" class="table table-striped table-bordered" style="width:100%">
         <thead>
         	<tr>
-            <th>DNI</th>
-            <th>CUIL</th>
-            <th> Nombre</th>
-            <th> Apellido</th>
-            <th>Email</th>
-            <th>Telefono</th>
-            <th>Fecha_Nacim</th>
-            <th>Estado</th>
+            <th style="text-align: center">DNI</th>
+            <th style="text-align: center">CUIL</th>
+            <th style="text-align: center">Nombre</th>
+            <th style="text-align: center">Apellido</th>
+            <th style="text-align: center">Email</th>
+            <th style="text-align: center">Telefono</th>
+            <th style="text-align: center">Fecha_Nacim</th>
+            <th style="text-align: center">Estado</th>
+            <th  style="text-align: center">Ejecutar</th>
             <th></th>
-            <th></th>
-            <tr> 
+            </tr> 
         </thead>
         <tbody>
         		<%  
@@ -82,7 +82,8 @@
 					
 					<td><a class="btn btn-primary" href="/TP_INTEGRADOR_GRUPO_5/ModificarCliente.jsp?dni=<%=cl.getDni()%>">Modificar</a></td>
 					<form method= "post" action="ServletClientes?Dni=<%=cl.getDni()%>">
-					<td><input type="submit" name="btnEliminar" value="Eliminar" class="btn btn-danger" /></td>
+					<td><input type="submit" name="btnEliminar" value="Eliminar" class="btn btn-danger"
+					onclick="return confirm('Aceptar Confirmara eliminar el Acliente')" /></td>
 					</form>
                 
             </tr>
@@ -132,7 +133,7 @@
                     }
                 },
                 scrollY: 400,
-                lengthMenu: [ [7, 25, -1], [7, 10, "All"] ],
+                lengthMenu: [ [6, 10, -1], [6, 10, "All"] ],
             });
         });
     </script>

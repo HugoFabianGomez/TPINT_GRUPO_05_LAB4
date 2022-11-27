@@ -1,5 +1,6 @@
 package daoImpl;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
@@ -89,9 +90,8 @@ public class ClienteDaoImpl implements ClienteDao {
 		cn = new Conexion();
 		cn.Open();	
 
-		String query = "insert into clientes (dni_CLI,             cuil_CLI,            nombre_CLI,               apellido_CLI,                 fecha_nacimiento_CLI,              domicilio_CLI,                  email_CLI,               telefono_CLI,               estado_CLI,  codigo_nacionalidad_CLI,                   codigo_localidad_CLI,                  codigo_provincia_CLI,                   codigo_genero_CLI,                  nombre_usuario_CLI) values"
-		                                  + "("+cliente.getDni()+","+cliente.getCuil()+",'"+cliente.getNombre()+"', '"+cliente.getApellido()+"', '"+cliente.getFechaNacimiento()+"', '"+cliente.getDomicilio()+"', '"+cliente.getEmail()+"', '"+cliente.getTelefono()+"',1,         "+cliente.getNacionalidad().getCodigo()+", "+cliente.getLocalidad().getCodigo()+", "+cliente.getProvincia().getCodigo()+", "+cliente.getGenero().getCodigo()+",'"+ cliente.getUsuario()+ "')";
-		
+		String query = ("insert into clientes (dni_CLI, cuil_CLI, nombre_CLI, apellido_CLI, fecha_nacimiento_CLI, domicilio_CLI, email_CLI, telefono_CLI, estado_CLI, codigo_nacionalidad_CLI, codigo_localidad_CLI, codigo_provincia_CLI, codigo_genero_CLI, nombre_usuario_CLI) "
+		                +" values("+cliente.getDni()+","+cliente.getCuil()+",'"+cliente.getNombre()+"','"+cliente.getApellido()+"','"+ cliente.getFechaNacimiento()+"','"+cliente.getDomicilio()+"','"+cliente.getEmail()+"','"+cliente.getTelefono()+"',1,"+cliente.getNacionalidad().getCodigo()+","+cliente.getLocalidad().getCodigo()+","+cliente.getProvincia().getCodigo()+","+ cliente.getGenero().getCodigo()+",'"+cliente.getUsuario().getNombreUsuario()+"');");
 		System.out.println(query);
 		try
 		 {
@@ -445,5 +445,38 @@ public class ClienteDaoImpl implements ClienteDao {
 			 cn.close();
 		 }
 		return cli;
+	}
+
+	@Override
+	public boolean existe(int dni) {
+		// TODO Auto-generated method stub
+		cn = new Conexion();
+		cn.Open();
+		
+		boolean existe = false;
+		int registros = 0; 
+		try
+		 {
+			 PreparedStatement ps = null;
+			 String querys = "select clientes.dni_CLI from clientes where clientes.dni_CLI = "+ dni;
+			 
+			 ResultSet rs = cn.query(querys);
+			 while(rs.next()) {
+				 registros ++;
+			 }
+			 if(registros > 0) {
+				 existe = true;
+				 System.out.println("Devolvio existe= "+existe);
+			 }	 
+		 } catch(Exception e)
+		 {
+			 System.out.println("Error en Verificar existe.....");
+			 e.printStackTrace();
+		 }
+		 finally
+		 {
+			 cn.close();
+		 } 
+		return existe;
 	}
 }

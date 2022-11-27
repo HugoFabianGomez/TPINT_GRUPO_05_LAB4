@@ -75,7 +75,7 @@ public class ServletLogin extends HttpServlet {
 			else
 			{
 				request.setAttribute("status", "fallo");
-				//response.sendRedirect("Login.jsp");
+				response.sendRedirect("Login.jsp");
 				System.out.println("Error de Usuario o Clave");
 				RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
 				rd.forward(request, response);

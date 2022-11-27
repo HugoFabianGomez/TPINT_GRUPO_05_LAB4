@@ -12,4 +12,5 @@ public interface ClienteDao {
 	public boolean insertar(Cliente cliente);
 	public boolean editar(Cliente cliente);
 	public boolean borrar(int dni);
+	public boolean existe(int dni);
 }

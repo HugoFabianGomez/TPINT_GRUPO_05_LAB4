@@ -57,5 +57,11 @@ public class ClienteNegocioImpl implements ClienteNegocio{
 		return clienteDao.obtenerUno(usuario);
 	}
 
+	@Override
+	public boolean existe(int dni) {
+		// TODO Auto-generated method stub
+		return clienteDao.existe(dni);
+	}
+
 
 }

@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.swing.JOptionPane;
+
 public class Conexion {
 	private String host = "jdbc:mysql://localhost:3306/";
 	private String user = "root";
@@ -55,6 +57,7 @@ public class Conexion {
 		}
 		catch(SQLException e)
 		{
+			JOptionPane.showMessageDialog(null, e);
 			save = false;
 			e.printStackTrace();
 		}

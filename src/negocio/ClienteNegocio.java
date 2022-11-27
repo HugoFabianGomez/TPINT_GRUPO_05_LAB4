@@ -11,7 +11,7 @@ public interface ClienteNegocio {
 	public boolean modificar(Cliente cliente);
 	public Cliente obtenerUno(int dni);
 	public Cliente obtenerUno(String usuario);
-	//public ArrayList<Cliente> obtenerUnolista(String usuario);
+	public boolean existe(int dni);
 	public boolean borrar(int dni);
 	
 

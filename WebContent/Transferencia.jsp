@@ -12,23 +12,23 @@
 	<title>Nueva Transferencia</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
-	<% 
-		Usuario currentUser = (Usuario)(session.getAttribute("usuario"));
-		if(session.getAttribute("usuario") !=null){
-		System.out.println("currentUser= " + currentUser.getNombreUsuario());
-		} else if(currentUser ==null){
-			
-			response.sendRedirect("/TP_INTEGRADOR_GRUPO_5/Login.jsp");
-			System.out.println("No hay usuario");
-		} else %>
 <body>
+				<% 
+					Usuario currentUser = (Usuario)(session.getAttribute("usuario"));
+					if(session.getAttribute("usuario") !=null){
+					//System.out.println("currentUser= " + currentUser.getNombreUsuario());
+					} else if(currentUser ==null){
+						
+						response.sendRedirect("/TP_INTEGRADOR_GRUPO_5/Login.jsp");
+						System.out.println("No hay usuario");
+					} else %>
 				<% 
 				//System.out.println("Que tengo en Transferencia ln.29= "+loginUser.getNombreUsuario());
 				if(session.getAttribute("permiso").equals("NoAdmin"))
 				{
 					ClienteNegocio clienteNegocio = new ClienteNegocioImpl();
 					String Usuario = currentUser.getNombreUsuario();
-					System.out.println("Usuario ln 31= "+Usuario);
+					//System.out.println("Usuario ln 31= "+Usuario);
 					Cliente cl = clienteNegocio.obtenerUno(Usuario);
 					
 					CuentaNegocio ctaNegocio = new CuentaNegocioImpl();
@@ -55,45 +55,52 @@
 					<form action="ServletMovimientos" method="get">
 					<table>
 							<tr>
-							<td style="width: 139px; ">	TITULAR:</td>
+							<td style="width: 139px; ">	<h4>TITULAR:</h4></td>
 							</tr>
 							<TR>
-							<td style="width: 139px; ">Nombre y Apellido </td>
-							<td style="height: 0px; "><input type="text" name="txtNOMBRE"  value="<%= cl.getNombre() %>" readonly /></td>
-							<td style="height: 0px; "><input type="text" name="txtAPELLIDO"  value="<%= cl.getApellido() %>" readonly /></td>
-							<td style="width: 139px; ">Dni.</td>
-							<td style="height: 0px; "><input type="text" name="txtDNI"  value="<%=cl.getDni() %>" readonly /></td>
+							<td style="width: 139px; "><h4> Nombre y Apellido </h4></td>
+							<td style="height: 0px; "><input type="text" name="txtNOMBRE"  value="<%= cl.getNombre() %>" readonly 
+							class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"/></td>
+							<td style="height: 0px; "><input type="text" name="txtAPELLIDO"  value="<%= cl.getApellido() %>" readonly 
+							class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"/></td>
+							<td style="width: 139px; "><h4> Dni.</h4></td>
+							<td style="height: 0px; "><input type="text" name="txtDNI"  value="<%=cl.getDni() %>" readonly 
+							class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"/></td>
 							</TR>
 							<tr>
-							<td style="width: 139px; ">Cuentas:</td> 
+							<td style="width: 139px; "><h4>Cuentas:</h4></td> 
 							</tr>
 							<tr>
-							<td style="width: 139px; ">Cuentas Origen</td> 
+							<td style="width: 139px; "><h4>Cuentas Origen</h4></td> 
 							<td style="height: 0px; ">
-							<select name="txtCuenta" >
+							<select name="txtCuenta" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required">
 								<%				
 								if(ctLista !=null)
 									for (Cuenta cta : ctLista) {
 								%>
 									<option value="<%=cta.getNumeroCuenta()%>"  ><%= cta.getNumeroCuenta()+"-" +cta.getTipoCuenta().getDescripcion() +" Saldo:  $ "+ cta.getSaldo()%></option>
-								<%}	%>									 				
+								<%}	%>
 							 </select>	
 							</td>							
 							
 							</tr>
 							<tr>
-							<td style="width: 139px; ">Cuentas Destino</td>
+							<td style="width: 139px; "><h4>Cuentas Destino</h4></td>
 							<tr>
-							<td style="width: 139px; ">C.B.U.:</td>
-							<td style="height: 0px; "><input type="text" name="txtCbuDestino" /></td>
-							<td>Importe a Transferir: </td>
-								<td style="height: 0px; ">  <input type="number" name="textImporteTransferencia" required /></td>	
+							<td style="width: 139px; "><h4>C.B.U.:</h4></td>
+							<td style="height: 0px; "><input type="text" name="txtCbuDestino" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required"/></td>
+							<td><h4>Importe a Transferir: </h4> </td>
+								<td style="height: 0px; ">  <input type="number" name="textImporteTransferencia" required 
+								class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"/></td>	
 							<tr>
-							<td style="width: 139px; ">Detalle:</td>
-							<td style="height: 0px; "><input type="text" name="txtDetalle" /></td>
+							<td style="width: 139px; "><h4>Detalle:</h4></td>
+							<td style="height: 0px; "><input type="text" name="txtDetalle" 
+							class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="required"/></td>
 							
 							<tr>
-							<td style="height: 0px; "><input type="submit" name="btnTranferencia" value="Confirmar"/></td>
+							<td style="height: 0px; "><input type="submit" name="btnTranferencia" value="Confirmar"
+							class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
+							onclick="return confirm('Confirme Transferencia')"/></td>
 						</tr>
 					
 					</table>
