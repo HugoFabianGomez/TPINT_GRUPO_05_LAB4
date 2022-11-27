@@ -59,6 +59,7 @@ public class ServletPrestamos extends HttpServlet {
 
 		if (request.getParameter("nroPre") != null) {
 			ArrayList<Cuota> listaCuotas = cuoNeg.obtenerCuotas(Integer.valueOf(request.getParameter("nroPre")));
+			request.setAttribute("nroPrestamo",request.getParameter("nroPre"));
 			request.setAttribute("listaCuotas", listaCuotas);
 			RequestDispatcher rd = request.getRequestDispatcher("CuotasPrestamo.jsp");
 			rd.forward(request, response);
@@ -125,6 +126,12 @@ public class ServletPrestamos extends HttpServlet {
 			boolean estado = presNeg.rechazar(2, Integer.valueOf(request.getParameter("rech")), String.valueOf(request.getParameter("txtMotivoRechazo")));
 			if(estado) {
 				RequestDispatcher rd = request.getRequestDispatcher("ServletPrestamos?lp=1");
+				rd.forward(request, response);	
+			}
+		} else if (request.getParameter("cuo") != null) {
+			boolean estado = cuoNeg.pagarCuota(Integer.valueOf(request.getParameter("cuo")),Integer.valueOf(request.getParameter("pres")));
+			if(estado) {
+				RequestDispatcher rd = request.getRequestDispatcher("ServletPrestamos?nroPre="+String.valueOf(request.getParameter("pres")));
 				rd.forward(request, response);	
 			}
 		}

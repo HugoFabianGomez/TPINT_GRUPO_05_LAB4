@@ -20,6 +20,8 @@
 			if (request.getAttribute("listaCuotas") != null) {
 				listaCuotas = (ArrayList<Cuota>) request.getAttribute("listaCuotas");
 			}
+
+			String nro_prestamo = request.getParameter("nroPre");
 		%>
 
 		<div style="text-align: center">
@@ -31,9 +33,7 @@
 							<div class="form-group">
 								<div class="col-md-12">
 									<label style="font-size: 20px;" class="form-label">Prestamo
-										N°<%
-										request.getParameter("nroPre");
-									%>
+										N°<%=nro_prestamo%>
 									</label>
 								</div>
 							</div>
@@ -65,11 +65,11 @@
 							<td style="text-align: center"><%=c.getSaldoCuota()%></td>
 							<td style="text-align: center"><%=c.getEstadoCuota()%></td>
 							<td class="text-center">
-							
-							<button type="button" id="DatosModalAutorizar"
+
+								<button type="button" id="functionPagarPrestamo"
 									class="btn btn-success" data-toggle="modal"
 									data-target="#modalPagarCuota"
-									data-nroprestamo="<%=c.getCodigoCuota()%>">
+									data-nrocuota="<%=c.getNumeroCuota()%>" data-nroprestamo="<%=c.getNumeroPrestamo()%>">
 									<i class="fa-solid fa-dollar-sign"></i>
 								</button>
 						</tr>
@@ -89,23 +89,35 @@
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<label for="NroCuota">Cuota N°</label> <input
-							type="text" name="NroCuota" id="NroCuota"
-							disabled="disabled"> <span aria-hidden="true"></span>
+						<input type="hidden" id="nroPrestamo2" /> <input
+							type="hidden" id="nroCuota2" /> <label
+							for="lblCuota">Cuota N°</label> <input type="text"
+							name="lblCuota" id="lblCuota" disabled="disabled">
+						<span aria-hidden="true"></span>
 					</div>
 					<div class="modal-body">
 						<div class="modal-body" style="text-align: center">¿Estas
-							seguro de rechazar el prestamo?</div>
+							seguro de pagar la cuota?</div>
 						<div class="modal-footer">
 							<button class="btn btn-secondary" type="button"
 								data-dismiss="modal">Cancelar</button>
 							<a class="btn btn-success" type="submit"
-								onclick="window.location.href='/TP_INTEGRADOR_GRUPO_5/ServletPrestamos?rech='+NroPrestamoRechazar.value;">Rechazar</a>
+								onclick="window.location.href='/TP_INTEGRADOR_GRUPO_5/ServletPrestamos?cuo='+nroCuota2.value+'&pres='+nroPrestamo2.value">Pagar</a>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</form>
+
+	<script>
+		$(document).on("click", "#functionPagarPrestamo", function() {
+			var nro_cuota = $(this).data('nrocuota');
+			var nro_prestamo = $(this).data('nroprestamo');
+			$("#nroCuota2").val(nro_cuota)
+			$("#nroPrestamo2").val(nro_prestamo);
+		})
+	</script>
+
 </body>
 </html>

@@ -21,4 +21,9 @@ public class CuotaNegocioImpl implements CuotaNegocio{
 	public ArrayList<Cuota> obtenerCuotas(int nroPrestamo) {
 		return cDao.obtenerCuotasPrestamo(nroPrestamo);
 	}
+	
+	@Override
+	public boolean pagarCuota(int nroCuota, int nroPrestamo) {
+		return cDao.pagarCuota(nroCuota,nroPrestamo);
+	}
 }

@@ -147,10 +147,9 @@ body>div {
 		<div class="modal fade" id="modalAutorizar" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">
-					<div class="modal-header">
-						<label for="NroPrestamoAutorizar">Autorizar prestamo N°</label> <input
-							type="text" name="NroPrestamoAutorizar" id="NroPrestamoAutorizar"
-							disabled="disabled"> <span aria-hidden="true"></span>
+					<div class="modal-header" style="text-align: center">
+						<input type="hidden" id="nroPrestamoHidden" /> <h2
+							id="NroPrestamoAutorizar"></h2>
 					</div>
 					<div class="modal-body">
 						<div class="modal-body" style="text-align: center">¿Estas
@@ -159,7 +158,7 @@ body>div {
 							<button class="btn btn-secondary" type="button"
 								data-dismiss="modal">Cancelar</button>
 							<a class="btn btn-success" type="submit"
-								onclick="window.location.href='/TP_INTEGRADOR_GRUPO_5/ServletPrestamos?aut='+NroPrestamoAutorizar.value;">Autorizar</a>
+								onclick="window.location.href='/TP_INTEGRADOR_GRUPO_5/ServletPrestamos?aut='+nroPrestamoHidden.value;">Autorizar</a>
 						</div>
 					</div>
 				</div>
@@ -170,19 +169,22 @@ body>div {
 		<div class="modal fade" id="modalRechazar" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">
-					<div class="modal-header">
-						<label for="NroPrestamoRechazar">Rechazar prestamo N°</label> <input
-							type="text" name="NroPrestamoRechazar" id="NroPrestamoRechazar"
-							disabled="disabled"> <span aria-hidden="true"></span>
+					<div class="modal-header" style="text-align: center">
+						<input type="hidden" id="nroPrestamoHidden2" /> <h2
+							id="NroPrestamoRechazar"></h2>
 					</div>
-					<div class="modal-body">
+					<div class="modal-body" style="text-align: center;">
+						<label for="txtMotivoRechazo">Motivo Rechazo: </label>
+						<textarea id="txtMotivoRechazo" name="txtMotivoRechazo" rows="4"
+							cols="50">
+</textarea>
 						<div class="modal-body" style="text-align: center">¿Estas
 							seguro de rechazar el prestamo?</div>
 						<div class="modal-footer">
 							<button class="btn btn-secondary" type="button"
 								data-dismiss="modal">Cancelar</button>
 							<a class="btn btn-success" type="submit"
-								onclick="window.location.href='/TP_INTEGRADOR_GRUPO_5/ServletPrestamos?rech='+NroPrestamoRechazar.value;">Rechazar</a>
+								onclick="window.location.href='/TP_INTEGRADOR_GRUPO_5/ServletPrestamos?rech='+nroPrestamoHidden2.value;">Rechazar</a>
 						</div>
 					</div>
 				</div>
@@ -223,12 +225,14 @@ body>div {
 	<script>
 		$(document).on("click", "#DatosModalAutorizar", function() {
 			var nro_pre = $(this).data('nroprestamo');
-			$("#NroPrestamoAutorizar").val(nro_pre);
+			$("#NroPrestamoAutorizar").text("Prestamo N°" + nro_pre);
+			$("#NroPrestamoHidden").val(nro_pre);
 		})
 
 		$(document).on("click", "#DatosModalRechazar", function() {
 			var nro_pre = $(this).data('nroprestamo2');
-			$("#NroPrestamoRechazar").val(nro_pre);
+			$("#NroPrestamoRechazar").text("Prestamo N°" + nro_pre);
+			$("#NroPrestamoHidden2").val(nro_pre);
 		})
 
 		$(document)

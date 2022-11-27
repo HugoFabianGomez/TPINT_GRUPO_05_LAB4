@@ -69,4 +69,24 @@ public class CuotaDaoImpl implements CuotaDao{
 		 }
 		 return list;
 	}
+	
+	@Override
+	public boolean pagarCuota(int nroCuota, int nroPrestamo) {
+		boolean estado = true;
+
+		cn = new Conexion();
+		cn.Open();
+
+		String query = "UPDATE Cuotas SET saldo_cuota = 0.00, codigo_estado_cuota = 2 WHERE nro_prestamo = "
+				+ nroPrestamo + " AND nro_cuota = " + nroCuota;
+		System.out.println(query);
+		try {
+			estado = cn.execute(query);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			cn.close();
+		}
+		return estado;
+	}
 }
