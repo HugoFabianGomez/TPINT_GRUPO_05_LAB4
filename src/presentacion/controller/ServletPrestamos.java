@@ -59,7 +59,7 @@ public class ServletPrestamos extends HttpServlet {
 
 		if (request.getParameter("nroPre") != null) {
 			ArrayList<Cuota> listaCuotas = cuoNeg.obtenerCuotas(Integer.valueOf(request.getParameter("nroPre")));
-			request.setAttribute("nroPrestamo",request.getParameter("nroPre"));
+			request.setAttribute("nroPrestamo", request.getParameter("nroPre"));
 			request.setAttribute("listaCuotas", listaCuotas);
 			RequestDispatcher rd = request.getRequestDispatcher("CuotasPrestamo.jsp");
 			rd.forward(request, response);
@@ -71,7 +71,44 @@ public class ServletPrestamos extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("ListaPrestamos.jsp");
 			rd.forward(request, response);
 		}
+		if (request.getParameter("dni") != null) {
+			Cliente cli = new Cliente();
+			cli = clNeg.obtenerUno(Integer.valueOf(request.getParameter("dni")));
+			request.setAttribute("labelCliente", cli.getNombreCompleto());
+			request.setAttribute("dniCliente", cli.getDni());
+			ArrayList<Cuenta> listaCuentas = cuenNeg
+					.obtenerCuentasCliente(Integer.valueOf(request.getParameter("dni")));
+			request.setAttribute("listaCuentas", listaCuentas);
+			RequestDispatcher rd = request.getRequestDispatcher("NuevoPrestamo.jsp");
+			rd.forward(request, response);
+		} else if (request.getParameter("aut") != null) {
+			boolean estado = presNeg.actualizar(1, Integer.valueOf(request.getParameter("aut")));
+			if (estado) {
+				RequestDispatcher rd = request.getRequestDispatcher("ServletPrestamos?lp=1");
+				rd.forward(request, response);
+			}
 
+		} else if (request.getParameter("rech") != null) {
+			boolean estado = presNeg.rechazar(2, Integer.valueOf(request.getParameter("rech")),
+					String.valueOf(request.getParameter("motivoRechazo")));
+			if (estado) {
+				RequestDispatcher rd = request.getRequestDispatcher("ServletPrestamos?lp=1");
+				rd.forward(request, response);
+			}
+		} else if (request.getParameter("cuo") != null) {
+			boolean estado = cuoNeg.pagarCuota(Integer.valueOf(request.getParameter("cuo")),
+					Integer.valueOf(request.getParameter("pres")));
+			if (estado) {
+				RequestDispatcher rd = request.getRequestDispatcher(
+						"ServletPrestamos?nroPre=" + String.valueOf(request.getParameter("pres")));
+				rd.forward(request, response);
+			}
+		}
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
 		if (request.getParameter("btnAceptar") != null) {
 			Prestamo NuevoPrestamo = new Prestamo();
 			Cuota cuota = new Cuota();
@@ -84,9 +121,8 @@ public class ServletPrestamos extends HttpServlet {
 			NuevoPrestamo.setImporteCuota((Float.parseFloat(request.getParameter("txtMonto"))
 					+ Float.parseFloat(request.getParameter("txtIntereses"))
 							/ Integer.valueOf(request.getParameter("cuotas"))));
-
 			Cliente c = new Cliente();
-			c.setDni(Integer.valueOf(request.getParameter("txtDni")));
+			c.setDni(Integer.valueOf(request.getParameter("DniValue")));
 
 			Cuenta cu = new Cuenta();
 			cu.setNumeroCuenta(Integer.valueOf(request.getParameter("ddlCuentas")));
@@ -104,41 +140,8 @@ public class ServletPrestamos extends HttpServlet {
 				if (cuoNeg.insertarCuotas(cuota))
 					response.sendRedirect("ServletPrestamos?mp=1");
 			}
-
-		} else if (request.getParameter("dni") != null) {
-			Cliente cli = new Cliente();
-			cli = clNeg.obtenerUno(Integer.valueOf(request.getParameter("dni")));
-			request.setAttribute("labelCliente", cli.getNombreCompleto());
-			request.setAttribute("dniCliente", cli.getDni());
-			ArrayList<Cuenta> listaCuentas = cuenNeg
-					.obtenerCuentasCliente(Integer.valueOf(request.getParameter("dni")));
-			request.setAttribute("listaCuentas", listaCuentas);
-			RequestDispatcher rd = request.getRequestDispatcher("NuevoPrestamo.jsp");
-			rd.forward(request, response);
-		} else if (request.getParameter("aut") != null) {
-			boolean estado = presNeg.actualizar(1, Integer.valueOf(request.getParameter("aut")));
-			if(estado) {
-				RequestDispatcher rd = request.getRequestDispatcher("ServletPrestamos?lp=1");
-				rd.forward(request, response);	
-			}
-
-		} else if (request.getParameter("rech") != null) {
-			boolean estado = presNeg.rechazar(2, Integer.valueOf(request.getParameter("rech")), String.valueOf(request.getParameter("txtMotivoRechazo")));
-			if(estado) {
-				RequestDispatcher rd = request.getRequestDispatcher("ServletPrestamos?lp=1");
-				rd.forward(request, response);	
-			}
-		} else if (request.getParameter("cuo") != null) {
-			boolean estado = cuoNeg.pagarCuota(Integer.valueOf(request.getParameter("cuo")),Integer.valueOf(request.getParameter("pres")));
-			if(estado) {
-				RequestDispatcher rd = request.getRequestDispatcher("ServletPrestamos?nroPre="+String.valueOf(request.getParameter("pres")));
-				rd.forward(request, response);	
-			}
 		}
-	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
 	}
 
 }

@@ -69,7 +69,8 @@
 								<button type="button" id="functionPagarPrestamo"
 									class="btn btn-success" data-toggle="modal"
 									data-target="#modalPagarCuota"
-									data-nrocuota="<%=c.getNumeroCuota()%>" data-nroprestamo="<%=c.getNumeroPrestamo()%>">
+									data-nrocuota="<%=c.getNumeroCuota()%>"
+									data-nroprestamo="<%=c.getNumeroPrestamo()%>">
 									<i class="fa-solid fa-dollar-sign"></i>
 								</button>
 						</tr>
@@ -80,7 +81,8 @@
 				</table>
 			</div>
 			<div>
-				</br> <a class="btn btn-primary" href="Inicio.jsp">Volver</a>
+				<a class="btn btn-primary" type="submit"
+					href="ServletPrestamos?mp=1">Volver</a>
 			</div>
 		</div>
 
@@ -89,11 +91,9 @@
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<input type="hidden" id="nroPrestamo2" /> <input
-							type="hidden" id="nroCuota2" /> <label
-							for="lblCuota">Cuota N°</label> <input type="text"
-							name="lblCuota" id="lblCuota" disabled="disabled">
-						<span aria-hidden="true"></span>
+						<input type="hidden" id="nroPrestamo2" /> <input type="hidden"
+							id="nroCuota2" />
+						<h2 id="lblCuota"></h2>
 					</div>
 					<div class="modal-body">
 						<div class="modal-body" style="text-align: center">¿Estas
@@ -114,8 +114,9 @@
 		$(document).on("click", "#functionPagarPrestamo", function() {
 			var nro_cuota = $(this).data('nrocuota');
 			var nro_prestamo = $(this).data('nroprestamo');
-			$("#nroCuota2").val(nro_cuota)
+			$("#lblCuota").text("Cuota N°" + nro_cuota)
 			$("#nroPrestamo2").val(nro_prestamo);
+			$("#nroCuota2").val(nro_cuota);
 		})
 	</script>
 

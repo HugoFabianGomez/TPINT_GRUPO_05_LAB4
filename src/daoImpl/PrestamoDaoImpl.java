@@ -149,6 +149,7 @@ public class PrestamoDaoImpl implements PrestamoDao {
 
 		String query = "UPDATE Prestamos SET otorgado_PRS = " + estadoPrestamo + " WHERE codigo_prestamo_PRS = "
 				+ nroPrestamo;
+		System.out.println(query);
 		try {
 			estado = cn.execute(query);
 		} catch (Exception e) {
@@ -166,8 +167,9 @@ public class PrestamoDaoImpl implements PrestamoDao {
 		cn = new Conexion();
 		cn.Open();
 
-		String query = "UPDATE Prestamos SET otorgado_PRS = " + estadoPrestamo + ", motivo_rechazo_PRS = " + motivoRechazo + " WHERE codigo_prestamo_PRS = "
+		String query = "UPDATE Prestamos SET otorgado_PRS = " + estadoPrestamo + ", motivo_rechazo_PRS = '" + motivoRechazo + "' WHERE codigo_prestamo_PRS = "
 				+ nroPrestamo;
+		System.out.println(query);
 		try {
 			estado = cn.execute(query);
 		} catch (Exception e) {

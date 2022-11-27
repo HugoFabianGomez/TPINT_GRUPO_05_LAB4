@@ -48,7 +48,7 @@
 					</tr>
 				</tbody>
 			</table>
-			
+
 			<h1>Mis Prestamos</h1>
 
 			<div class="container" style="margin-top: 10px; padding: 5px">
@@ -73,67 +73,72 @@
 							if (listaMisPrestamos != null)
 								for (Prestamo p : listaMisPrestamos) {
 						%>
-							<tr>
-								<td style="text-align: center; width: 150px;"><%=p.getCodigo()%></td>
-								<td style="text-align: center"><%=p.getCliente().getNombreCompleto()%></td>
-								<td style="text-align: center"><%=p.getCliente().getDni()%></td>
-								<td style="text-align: center"><%=p.getCuenta().getNumeroCuenta()%></td>
-								<td style="text-align: center"><%=p.getImportePagar()%></td>
-								<td style="text-align: center"><%=p.getImportePagar()%></td>
-								<td style="text-align: center"><%=p.getEstado()%></td>
-								<td style="text-align: center; width: 120px;">
-									<button type="button" id="DatosModalVerPrestamo"
-										class="btn btn-primary" data-toggle="modal"
-										data-target="#modalPrestamo"
-										data-nombrecompleto="<%=p.getCliente().getNombreCompleto()%>"
-										data-nroprestamo1="<%=p.getCodigo()%>"
-										data-dni="<%=p.getCliente().getDni()%>"
-										data-numerocuenta="<%=p.getCuenta().getNumeroCuenta()%>"
-										data-importepagar="<%=p.getImportePagar()%>"
-										data-estadoprestamo="<%=p.getEstado()%>"
-										data-motivorechazo="<%=p.getMotivoRechazo()%>"
-										data-cuotas="<%=p.getPlazoMeses()%>">
-										<i class="fa-sharp fa-solid fa-eye"></i>
-									</button> <a class="btn btn-primary"
-									href="/TP_INTEGRADOR_GRUPO_5/ServletPrestamos?nroPre=<%=p.getCodigo()%>">
-										<i class="fa-solid fa-money-bill"></i>
-								</a>
-								</td>
-							</tr>
-							<%
-								}
-							%>
-						</tbody>
-					</table>
+						<tr>
+							<td style="text-align: center; width: 150px;"><%=p.getCodigo()%></td>
+							<td style="text-align: center"><%=p.getCliente().getNombreCompleto()%></td>
+							<td style="text-align: center"><%=p.getCliente().getDni()%></td>
+							<td style="text-align: center"><%=p.getCuenta().getNumeroCuenta()%></td>
+							<td style="text-align: center"><%=p.getImportePagar()%></td>
+							<td style="text-align: center"><%=p.getImportePagar()%></td>
+							<td style="text-align: center"><%=p.getEstado()%></td>
+							<td style="text-align: center; width: 120px;">
+								<button type="button" id="DatosModalVerPrestamo"
+									class="btn btn-primary" data-toggle="modal"
+									data-target="#modalPrestamo"
+									data-nombrecompleto="<%=p.getCliente().getNombreCompleto()%>"
+									data-nroprestamo1="<%=p.getCodigo()%>"
+									data-dni="<%=p.getCliente().getDni()%>"
+									data-numerocuenta="<%=p.getCuenta().getNumeroCuenta()%>"
+									data-importepagar="<%=p.getImportePagar()%>"
+									data-estadoprestamo="<%=p.getEstado()%>"
+									data-motivorechazo="<%=p.getMotivoRechazo()%>"
+									data-cuotas="<%=p.getPlazoMeses()%>">
+									<i class="fa-sharp fa-solid fa-eye"></i>
+								</button> <%
+ 	if (p.getEstado() == "Autorizado") {
+ %> <a class="btn btn-primary"
+								href="/TP_INTEGRADOR_GRUPO_5/ServletPrestamos?nroPre=<%=p.getCodigo()%>">
+									<i class="fa-solid fa-money-bill"></i>
+							</a> <%
+ 	}
+ %>
+							</td>
+						</tr>
+						<%
+							}
+						%>
+					</tbody>
+				</table>
+				<div>
 					<div>
-						<div>
-							</br> <a class="btn btn-primary" href="Inicio.jsp">Volver</a>
-						</div>
+						</br> <a class="btn btn-primary" href="Inicio.jsp">Volver</a>
 					</div>
+				</div>
 
-					<!-- Modal ver prestamo-->
-					<div class="modal fade" id="modalPrestamo" role="dialog">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h2 id="VerNroPrestamo" style="text-align: center;"></h2>
-								</div>
-								<div class="modal-body" style="text-align: center;">
-									</br> <label id="VerNombreCompleto"></label> </br> <label id="VerDni"></label>
-									</br> <label id="VerNumeroCuenta"></label> </br> <label
-										id="VerImportePagar"></label> </br> <label id="VerEstadoPrestamo"></label>
-									</br> <label id="VerMotivoRechazo"></label> </br> <label id="VerCuotas"></label>
-									</br>
-									<div class="modal-footer">
-										<button class="btn btn-success" type="button"
-											data-dismiss="modal">Cerrar</button>
-									</div>
+				<!-- Modal ver prestamo-->
+				<div class="modal fade" id="modalPrestamo" role="dialog">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h2 id="VerNroPrestamo" style="text-align: center;"></h2>
+							</div>
+							<div class="modal-body" style="text-align: center;">
+								<label id="VerNombreCompleto"></label> </br> <label id="VerDni"></label>
+								</br> <label id="VerNumeroCuenta"></label> </br> <label
+									id="VerImportePagar"></label> </br> <label id="VerEstadoPrestamo"></label>
+								</br> <label id="VerMotivoRechazo"></label> </br> <label id="VerCuotas"></label>
+								</br>
+								<div class="modal-footer">
+									<button class="btn btn-success" type="button"
+										data-dismiss="modal">Cerrar</button>		
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				</div>>
+			</div>
+		</div>
+		>
 	</form>
 
 	<!-- jQuery library -->

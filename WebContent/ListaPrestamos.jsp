@@ -110,11 +110,14 @@ body>div {
 									data-motivorechazo="<%=p.getMotivoRechazo()%>"
 									data-cuotas="<%=p.getPlazoMeses()%>">
 									<i class="fa-sharp fa-solid fa-eye"></i>
-								</button> <a class="btn btn-primary"
+								</button> <%
+ 	if (p.getEstado() == "Autorizado") {
+ %> <a class="btn btn-primary"
 								href="/TP_INTEGRADOR_GRUPO_5/ServletPrestamos?nroPre=<%=p.getCodigo()%>">
 									<i class="fa-solid fa-money-bill"></i>
 							</a> <%
- 	if (p.getEstado() == "Pendiente") {
+ 	}
+ 			if (p.getEstado() == "Pendiente") {
  %>
 								<button type="button" id="DatosModalAutorizar"
 									class="btn btn-success" data-toggle="modal"
@@ -148,8 +151,8 @@ body>div {
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header" style="text-align: center">
-						<input type="hidden" id="nroPrestamoHidden" /> <h2
-							id="NroPrestamoAutorizar"></h2>
+						<input type="hidden" id="nroPrestamoHidden" />
+						<h2 id="NroPrestamoAutorizar"></h2>
 					</div>
 					<div class="modal-body">
 						<div class="modal-body" style="text-align: center">¿Estas
@@ -170,8 +173,8 @@ body>div {
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header" style="text-align: center">
-						<input type="hidden" id="nroPrestamoHidden2" /> <h2
-							id="NroPrestamoRechazar"></h2>
+						<input type="hidden" id="nroPrestamoHidden2" />
+						<h2 id="NroPrestamoRechazar"></h2>
 					</div>
 					<div class="modal-body" style="text-align: center;">
 						<label for="txtMotivoRechazo">Motivo Rechazo: </label>
@@ -184,7 +187,7 @@ body>div {
 							<button class="btn btn-secondary" type="button"
 								data-dismiss="modal">Cancelar</button>
 							<a class="btn btn-success" type="submit"
-								onclick="window.location.href='/TP_INTEGRADOR_GRUPO_5/ServletPrestamos?rech='+nroPrestamoHidden2.value;">Rechazar</a>
+								onclick="window.location.href='/TP_INTEGRADOR_GRUPO_5/ServletPrestamos?rech='+nroPrestamoHidden2.value+'&motivoRechazo='+txtMotivoRechazo.value">Rechazar</a>
 						</div>
 					</div>
 				</div>
@@ -199,7 +202,7 @@ body>div {
 						<h2 id="VerNroPrestamo" style="text-align: center;"></h2>
 					</div>
 					<div class="modal-body" style="text-align: center;">
-						</br> <label id="VerNombreCompleto"></label> </br> <label id="VerDni"></label>
+						<label id="VerNombreCompleto"></label> </br> <label id="VerDni"></label>
 						</br> <label id="VerNumeroCuenta"></label> </br> <label id="VerImportePagar"></label>
 						</br> <label id="VerEstadoPrestamo"></label> </br> <label
 							id="VerMotivoRechazo"></label> </br> <label id="VerCuotas"></label> </br>
@@ -226,13 +229,13 @@ body>div {
 		$(document).on("click", "#DatosModalAutorizar", function() {
 			var nro_pre = $(this).data('nroprestamo');
 			$("#NroPrestamoAutorizar").text("Prestamo N°" + nro_pre);
-			$("#NroPrestamoHidden").val(nro_pre);
+			$("#nroPrestamoHidden").val(nro_pre);
 		})
 
 		$(document).on("click", "#DatosModalRechazar", function() {
 			var nro_pre = $(this).data('nroprestamo2');
 			$("#NroPrestamoRechazar").text("Prestamo N°" + nro_pre);
-			$("#NroPrestamoHidden2").val(nro_pre);
+			$("#nroPrestamoHidden2").val(nro_pre);
 		})
 
 		$(document)
@@ -266,6 +269,5 @@ body>div {
 									"Motivo del Rechazo: " + motivo_rechazo);
 						})
 	</script>
-
 </body>
 </html>
