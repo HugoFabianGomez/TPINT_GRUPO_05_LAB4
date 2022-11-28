@@ -44,28 +44,32 @@
 <form action="ServletClientes" method="get">
 <table>
 	<tr> 
-		<td style="width: 139px; ">DNI</td>
+		<td style="width: 139px; "><h4>DNI</h4></td>
 		<td style="height: 0px; "><input type="Number" name="txtDNI" min="1" max="9999999999" value="<%=request.getParameter("dni")%>" readonly
+		class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
 		required  maxlength="10" autocomplete="off" onkeypress="return((event.charCode >= 48 && event.charCode <= 57))"
 		value="00.000.000" /><br></td>
-		<td>CUIL  </td>
+		<td><h4>CUIL</h4>  </td>
 		<td style="height: 0px; "><input type="Number" name="txtCUIL" value="<%=cl.getCuil() %>"
+		class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
 		required  maxlength="12" autocomplete="off" onkeypress="return((event.charCode >= 48 && event.charCode <= 57))"
 		value="00000000000" /><br></td>
 
 	</tr>
 		<tr> 
-		<td style="width: 139px; ">NOMBRE/S </td>
-		<td style="height: 0px; "><input type="text" name="txtNOMBRE"  value="<%=cl.getNombre() %>"/></td>
-		<td>APELLIDO/S </td>
-		<td style="height: 0px; "><input type="text" name="txtAPELLIDO"  value="<%=cl.getApellido() %>"/></td>
+		<td style="width: 139px; "><h4>NOMBRE /S</h4></td>
+		<td style="height: 0px; "><input type="text" name="txtNOMBRE"  value="<%=cl.getNombre() %>"
+		class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"/></td>
+		<td><h4>APELLIDO /S</h4> </td>
+		<td style="height: 0px; "><input type="text" name="txtAPELLIDO"  value="<%=cl.getApellido() %>"
+		class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"/></td>
 		
 	</tr>
 	 
 	<tr> 
-		<td>NACIONALIDAD</td>
+		<td><h4></h4>NACIONALIDAD</td>
 		<td style="height: 0px; ">
-			<select name="txtNACIONALIDAD" >
+			<select name="txtNACIONALIDAD" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
 				<%				
 				if(list_Nacionalidad!=null)
 					for (Nacionalidad nac : list_Nacionalidad) {
@@ -76,16 +80,18 @@
 				<%}	%>									 				
 			 </select>	
 		</td>
-		<td>FECHA NACIMIENTO</td>
-		<td style="height: 0px; "><input type="date" name="txtFECHA_NAC"  value="<%=cl.getFechaNacimiento() %>"/><br></td>
-		<td>GENERO </td>
+		<td><h4>FECHA NACIMIENTO</h4></td>
+		<td style="height: 0px; "><input type="date" name="txtFECHA_NAC"  value="<%=cl.getFechaNacimiento() %>"
+		class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"/><br></td>
+		<td><h4>GENERO</h4> </td>
 		<td style="height: 0px; ">
-			<select name="txtSEXO" >
+			<select name="txtSEXO" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
 				<%
 				if(list_Genero!=null)
 					for (Genero gen : list_Genero) {
 				%>
-					<option value="<%=gen.getCodigo()%>" <%=gen.getCodigo()==cl.getGenero().getCodigo()?"selected":"" %>><%=gen.getDescripcion()%></option>
+					<option class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
+					value="<%=gen.getCodigo()%>" <%=gen.getCodigo()==cl.getGenero().getCodigo()?"selected":"" %>><%=gen.getDescripcion()%></option>
 				<% }%>
 			 </select>	
 		</td>
@@ -93,10 +99,11 @@
 	</tr>
 	
 	<tr>
-		<td>DOMICILIO </td>
+		<td><h4>DOMICILIO</h4> </td>
 		<td style="height: 0px; "><input type="text" name="txtDIRECCION" required  maxlength="40" autocomplete="off" value="<%=cl.getDomicilio() %>"/><br></td>
+		<td><h4>Localidad</h4></td>
 		<td style="height: 0px; ">
-			<select name="txtLOCALIDAD" >
+			<select name="txtLOCALIDAD" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
 				<%
 				if(list_Localidad!=null)
 					for (Localidad loc : list_Localidad) {
@@ -106,8 +113,9 @@
 												 				
 			 </select>	
 		</td>
+		<td><h4>  Provincia</h4></td>
 		<td style="height: 0px; ">
-			<select name="txtPROVINCIA" >
+			<select name="txtPROVINCIA" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
 					<%
 				if(list_Provincia!=null)
 					for (Provincia prov : list_Provincia) {
@@ -120,11 +128,11 @@
 		</td>
 	</tr>
 	<tr>
-		<td>CORREO ELECTRONICO	</td>
+		<td><h4>CORREO ELECTRONICO</h4></td>
 		<td style="height: 0px; ">  <input type="email" name="textEMAIL" required value="<%=cl.getEmail() %>" /> </td>	
 	</tr>
 	<tr> 
-		<td>TELEFONO </td>
+		<td><h4>TELEFONO</h4> </td>
 		<td style="height: 0px; "><input type="tel" name="txtTELEFONO" value="<%=cl.getTelefono() %>"/></td>
 	</tr>
 	<tr>

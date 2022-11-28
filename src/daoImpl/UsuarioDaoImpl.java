@@ -14,31 +14,31 @@ import entidades.Usuario;
 public class UsuarioDaoImpl implements UsuarioDao {
 	private Conexion cn;
 
-	public List<Usuario> obtenerTodos() {
+	public ArrayList<Usuario> obtenerTodos() {
 		cn = new Conexion();
 		cn.Open();
-		List<Usuario> list = new ArrayList<Usuario>();
+		ArrayList<Usuario> listUsuarios = new ArrayList<Usuario>();
 		try {
-			ResultSet rs = cn.query("select * from Usuarios U\r\n"
-					+ "inner join TipoUsuarios TUS on TUS.codigo_tipo_usuario_TUS = U.codigo_tipo_usuario_US");
+			ResultSet rs = cn.query("select * from usuarios inner join tiposusuario on codigo_tipo_usuario_US = codigo_tipo_usuario_TUS;");
 			while (rs.next()) {
 				Usuario u = new Usuario();
-				u.setNombreUsuario(rs.getString("U.nombre_usuario_US"));
-				u.setContrasenia(rs.getString("U.contrasena_US"));
-
+				u.setNombreUsuario(rs.getString("nombre_usuario_US"));
+				u.setContrasenia(rs.getString("contrasena_US"));
+				u.setEstado(rs.getBoolean("estado_US"));
+				
 				TipoUsuario tu = new TipoUsuario();
-				tu.setTipoUsuario(rs.getString("TU.descripcion_TUS"));
+				tu.setTipoUsuario(rs.getString("codigo_tipo_usuario_TUS"));
+				tu.setTipoUsuario(rs.getString("descripcion_TUS"));
 				u.setTipoUsuario(tu);
 
-				list.add(u);
+				listUsuarios.add(u);
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			cn.close();
 		}
-		return list;
+		return listUsuarios;
 	}
 
 	public boolean insertar(Usuario u) {

@@ -57,7 +57,7 @@ public class Conexion {
 		}
 		catch(SQLException e)
 		{
-			JOptionPane.showMessageDialog(null, e);
+			//JOptionPane.showMessageDialog(null, e);
 			save = false;
 			e.printStackTrace();
 		}

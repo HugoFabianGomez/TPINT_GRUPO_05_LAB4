@@ -1,5 +1,7 @@
 package negocioImpl;
 
+import java.util.ArrayList;
+
 import dao.UsuarioDao;
 import daoImpl.UsuarioDaoImpl;
 import entidades.Usuario;
@@ -27,5 +29,11 @@ public class UsuarioNegocioImpl implements UsuarioNegocio {
 	@Override
 	public int obtenerDniUsuario(String user) {
 		return usuDao.obtenerDniUser(user);
+	}
+
+	@Override
+	public ArrayList<Usuario> obtenerTodos() {
+		// TODO Auto-generated method stub
+		return usuDao.obtenerTodos();
 	}
 }

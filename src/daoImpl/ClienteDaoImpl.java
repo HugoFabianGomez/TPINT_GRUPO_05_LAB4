@@ -90,8 +90,8 @@ public class ClienteDaoImpl implements ClienteDao {
 		cn = new Conexion();
 		cn.Open();	
 
-		String query = ("insert into clientes (dni_CLI, cuil_CLI, nombre_CLI, apellido_CLI, fecha_nacimiento_CLI, domicilio_CLI, email_CLI, telefono_CLI, estado_CLI, codigo_nacionalidad_CLI, codigo_localidad_CLI, codigo_provincia_CLI, codigo_genero_CLI, nombre_usuario_CLI) "
-		                +" values("+cliente.getDni()+","+cliente.getCuil()+",'"+cliente.getNombre()+"','"+cliente.getApellido()+"','"+ cliente.getFechaNacimiento()+"','"+cliente.getDomicilio()+"','"+cliente.getEmail()+"','"+cliente.getTelefono()+"',1,"+cliente.getNacionalidad().getCodigo()+","+cliente.getLocalidad().getCodigo()+","+cliente.getProvincia().getCodigo()+","+ cliente.getGenero().getCodigo()+",'"+cliente.getUsuario().getNombreUsuario()+"');");
+		String query = ("insert into clientes (dni_CLI, cuil_CLI, nombre_CLI, apellido_CLI, fecha_nacimiento_CLI, domicilio_CLI, email_CLI, telefono_CLI, estado_CLI, codigo_nacionalidad_CLI, codigo_localidad_CLI, codigo_provincia_CLI, codigo_genero_CLI, nombre_usuario_CLI)"
+		               +" values("+cliente.getDni()+","+cliente.getCuil()+",'"+cliente.getNombre()+"','"+cliente.getApellido()+"','"+ cliente.getFechaNacimiento()+"','"+cliente.getDomicilio()+"','"+cliente.getEmail()+"','"+cliente.getTelefono()+"',1,          "+cliente.getNacionalidad().getCodigo()+","+cliente.getLocalidad().getCodigo()+","+cliente.getProvincia().getCodigo()+","+ cliente.getGenero().getCodigo()+",'"+cliente.getUsuario().getNombreUsuario()+"');");
 		System.out.println(query);
 		try
 		 {
