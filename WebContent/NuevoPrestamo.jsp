@@ -28,24 +28,25 @@
 		String dni = String.valueOf(request.getAttribute("dniCliente"));
 	%>
 
-	<form method="get" action="ServletPrestamos">
-		<h2>Nuevo prestamo</h2>
+	<form method="post" action="ServletPrestamos">
+		<h2 style="text-align: center; margin-bottom: 20px;">Nuevo
+			prestamo</h2>
 
-		<div class="row">
+		<div class="row"
+			style="margin: auto; width: 60%; border: 3px solid #73AD21; padding: 10px">
 			<div class="col-md-6">
 				<div class="mb-3">
 					<label class="form-label">Cliente: <%=request.getAttribute("labelCliente")%></label>
 				</div>
 
 				<div class="mb-3">
-					<label for="txtDni" class="form-label">Dni</label> <input
-						type="text" class="form-control" id="txtDni" name="txtDni"
-						value="<%=String.valueOf(request.getAttribute("dniCliente"))%>">
+					<label id="lblDni" class="form-label">DNI: <%=dni%></label> <input
+						type="hidden" id="DniValue" name="DniValue" value="<%=dni%>" />
 				</div>
 
 				<div class="mb-3">
 					<label for="ddlCuentas" class="form-label">Cuentas</label> <select
-						name="ddlCuentas" class="form-select">
+						required="required" name="ddlCuentas" class="form-select">
 						<%
 							if (listaCuentas != null)
 								for (Cuenta c : listaCuentas) {
@@ -62,12 +63,14 @@
 					<label for="txtMonto" class="form-label">Monto</label> <input
 						type="text" class="form-control" id="txtMonto" name="txtMonto"
 						required maxlength="40" autocomplete="off" onchange="update();"
+						required="required"
 						oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
 				</div>
 
 				<div class="mb-3">
 					<button type="submit" name="btnAceptar" class="btn btn-success">Agregar</button>
-					<button type="button" name="btnCancelar" class="btn btn-danger">Cancelar</button>
+					<a class="btn btn-danger" type="submit"
+						href="ServletPrestamos?mp=1">Cancelar</a>
 				</div>
 			</div>
 
@@ -75,7 +78,8 @@
 
 				<div>
 					<label for="ddlCuotas" class="form-label">Cuotas</label> <select
-						id="ddlCuotas" name="cuotas" class="form-select">
+						required="required" id="ddlCuotas" name="cuotas"
+						class="form-select">
 						<option value="1">1</option>
 						<option value="3">3</option>
 						<option value="6">6</option>
@@ -88,14 +92,16 @@
 
 				<div class="mb-3">
 					<label for="txtIntereses" class="form-label">Intereses</label> <input
-						type="text" class="form-control" id="txtIntereses"
-						name="txtIntereses" required maxlength="15" autocomplete="on"
+						required="required" type="text" class="form-control"
+						id="txtIntereses" name="txtIntereses" required maxlength="15"
+						autocomplete="on" readonly
 						oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
 				</div>
 
 				<div class="mb-3">
 					<label for="txtFecha" class="form-label">Fecha</label> <input
-						type="text" class="form-control" id="txtFecha" name="txtFecha">
+						required="required" type="text" class="form-control" id="txtFecha"
+						name="txtFecha">
 				</div>
 			</div>
 		</div>
