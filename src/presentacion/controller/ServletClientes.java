@@ -1,6 +1,7 @@
 package presentacion.controller;
 
 import java.io.IOException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -42,38 +43,41 @@ public class ServletClientes extends HttpServlet {
 		if(request.getParameter("btnAceptar")!=null)
 		{
 			boolean filas = false;
-			System.out.println("Entro Servlet");
+			System.out.println("Entro Servlet Cliente ln 46");
 			
-			Usuario usu = new Usuario();
-			usu.setNombreUsuario(request.getParameter("textUSUARIO"));
-			usu.setContrasenia(request.getParameter("txtDNI"));
-			filas= UsuaNeg.agregar(usu);		
+				Usuario usu = new Usuario();
+				usu.setNombreUsuario(request.getParameter("textUSUARIO"));
+				usu.setContrasenia(request.getParameter("txtDNI"));
+				filas= UsuaNeg.agregar(usu);		
+				
+				Cliente cliente =  new Cliente();
+				cliente.setDni(Integer.parseInt(request.getParameter("txtDNI")));
+				cliente.setCuil(Integer.parseInt(request.getParameter("txtCUIL")));
+				cliente.setNombre(request.getParameter("txtNOMBRE"));
+				cliente.setApellido(request.getParameter("txtAPELLIDO"));
+				cliente.setNacionalidad(new Nacionalidad(Integer.parseInt(request.getParameter("txtNACIONALIDAD"))));
+				cliente.setFechaNacimiento(request.getParameter("txtFECHA_NAC"));
+				cliente.setGenero(new Genero(Integer.parseInt(request.getParameter("txtGENERO"))));
+				cliente.setDomicilio(request.getParameter("txtDIRECCION"));
+				cliente.setLocalidad(new Localidad(Integer.parseInt(request.getParameter("txtLOCALIDAD"))));
+				cliente.setProvincia(new Provincia(Integer.parseInt(request.getParameter("txtPROVINCIA"))));
+				cliente.setEmail(request.getParameter("textEMAIL"));
+				cliente.setTelefono(request.getParameter("txtTELEFONO"));
+				cliente.setUsuario(new Usuario(request.getParameter("textUSUARIO")));	
+				//System.out.println(cliente.getFechaNacimiento());
+				
+				try {
+					filas=ClienteNeg.agregar(cliente);					
+				}catch(Exception e) {
+					System.out.println("se ha violado una restricción de integridad (clave externa, clave principal o clave única)");
+					
+				}
+				//REQUESTDISPATCHER
+				
+				request.setAttribute("filas", filas);
+				RequestDispatcher rd = request.getRequestDispatcher("/ListarClientes.jsp");   
+		        rd.forward(request, response);
 			
-			
-			Cliente cliente =  new Cliente();
-			cliente.setDni(Integer.parseInt(request.getParameter("txtDNI")));
-			cliente.setCuil(Integer.parseInt(request.getParameter("txtCUIL")));
-			cliente.setNombre(request.getParameter("txtNOMBRE"));
-			cliente.setApellido(request.getParameter("txtAPELLIDO"));
-			cliente.setNacionalidad(new Nacionalidad(Integer.parseInt(request.getParameter("txtNACIONALIDAD"))));
-			cliente.setFechaNacimiento(request.getParameter("txtFECHA_NAC"));
-			cliente.setGenero(new Genero(Integer.parseInt(request.getParameter("txtGENERO"))));
-			cliente.setDomicilio(request.getParameter("txtDIRECCION"));
-			cliente.setLocalidad(new Localidad(Integer.parseInt(request.getParameter("txtLOCALIDAD"))));
-			cliente.setProvincia(new Provincia(Integer.parseInt(request.getParameter("txtPROVINCIA"))));
-			cliente.setEmail(request.getParameter("textEMAIL"));
-			cliente.setTelefono(request.getParameter("txtTELEFONO"));
-			cliente.setUsuario(new Usuario(request.getParameter("textUSUARIO")));
-			
-			
-			//System.out.println(cliente.getFechaNacimiento());
-			
-			filas=ClienteNeg.agregar(cliente);
-			//REQUESTDISPATCHER
-			
-			request.setAttribute("filas", filas);
-			RequestDispatcher rd = request.getRequestDispatcher("/ListarClientes.jsp");   
-	        rd.forward(request, response);
 	        
 		} else if(request.getParameter("btnModificar")!=null) 
 		{

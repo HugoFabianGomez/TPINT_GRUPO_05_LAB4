@@ -1,3 +1,4 @@
+<%@page import="javax.swing.JOptionPane"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="entidades.*"%>
 <%@page import="negocio.*"%>
@@ -21,10 +22,13 @@
 						
 						response.sendRedirect("/TP_INTEGRADOR_GRUPO_5/Login.jsp");
 						System.out.println("No hay usuario");
-					} else %>
-				<% 
+					} else 
 				//System.out.println("Que tengo en Transferencia ln.29= "+loginUser.getNombreUsuario());
-				if(session.getAttribute("permiso").equals("NoAdmin"))
+				if(session.getAttribute("permiso").equals("Admin")){
+					JOptionPane.showMessageDialog(null, "Esta Opcion es del Perfil Cliente");
+					response.sendRedirect("/TP_INTEGRADOR_GRUPO_5/Login.jsp");
+					System.out.println("Esta Opcion es del Perfil Cliente");
+				} else if(session.getAttribute("permiso").equals("NoAdmin"))
 				{
 					ClienteNegocio clienteNegocio = new ClienteNegocioImpl();
 					String Usuario = currentUser.getNombreUsuario();

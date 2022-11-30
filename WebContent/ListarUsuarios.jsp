@@ -50,6 +50,7 @@
             <th style="text-align: center">CONTRASEÑA</th>
             <th style="text-align: center">ESTADO</th>
             <th style="text-align: center">TIPO USUARIO</th>
+            <th style="text-align: center">Accion</th>
             </tr> 
         </thead>
         <tbody>
@@ -62,6 +63,7 @@
 					<td><%= us.getContrasenia() %> </td>
 					<td><%= us.isEstado()%>	</td>
 					<td><%= us.getTipoUsuario().getTipoUsuario() %>	</td>
+					<td><a class="btn btn-primary" href="/TP_INTEGRADOR_GRUPO_5/Perfil.jsp?Usuario=<%=us.getNombreUsuario()%>">Modificar Pass</a></td>
             </tr>
             <%  } %>
             

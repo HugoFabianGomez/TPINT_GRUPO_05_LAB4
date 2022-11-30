@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import dao.ClienteDao;
 import daoImpl.Conexion;
 import entidades.Cliente;
@@ -467,6 +469,7 @@ public class ClienteDaoImpl implements ClienteDao {
 			 if(registros > 0) {
 				 existe = true;
 				 System.out.println("Devolvio existe= "+existe);
+				 JOptionPane.showMessageDialog(null, "El Dni existe en la Base de Datos");
 			 }	 
 		 } catch(Exception e)
 		 {

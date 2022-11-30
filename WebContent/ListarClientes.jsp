@@ -1,3 +1,4 @@
+ <%@page import="javax.swing.JOptionPane" %>
 <%@page import="negocio.ClienteNegocio"%>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="entidades.Cliente" %>
@@ -33,6 +34,13 @@
 			if(session.getAttribute("userid")==null || session.getAttribute("permiso")=="NoAdmin")
 			{
 				RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+			}
+			if(session.getAttribute("filas") !=null){
+					boolean filas = Boolean.parseBoolean(request.getParameter("filas"));
+					if(filas == true){
+						out.println("El registro se agrego correctamente");
+						 JOptionPane.showMessageDialog(null, "El registro se agrego correctamente");
+					}
 			}
 		
 			ClienteNegocio cliNegocio = new ClienteNegocioImpl();

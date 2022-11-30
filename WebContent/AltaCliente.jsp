@@ -32,6 +32,7 @@
 			
 			LocalidadNegocio locNegocio = new LocalidadNegocioImpl();
 			ArrayList<Localidad> list_Localidad = locNegocio.obtenerLocalidad();
+			
 		%>
 
 	<jsp:include page="Menu.jsp"></jsp:include>
@@ -46,7 +47,15 @@
 		required   autocomplete="off" onkeypress="return((event.charCode >= 48 && event.charCode <= 57))"
 		value="00000" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" />
 		</td>
-		
+		<%
+			/*	PARA VERIFICAR SI EL DINI CARGADO SE ENCUENTRA EN LA BASE
+			ClienteNegocio ClienteNeg = new ClienteNegocioImpl();
+			boolean existe = false;
+			existe= ClienteNeg.existe(Boolean.parseBoolean("txtDNI").tos);
+			if(existe == true){
+				JOptionPane.showMessageDialog(null, "Entre al jsp de Alta Cliente");
+			}*/
+		%>
 		<td><h4>CUIL  </h4></td>
 		<td style="height: 0px; "><input type="Number" name="txtCUIL" min="1" max="30999999"
 		required  maxlength="8" autocomplete="off" onkeypress="return((event.charCode >= 48 && event.charCode <= 57))"
@@ -147,16 +156,6 @@
 
 </table>
 </form>
-		<%
-			boolean existe =false;
-			if(request.getAttribute("existe") != null){
-				existe = (boolean)request.getAttribute("existe");
-				
-				if(existe == true){
-					JOptionPane.showMessageDialog(null, "El Dni existe en la Base de Datos");
-				}
-			}
-		%>
-
+		
 </body>
 </html>

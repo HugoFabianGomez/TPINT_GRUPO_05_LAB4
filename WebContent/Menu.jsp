@@ -112,8 +112,9 @@
           </a>
           
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="Perfil.jsp">Perfil</a></li>
-              <li><a class="dropdown-item" data-toggle="modal" data-target="#myModal">Salir</a></li>  
+            <li><a class="dropdown-item" href="PerfilUsuario.jsp">Perfil</a></li>
+            <li><a class="dropdown-item" href="Perfil.jsp">Passward</a></li>
+            <li><a class="dropdown-item" data-toggle="modal" data-target="#myModal">Salir</a></li>  
             
             
           </ul>
