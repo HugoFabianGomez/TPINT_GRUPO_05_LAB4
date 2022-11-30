@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JOptionPane;
 
 import entidades.Cliente;
 import entidades.Nacionalidad;
@@ -20,9 +21,8 @@ import negocioImpl.ClienteNegocioImpl;
 import negocioImpl.UsuarioNegocioImpl;
 import entidades.Genero;
 import entidades.Localidad;
+import CreandoException.ValidoDniUsuario;
 
-
-//>>>>>>> 5b4a8aa43b3a66077f920fb03041551279e015b3
 
 @WebServlet("/ServletClientes")
 public class ServletClientes extends HttpServlet {
@@ -45,10 +45,12 @@ public class ServletClientes extends HttpServlet {
 			boolean filas = false;
 			System.out.println("Entro Servlet Cliente ln 46");
 			
+			
 				Usuario usu = new Usuario();
 				usu.setNombreUsuario(request.getParameter("textUSUARIO"));
 				usu.setContrasenia(request.getParameter("txtDNI"));
-				filas= UsuaNeg.agregar(usu);		
+				filas= UsuaNeg.agregar(usu);
+				
 				
 				Cliente cliente =  new Cliente();
 				cliente.setDni(Integer.parseInt(request.getParameter("txtDNI")));
@@ -65,12 +67,16 @@ public class ServletClientes extends HttpServlet {
 				cliente.setTelefono(request.getParameter("txtTELEFONO"));
 				cliente.setUsuario(new Usuario(request.getParameter("textUSUARIO")));	
 				//System.out.println(cliente.getFechaNacimiento());
-				
+								
 				try {
-					filas=ClienteNeg.agregar(cliente);					
+					filas=ClienteNeg.agregar(cliente);
+					System.out.println("Valor de filas= "+filas);
 				}catch(Exception e) {
+					e.printStackTrace();
 					System.out.println("se ha violado una restricción de integridad (clave externa, clave principal o clave única)");
-					
+					JOptionPane.showMessageDialog(null, "se ha violado una restricción de integridad (clave externa, clave principal o clave única)"+ e.getStackTrace());
+					RequestDispatcher rd = request.getRequestDispatcher("/Inicio.jsp");
+					rd.forward(request, response);
 				}
 				//REQUESTDISPATCHER
 				

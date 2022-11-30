@@ -16,6 +16,7 @@ import entidades.Nacionalidad;
 import entidades.Provincia;
 import entidades.Usuario;
 import entidades.TipoUsuario;
+import CreandoException.ValidoDniUsuario;
 
 
 public class ClienteDaoImpl implements ClienteDao {
@@ -87,11 +88,20 @@ public class ClienteDaoImpl implements ClienteDao {
 
 	@Override
 	public boolean insertar(Cliente cliente) {
-		boolean estado=true;
-
+		boolean estado=false;
+		boolean existedni = true;
+		boolean existeUsuario = true;
 		cn = new Conexion();
 		cn.Open();	
+		
+		ValidoDniUsuario dni = new ValidoDniUsuario();
 
+		existedni = dni.ComprueboDni(cliente.getDni());
+		existeUsuario = dni.ComprueboUsuario(cliente.getUsuario().getNombreUsuario());
+		
+		if(existedni == false && existeUsuario == false) {
+
+		
 		String query = ("insert into clientes (dni_CLI, cuil_CLI, nombre_CLI, apellido_CLI, fecha_nacimiento_CLI, domicilio_CLI, email_CLI, telefono_CLI, estado_CLI, codigo_nacionalidad_CLI, codigo_localidad_CLI, codigo_provincia_CLI, codigo_genero_CLI, nombre_usuario_CLI)"
 		               +" values("+cliente.getDni()+","+cliente.getCuil()+",'"+cliente.getNombre()+"','"+cliente.getApellido()+"','"+ cliente.getFechaNacimiento()+"','"+cliente.getDomicilio()+"','"+cliente.getEmail()+"','"+cliente.getTelefono()+"',1,          "+cliente.getNacionalidad().getCodigo()+","+cliente.getLocalidad().getCodigo()+","+cliente.getProvincia().getCodigo()+","+ cliente.getGenero().getCodigo()+",'"+cliente.getUsuario().getNombreUsuario()+"');");
 		System.out.println(query);
@@ -107,6 +117,7 @@ public class ClienteDaoImpl implements ClienteDao {
 		finally
 		{
 			cn.close();
+		}
 		}
 		return estado;
 	}

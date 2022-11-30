@@ -2,7 +2,7 @@
 <%@page import="entidades.*"%>
 <%@page import="negocio.*"%>
 <%@page import="negocioImpl.*"%>
-<%@page import="presentacion.controller.ServletClientes"%>
+<%@page import="presentacion.controller.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -19,22 +19,14 @@
 				RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
 			}
 		%>
-	<%
-	GeneroNegocio generoNegocio = new GeneroNegocioImpl();
-	ArrayList<Genero> list_Genero = generoNegocio.obtenerTodos();
-
-	NacionalidadNegocio nacNegocio = new NacionalidadNegocioImpl();
-	ArrayList<Nacionalidad> list_Nacionalidad = nacNegocio.obtenerTodos();
-
-	ProvinciaNegocio provNegocio = new ProvinciaNegocioImpl();
-	ArrayList<Provincia> list_Provincia = provNegocio.obtenerTodos();
-
-	LocalidadNegocio locNegocio = new LocalidadNegocioImpl();
-	ArrayList<Localidad> list_Localidad = locNegocio.obtenerLocalidad();
+	<%	
+		ArrayList<Genero> list_Genero =             (ArrayList<Genero>)         ServletGeneros.obtenerGeneros();
+		ArrayList<Nacionalidad> list_Nacionalidad = (ArrayList<Nacionalidad>)   ServletNacionalidades.obtenerNacionalidades();	
+		ArrayList<Localidad> list_Localidad =       (ArrayList<Localidad>)      ServletLocalidades.obtenerLocalidades();
+		ArrayList<Provincia> list_Provincia =       (ArrayList<Provincia>)      ServletProvincias.obtenerProvincia();
 		
 		String dni = request.getParameter("dni");
  		Cliente cl = ServletClientes.obtenerCliente(dni);
- 		
 	%>
 
 
@@ -100,7 +92,8 @@
 	
 	<tr>
 		<td><h4>DOMICILIO</h4> </td>
-		<td style="height: 0px; "><input type="text" name="txtDIRECCION" required  maxlength="40" autocomplete="off" value="<%=cl.getDomicilio() %>"/><br></td>
+		<td style="height: 0px; "><input type="text" name="txtDIRECCION" required  maxlength="40" autocomplete="off" value="<%=cl.getDomicilio() %>"
+			class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"/><br></td>
 		<td><h4>Localidad</h4></td>
 		<td style="height: 0px; ">
 			<select name="txtLOCALIDAD" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
@@ -129,11 +122,13 @@
 	</tr>
 	<tr>
 		<td><h4>CORREO ELECTRONICO</h4></td>
-		<td style="height: 0px; ">  <input type="email" name="textEMAIL" required value="<%=cl.getEmail() %>" /> </td>	
+		<td style="height: 0px; ">  <input type="email" name="textEMAIL" required value="<%=cl.getEmail() %>"
+			class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" /> </td>	
 	</tr>
 	<tr> 
 		<td><h4>TELEFONO</h4> </td>
-		<td style="height: 0px; "><input type="tel" name="txtTELEFONO" value="<%=cl.getTelefono() %>"/></td>
+		<td style="height: 0px; "><input type="tel" name="txtTELEFONO" value="<%=cl.getTelefono() %>"
+			class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"/></td>
 	</tr>
 	<tr>
 		<td></td>
@@ -141,7 +136,8 @@
 	<tr> 
 		<br><br>
 		<form>
-		<td class="common-button secondary"><input type="submit" name="btnModificar" value="MODIFICAR"/></td>
+		<td class="common-button secondary"><input type="submit" name="btnModificar" value="MODIFICAR"
+			class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"/></td>
 		</form>
 	</tr>
 

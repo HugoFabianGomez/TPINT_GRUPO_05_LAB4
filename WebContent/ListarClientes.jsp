@@ -42,17 +42,7 @@
 						 JOptionPane.showMessageDialog(null, "El registro se agrego correctamente");
 					}
 			}
-		
-			ClienteNegocio cliNegocio = new ClienteNegocioImpl();
-			ArrayList<Cliente> lista_cliente;
-			
-			
-			String DniaBuscar = request.getParameter("buscarDni"); 
-			if(DniaBuscar != null && DniaBuscar !=""){
-				lista_cliente = cliNegocio.obtenerTodos(Integer.parseInt(DniaBuscar));
-			}else{
-				lista_cliente = cliNegocio.obtenerTodos();
-			}
+			ArrayList<Cliente> lista_cliente = (ArrayList<Cliente>) ServletClientes.obtenerClientes();
 	%>
 	
 		<!--  -->  

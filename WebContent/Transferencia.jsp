@@ -16,7 +16,9 @@
 <body>
 				<% 
 					Usuario currentUser = (Usuario)(session.getAttribute("usuario"));
-					if(session.getAttribute("usuario") !=null){
+						
+				
+				if(session.getAttribute("usuario") !=null){
 					//System.out.println("currentUser= " + currentUser.getNombreUsuario());
 					} else if(currentUser ==null){
 						

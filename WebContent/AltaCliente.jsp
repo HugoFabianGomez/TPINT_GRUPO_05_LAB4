@@ -3,6 +3,7 @@
 <%@page import="entidades.*"%>
 <%@page import="negocio.*"%>
 <%@page import="negocioImpl.*"%>
+<%@page import="presentacion.controller.*"%>
 <%@page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -19,20 +20,11 @@
 			{
 				RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
 			}
-		%>
-		<%		
-			GeneroNegocio generoNegocio = new GeneroNegocioImpl();
-			ArrayList<Genero> list_Genero = generoNegocio.obtenerTodos();
 			
-			NacionalidadNegocio nacNegocio = new NacionalidadNegocioImpl();
-			ArrayList<Nacionalidad> list_Nacionalidad = nacNegocio.obtenerTodos();
-			
-			ProvinciaNegocio provNegocio = new ProvinciaNegocioImpl();
-			ArrayList<Provincia> list_Provincia = provNegocio.obtenerTodos();
-			
-			LocalidadNegocio locNegocio = new LocalidadNegocioImpl();
-			ArrayList<Localidad> list_Localidad = locNegocio.obtenerLocalidad();
-			
+		ArrayList<Genero> list_Genero =             (ArrayList<Genero>)         ServletGeneros.obtenerGeneros();
+		ArrayList<Nacionalidad> list_Nacionalidad = (ArrayList<Nacionalidad>) ServletNacionalidades.obtenerNacionalidades();	
+		ArrayList<Localidad> list_Localidad =       (ArrayList<Localidad>)      ServletLocalidades.obtenerLocalidades();
+		ArrayList<Provincia> list_Provincia =       (ArrayList<Provincia>)      ServletProvincias.obtenerProvincia();	
 		%>
 
 	<jsp:include page="Menu.jsp"></jsp:include>
