@@ -45,7 +45,8 @@ public class CuotaDaoImpl implements CuotaDao{
 		 try
 		 {
 			 ResultSet rs= cn.query("SELECT * FROM Cuotas C\r\n" + 
-					"INNER JOIN EstadosCuotas EC ON C.codigo_estado_cuota = EC.codigo_estado\r\n" + 
+					"INNER JOIN EstadosCuotas EC ON C.codigo_estado_cuota = EC.codigo_estado\r\n" +
+					"INNER JOIN prestamos P ON C.nro_prestamo = P.codigo_prestamo_PRS\r\n" +
 			 		"WHERE C.Estado = 1 AND C.nro_prestamo = " + nroPrestamo);
 			 while(rs.next())
 			 {
@@ -56,6 +57,7 @@ public class CuotaDaoImpl implements CuotaDao{
 				 cuota.setImporteCuota(rs.getFloat("C.importe_cuota"));
 				 cuota.setSaldoCuota(rs.getFloat("C.saldo_cuota"));
 				 cuota.setEstadoCuota(rs.getString("EC.estado"));
+				 cuota.setNumeroCuenta(rs.getInt("P.cuenta_cliente_PRS"));
 				 list.add(cuota);
 			 }
 		 }
@@ -71,13 +73,13 @@ public class CuotaDaoImpl implements CuotaDao{
 	}
 	
 	@Override
-	public boolean pagarCuota(int nroCuota, int nroPrestamo) {
+	public boolean pagarCuota(int nroCuota, int nroPrestamo, float paga) {
 		boolean estado = true;
 
 		cn = new Conexion();
 		cn.Open();
 
-		String query = "UPDATE Cuotas SET saldo_cuota = 0.00, codigo_estado_cuota = 2 WHERE nro_prestamo = "
+		String query = "UPDATE Cuotas SET saldo_cuota = saldo_cuota - " + paga + " WHERE nro_prestamo = "
 				+ nroPrestamo + " AND nro_cuota = " + nroCuota;
 		System.out.println(query);
 		try {

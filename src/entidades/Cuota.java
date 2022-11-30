@@ -4,6 +4,7 @@ public class Cuota {
 	private int codigoCuota;
 	private int numeroCuota;
 	private int numeroPrestamo;
+	private int numeroCuenta;
 	private float importeCuota;
 	private float saldoCuota;
 	private String fechaVencimiento;
@@ -12,6 +13,14 @@ public class Cuota {
 	public Cuota() {
 	}
 	
+	public int getNumeroCuenta() {
+		return numeroCuenta;
+	}
+
+	public void setNumeroCuenta(int numeroCuenta) {
+		this.numeroCuenta = numeroCuenta;
+	}
+
 	public String getEstadoCuota() {
 		return estadoCuota;
 	}

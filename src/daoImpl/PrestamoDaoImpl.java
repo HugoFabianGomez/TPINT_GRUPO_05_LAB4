@@ -10,7 +10,6 @@ import com.mysql.jdbc.Statement;
 import dao.PrestamoDao;
 import entidades.Cliente;
 import entidades.Cuenta;
-import entidades.Nacionalidad;
 import entidades.Prestamo;
 
 public class PrestamoDaoImpl implements PrestamoDao {
