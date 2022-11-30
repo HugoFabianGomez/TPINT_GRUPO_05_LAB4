@@ -14,15 +14,19 @@ import javax.servlet.http.HttpSession;
 import entidades.Cliente;
 import entidades.Cuenta;
 import entidades.Cuota;
+import entidades.Movimiento;
 import entidades.Prestamo;
+import entidades.TipoMovimiento;
 import negocio.ClienteNegocio;
 import negocio.CuentaNegocio;
 import negocio.CuotaNegocio;
+import negocio.MovimientoNegocio;
 import negocio.PrestamoNegocio;
 import negocio.UsuarioNegocio;
 import negocioImpl.ClienteNegocioImpl;
 import negocioImpl.CuentaNegocioImpl;
 import negocioImpl.CuotaNegocioImpl;
+import negocioImpl.MovimientoNegocioImpl;
 import negocioImpl.PrestamoNegocioImpl;
 import negocioImpl.UsuarioNegocioImpl;
 
@@ -34,6 +38,7 @@ public class ServletPrestamos extends HttpServlet {
 	private static PrestamoNegocio presNeg = new PrestamoNegocioImpl();
 	private static UsuarioNegocio userNeg = new UsuarioNegocioImpl();
 	private static CuotaNegocio cuoNeg = new CuotaNegocioImpl();
+	private static MovimientoNegocio movNeg = new MovimientoNegocioImpl();
 
 	public ServletPrestamos() {
 		super();
@@ -96,19 +101,37 @@ public class ServletPrestamos extends HttpServlet {
 				rd.forward(request, response);
 			}
 		} else if (request.getParameter("cuo") != null) {
-			boolean estado = cuoNeg.pagarCuota(Integer.valueOf(request.getParameter("cuo")),
-					Integer.valueOf(request.getParameter("pres")));
+
+			int nroPrestamo = Integer.valueOf(request.getParameter("pres"));
+			int nroCuota = Integer.valueOf(request.getParameter("cuo"));
+			float Monto = Float.parseFloat(request.getParameter("txtMonto"));
+			int nroCuenta = Integer.valueOf(request.getParameter("nroCuenta"));
+
+			Movimiento mov = new Movimiento();
+			mov.setDetalle("Pago prestamo N°" + nroPrestamo + ", Cuota N°" + nroCuota);
+			mov.setImporte(Monto);
+
+			Cuenta cuenta = new Cuenta(nroCuenta);
+			mov.setCuenta(cuenta);
+
+			TipoMovimiento tipoMov = new TipoMovimiento(3);
+			mov.setTipoMovimiento(tipoMov);
+
+			boolean estado = cuoNeg.pagarCuota(nroCuota, nroPrestamo, Monto);
+
 			if (estado) {
-				RequestDispatcher rd = request.getRequestDispatcher(
-						"ServletPrestamos?nroPre=" + String.valueOf(request.getParameter("pres")));
-				rd.forward(request, response);
+				if (movNeg.agregar(mov)) {
+					RequestDispatcher rd = request.getRequestDispatcher(
+							"ServletPrestamos?nroPre=" + nroPrestamo);
+					rd.forward(request, response);
+				}
 			}
 		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		if (request.getParameter("btnAceptar") != null) {
 			Prestamo NuevoPrestamo = new Prestamo();
 			Cuota cuota = new Cuota();

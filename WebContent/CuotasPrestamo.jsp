@@ -50,6 +50,7 @@
 							<th style="text-align: center; width: 150px;">Nro. de Cuota</th>
 							<th style="text-align: center">Importe Cuota</th>
 							<th style="text-align: center">Saldo Cuota</th>
+							<th style="text-align: center">Cuenta</th>
 							<th style="text-align: center">Estado Cuota</th>
 							<th style="text-align: center; width: 160px;">Accion</th>
 						</tr>
@@ -63,16 +64,23 @@
 							<td style="text-align: center"><%=c.getNumeroCuota()%></td>
 							<td style="text-align: center"><%=c.getImporteCuota()%></td>
 							<td style="text-align: center"><%=c.getSaldoCuota()%></td>
+							<td style="text-align: center"><%=c.getNumeroCuenta()%></td>
 							<td style="text-align: center"><%=c.getEstadoCuota()%></td>
 							<td class="text-center">
-
+								<%
+									if (c.getSaldoCuota() > 0.00) {
+								%>
 								<button type="button" id="functionPagarPrestamo"
 									class="btn btn-success" data-toggle="modal"
 									data-target="#modalPagarCuota"
 									data-nrocuota="<%=c.getNumeroCuota()%>"
-									data-nroprestamo="<%=c.getNumeroPrestamo()%>">
+									data-nroprestamo="<%=c.getNumeroPrestamo()%>" data-saldocuota="<%=c.getSaldoCuota()%>" 
+									data-nrocuenta="<%=c.getNumeroCuenta()%>">
 									<i class="fa-solid fa-dollar-sign"></i>
-								</button>
+								</button> <%
+ 	}
+ %>
+							
 						</tr>
 						<%
 							}
@@ -93,16 +101,20 @@
 					<div class="modal-header">
 						<input type="hidden" id="nroPrestamo2" /> <input type="hidden"
 							id="nroCuota2" />
+							<input type="hidden" id="nroCuenta2" />
 						<h2 id="lblCuota"></h2>
 					</div>
 					<div class="modal-body">
+						<label for="txtMontoPagar">Monto a pagar: </label> <input
+							id="txtMontoPagar" name="txtMontoPagar"
+							oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
 						<div class="modal-body" style="text-align: center">¿Estas
 							seguro de pagar la cuota?</div>
 						<div class="modal-footer">
 							<button class="btn btn-secondary" type="button"
 								data-dismiss="modal">Cancelar</button>
 							<a class="btn btn-success" type="submit"
-								onclick="window.location.href='/TP_INTEGRADOR_GRUPO_5/ServletPrestamos?cuo='+nroCuota2.value+'&pres='+nroPrestamo2.value">Pagar</a>
+								onclick="window.location.href='/TP_INTEGRADOR_GRUPO_5/ServletPrestamos?cuo='+nroCuota2.value+'&pres='+nroPrestamo2.value+'&txtMonto='+txtMontoPagar.value+'&nroCuenta='+nroCuenta2.value">Pagar</a>
 						</div>
 					</div>
 				</div>
@@ -114,9 +126,16 @@
 		$(document).on("click", "#functionPagarPrestamo", function() {
 			var nro_cuota = $(this).data('nrocuota');
 			var nro_prestamo = $(this).data('nroprestamo');
+			var saldo_cuota = $(this).data('saldocuota');
+			var numero_cuenta = $(this).data('nrocuenta');
 			$("#lblCuota").text("Cuota N°" + nro_cuota)
 			$("#nroPrestamo2").val(nro_prestamo);
 			$("#nroCuota2").val(nro_cuota);
+			$("#nroCuenta2").val(numero_cuenta);
+			$("#txtMontoPagar").attr({
+				"max" : saldo_cuota, 
+				"min" : 0
+			});
 		})
 	</script>
 

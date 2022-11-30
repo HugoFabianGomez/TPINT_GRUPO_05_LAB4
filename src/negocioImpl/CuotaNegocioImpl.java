@@ -4,9 +4,7 @@ import java.util.ArrayList;
 
 import dao.CuotaDao;
 import daoImpl.CuotaDaoImpl;
-import entidades.Cuenta;
 import entidades.Cuota;
-import negocio.CuentaNegocio;
 import negocio.CuotaNegocio;
 
 public class CuotaNegocioImpl implements CuotaNegocio{
@@ -23,7 +21,7 @@ public class CuotaNegocioImpl implements CuotaNegocio{
 	}
 	
 	@Override
-	public boolean pagarCuota(int nroCuota, int nroPrestamo) {
-		return cDao.pagarCuota(nroCuota,nroPrestamo);
+	public boolean pagarCuota(int nroCuota, int nroPrestamo, float paga) {
+		return cDao.pagarCuota(nroCuota,nroPrestamo,paga);
 	}
 }
