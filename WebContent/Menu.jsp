@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@page import="entidades.Error"%>
+<%@page import="daoImpl.*"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,12 +19,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-		<%
-			if(session.getAttribute("userid")==null)
-			{
-				response.sendRedirect("Login.jsp");		
-			}
-		%>
+<%
+		if(session.getAttribute("userid")==null)
+		{
+			response.sendRedirect("Login.jsp");		
+		}
+
+%>
 <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Nuestro Banco</a>
