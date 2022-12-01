@@ -43,10 +43,7 @@
 					
 				%>
 				  	<header class="card shadows">
-					 	<h1>Bienvenido </h1>
-					 	<form action="/TP_INTEGRADOR_GRUPO_5/ServletLogin" method="POST">
-							<button type="submit" name="cerrarSesion" class="common-button danger">Cerrar sesion</button>
-						</form>
+					 	
 					 </header>
 	 
 	 
