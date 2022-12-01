@@ -10,4 +10,5 @@ public interface PrestamoNegocio {
 	public int insertar(Prestamo prestamo);
 	public boolean actualizar(int estado, int nroprestamo);
 	public boolean rechazar(int estado, int nroprestamo, String motivoRechazo);
+	boolean descontarSaldoPrestamo(int nroPrestamo, float Monto);
 }

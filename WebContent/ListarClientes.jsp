@@ -27,7 +27,7 @@
             border-radius: 15px;
         }
     </style>
-    <title>MovGeneral</title>
+    <title>Lista clientes</title>
 </head>
 <body>
 	<jsp:include page="Menu.jsp"></jsp:include>

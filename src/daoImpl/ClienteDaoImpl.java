@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import CreandoException.ValidoDniUsuario;
 import dao.ClienteDao;
 import daoImpl.Conexion;
 import entidades.Cliente;

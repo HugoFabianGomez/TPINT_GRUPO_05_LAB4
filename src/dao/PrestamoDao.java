@@ -11,4 +11,5 @@ public interface PrestamoDao {
 	ArrayList<Prestamo> obtenerPrestamosCliente(int dni);
 	boolean actualizar(int estado, int nroPrestamo);
 	boolean rechazar(int estado, int nroPrestamo, String motivoRechazo);
+	boolean descontarSaldoPrestamo(int nroPrestamo, float Monto);
 }

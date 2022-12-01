@@ -118,6 +118,7 @@ public class ServletPrestamos extends HttpServlet {
 			mov.setTipoMovimiento(tipoMov);
 
 			boolean estado = cuoNeg.pagarCuota(nroCuota, nroPrestamo, Monto);
+			presNeg.descontarSaldoPrestamo(nroPrestamo,Monto);
 
 			if (estado) {
 				if (movNeg.agregar(mov)) {

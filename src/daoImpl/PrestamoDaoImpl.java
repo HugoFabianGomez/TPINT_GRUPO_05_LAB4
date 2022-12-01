@@ -178,4 +178,24 @@ public class PrestamoDaoImpl implements PrestamoDao {
 		}
 		return estado;
 	}
+	
+	@Override
+	public boolean descontarSaldoPrestamo(int nroPrestamo, float Monto) {
+		boolean estado = true;
+
+		cn = new Conexion();
+		cn.Open();
+
+		String query = "UPDATE Prestamos SET importa_pagar_PRS = importa_pagar_PRS - " + Monto + " WHERE nro_prestamo_PRS = "
+				+ nroPrestamo;
+		System.out.println(query);
+		try {
+			estado = cn.execute(query);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			cn.close();
+		}
+		return estado;
+	}
 }

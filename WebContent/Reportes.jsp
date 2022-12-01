@@ -28,7 +28,7 @@
 		<%
 		int cantidad=0;
 		if(request.getAttribute("cantidad")!=null){ 
-		cantidad =(int)request.getAttribute("cantidad");
+		cantidad =(Integer)request.getAttribute("cantidad");
 		%>
 		<td style="width: 300px; " align="center"><input type="text" readonly value="<%= cantidad%>"/></td>
 		<%

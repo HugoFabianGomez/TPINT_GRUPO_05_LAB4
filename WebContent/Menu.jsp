@@ -24,7 +24,7 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Inicio</title>
 </head>
 <body>
 	<%
@@ -67,7 +67,6 @@
 						role="button" data-bs-toggle="dropdown" aria-expanded="false">
 							Usuarios </a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="AltaUsuario.jsp">Alta</a></li>
 							<li><a class="dropdown-item" href="ListarUsuarios.jsp">Listar</a></li>
 						</ul></li>
 					<%
@@ -94,14 +93,18 @@
 						role="button" data-bs-toggle="dropdown" aria-expanded="false">
 							Movimientos </a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-							<li><a class="dropdown-item" href="Transferencia.jsp">Transferencias</a></li>
 							<%
+								if (session.getAttribute("permiso").equals("NoAdmin")) {
+							%>
+							<li><a class="dropdown-item" href="Transferencia.jsp">Transferencias</a></li>
+							<li><a class="dropdown-item" href="ListarMovimientosCliente.jsp">Mis
+									movimientos</a></li>
+							<%
+								}
 								if (session.getAttribute("permiso").equals("Admin")) {
 							%>
-							<li><a class="dropdown-item" href="ListarMovimientos.jsp">Listar</a></li>
-							<li><a class="dropdown-item"
-								href="ListarMovimientosCliente.jsp">Listar Cliente Usuario</a></li>
+							<li><a class="dropdown-item" href="ListarMovimientos.jsp">Listar movimientos</a></li>
+							
 							<%
 								}
 							%>
@@ -118,14 +121,12 @@
 								if (session.getAttribute("permiso").equals("Admin")) //)
 								{
 							%>
-							<li><a class="dropdown-item"
-								href="ServletPrestamos?lp=1">Lista
+							<li><a class="dropdown-item" href="ServletPrestamos?lp=1">Lista
 									Prestamos</a></li>
 							<%
 								} else if (session.getAttribute("permiso").equals("NoAdmin")) {
 							%>
-							<li><a class="dropdown-item"
-								href="ServletPrestamos?mp=1">Mis
+							<li><a class="dropdown-item" href="ServletPrestamos?mp=1">Mis
 									Prestamos</a></li>
 							<%
 								}
@@ -177,7 +178,6 @@
 
 					<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<li><a class="dropdown-item" href="PerfilUsuario.jsp">Perfil</a></li>
-						<li><a class="dropdown-item" href="Perfil.jsp">Passward</a></li>
 						<li><a class="dropdown-item" data-toggle="modal"
 							data-target="#myModal">Salir</a></li>
 

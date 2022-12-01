@@ -97,7 +97,7 @@
 								</button> <%
  	if (p.getEstado() == "Autorizado") {
  %> <a class="btn btn-primary"
-								href="/TP_INTEGRADOR_GRUPO_5/ServletPrestamos?nroPre=<%=request.getAttribute("dniActual").toString()%>">
+								href="/TP_INTEGRADOR_GRUPO_5/ServletPrestamos?nroPre=<%=p.getCodigo()%>">
 									<i class="fa-solid fa-money-bill"></i>
 							</a> <%
  	}

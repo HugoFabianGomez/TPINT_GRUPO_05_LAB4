@@ -106,8 +106,8 @@
 					</div>
 					<div class="modal-body">
 						<label for="txtMontoPagar">Monto a pagar: </label> <input
-							id="txtMontoPagar" name="txtMontoPagar"
-							oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+							id="txtMontoPagar" name="txtMontoPagar" type="number" step="0.01">
+							<!-- oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"> -->
 						<div class="modal-body" style="text-align: center">¿Estas
 							seguro de pagar la cuota?</div>
 						<div class="modal-footer">

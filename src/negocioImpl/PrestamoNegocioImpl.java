@@ -35,4 +35,9 @@ public class PrestamoNegocioImpl implements PrestamoNegocio {
 	public boolean rechazar(int estado, int nroprestamo, String motivoRechazo) {		
 		return pDao.rechazar(estado,nroprestamo,motivoRechazo);
 	}
+	
+	@Override
+	public boolean descontarSaldoPrestamo(int nroPrestamo, float Monto) {		
+		return pDao.descontarSaldoPrestamo(nroPrestamo,Monto);
+	}	
 }
