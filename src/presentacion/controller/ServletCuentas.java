@@ -13,12 +13,16 @@ import javax.servlet.http.HttpSession;
 
 import entidades.Cliente;
 import entidades.Cuenta;
+import entidades.Movimiento;
 import entidades.TipoCuenta;
+import entidades.TipoMovimiento;
 import negocio.ClienteNegocio;
 import negocio.CuentaNegocio;
+import negocio.MovimientoNegocio;
 import negocio.UsuarioNegocio;
 import negocioImpl.ClienteNegocioImpl;
 import negocioImpl.CuentaNegocioImpl;
+import negocioImpl.MovimientoNegocioImpl;
 import negocioImpl.UsuarioNegocioImpl;
 
 @WebServlet("/ServletCuentas")
@@ -28,6 +32,7 @@ public class ServletCuentas extends HttpServlet {
 	CuentaNegocio cuNeg = new CuentaNegocioImpl();
 	ClienteNegocio cliNeg = new ClienteNegocioImpl();
 	UsuarioNegocio userNeg = new UsuarioNegocioImpl();
+	MovimientoNegocio movNeg = new MovimientoNegocioImpl();
 
 	public ServletCuentas() {
 		super();
@@ -100,6 +105,15 @@ public class ServletCuentas extends HttpServlet {
 				int cantidadCuentas = cuNeg.cantidadCuentas(cuenta.getCliente().getDni());
 				if (cantidadCuentas < 3) {
 					inserto = cuNeg.insertar(cuenta);
+					TipoMovimiento tpMov = new TipoMovimiento();
+					tpMov.setCodigo(1);
+					Movimiento mov = new Movimiento();
+					mov.setFecha(request.getParameter("txtFechaCreacion"));
+					mov.setCuenta(cuenta);
+					mov.setDetalle("Alta de cuenta");
+					mov.setImporte(10000);
+					mov.setTipoMovimiento(tpMov);
+					movNeg.agregar(mov);
 				}
 			}
 			request.setAttribute("inserto", inserto);
