@@ -16,7 +16,6 @@ import entidades.Nacionalidad;
 import entidades.Provincia;
 import entidades.Usuario;
 import entidades.TipoUsuario;
-import CreandoException.ValidoDniUsuario;
 
 
 public class ClienteDaoImpl implements ClienteDao {
@@ -258,10 +257,10 @@ public class ClienteDaoImpl implements ClienteDao {
 			 		"inner join nacionalidades on codigo_nacionalidad_CLI = codigo_nacionalidad_NAC\r\n" + 
 			 		"inner join provincias on codigo_provincia_CLI = codigo_provincia_PRO\r\n" +
 			 		"inner join localidades on codigo_provincia_PRO = codigo_provincia_LOC\r\n" +  
-			 		"inner join generos on codigo_genero_CLI = codigo_genero_GEN where clientes.dni_CLI ="+dni +" GROUP BY dni_CLI ;");
+			 		"inner join generos on codigo_genero_CLI = codigo_genero_GEN where clientes.dni_CLI ="+dni);
 			 if(rs.next())
 			 {
-				 System.out.println("Entre en obtenerUno");
+				 System.out.println(rs);
 				 cli.setDni(rs.getInt("clientes.dni_CLI"));
 				 cli.setCuil(rs.getInt("clientes.cuil_CLI"));
 				 cli.setNombre(rs.getString("clientes.nombre_CLI"));

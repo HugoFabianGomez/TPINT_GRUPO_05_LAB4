@@ -62,7 +62,7 @@
 			<% 
 			boolean inserto=false;
 			if(request.getAttribute("inserto")!=null){
-				inserto = (boolean)request.getAttribute("inserto");
+				inserto = (Boolean)request.getAttribute("inserto");
 				if(inserto==false){
 				%>
 					<div class="mb-3">

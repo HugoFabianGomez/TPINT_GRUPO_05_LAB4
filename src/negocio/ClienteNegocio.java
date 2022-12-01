@@ -13,6 +13,4 @@ public interface ClienteNegocio {
 	public Cliente obtenerUno(String usuario);
 	public boolean existe(int dni);
 	public boolean borrar(int dni);
-	
-
 }

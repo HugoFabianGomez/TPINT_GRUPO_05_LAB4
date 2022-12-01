@@ -56,7 +56,7 @@ public class CuentaDaoImpl implements CuentaDao {
 				 cuenta.setNumeroCuenta(rs.getInt("cuentas.numero_cuenta_CU"));
 				 cuenta.setCbu(rs.getInt("cuentas.cbu_CU"));
 				 cuenta.setFechaCreacion(rs.getString("cuentas.fecha_creacion_CU"));
-				 cuenta.setSaldo(rs.getFloat("cuentas.saldo_CU"));
+				 cuenta.setSaldo(rs.getFloat("cuentas.saldo_CU")); 
 				 cuenta.setEstado(rs.getBoolean("cuentas.estado_CU"));				 				 
 				 
 				 TipoCuenta tipoCuenta = new TipoCuenta();
@@ -73,6 +73,7 @@ public class CuentaDaoImpl implements CuentaDao {
 				 cliente.setEmail(rs.getString("clientes.email_CLI"));
 				 cliente.setTelefono(rs.getString("clientes.telefono_CLI"));
 				 cliente.setEstado(rs.getBoolean("clientes.estado_CLI"));
+				  
 				 cliente.setNombreCompleto(rs.getString("clientes.nombre_CLI")+" "+rs.getString("clientes.apellido_CLI"));
 				 
 				 cuenta.setTipoCuenta(tipoCuenta);

@@ -39,7 +39,7 @@
 							<div class="col-md-1">
 								<div class="shortcuts">
 									<a
-										href="ServletPrestamos?dni=<%=session.getAttribute("dni").toString()%>"><input
+										href="ServletPrestamos?dni=<%=request.getAttribute("dniActual").toString()%>"><input
 										type="button" name="btnNuevo" class="btn btn-success"
 										value="Nuevo prestamo" /></a>
 								</div>
@@ -97,7 +97,7 @@
 								</button> <%
  	if (p.getEstado() == "Autorizado") {
  %> <a class="btn btn-primary"
-								href="/TP_INTEGRADOR_GRUPO_5/ServletPrestamos?nroPre=<%=session.getAttribute("dni").toString()%>">
+								href="/TP_INTEGRADOR_GRUPO_5/ServletPrestamos?nroPre=<%=request.getAttribute("dniActual").toString()%>">
 									<i class="fa-solid fa-money-bill"></i>
 							</a> <%
  	}
