@@ -328,7 +328,7 @@ public class ClienteDaoImpl implements ClienteDao {
 			 if(rs.next())
 			 {
 				 System.out.println("Entre en obtenerUno");
-				 cli.setDni(rs.getInt("clientes.dni_CLI"));
+				 cli.setDni(rs.getInt("dni_CLI"));
 				 cli.setCuil(rs.getInt("clientes.cuil_CLI"));
 				 cli.setNombre(rs.getString("clientes.nombre_CLI"));
 				 cli.setApellido(rs.getString("clientes.apellido_CLI"));

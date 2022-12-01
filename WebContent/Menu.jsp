@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@page import="entidades.Error"%>
+<%@page import="entidades.*"%>
 <%@page import="daoImpl.*"%>
 <%@page import="java.text.SimpleDateFormat"%>
+<%@page import="daoImpl.*"%>
 <%@page import="java.util.Date"%>
 <!DOCTYPE html>
 <html>
@@ -24,6 +25,15 @@
 		{
 			response.sendRedirect("Login.jsp");		
 		}
+		else
+		{
+			Cliente OCliente = new Cliente();
+			ClienteDaoImpl CDAO = new ClienteDaoImpl();
+			OCliente=CDAO.obtenerxusuario(session.getAttribute("userid").toString());
+			if (OCliente!=null)
+			session.setAttribute("dni", OCliente.getCuil());
+			
+		}
 
 %>
 <nav class="navbar navbar-expand-lg bg-light">
@@ -34,7 +44,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-       <% if(session.getAttribute("permiso") != null) //.equals("Admin"))
+       <% if(session.getAttribute("permiso").equals("Admin")) //
         	{ %>
 		        <li class="nav-item dropdown">
 		          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -55,24 +65,30 @@
             <li><a class="dropdown-item" href="ListarUsuarios.jsp">Listar</a></li>
           </ul>
         </li>
+        <%} %>
                 <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Cuentas
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="ServletTiposCuenta?param=1">Nuevo</a></li>
+                 <% if(session.getAttribute("permiso").equals("Admin")) 
+                 { %>
+            <li><a class="dropdown-item" href="ServletTiposCuenta?param=1">Nuevo</a></li><%} %>
             <li><a class="dropdown-item" href="ServletCuentas?listar=1">Listar</a></li>
           </ul>
         </li>
-<%} %>
+
                 <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Movimientos
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="Transferencia.jsp">Transferencia</a></li>
+                           
+            <li><a class="dropdown-item" href="Transferencia.jsp">Transferencias</a></li>
+           <% if(session.getAttribute("permiso").equals("Admin")) { %>
             <li><a class="dropdown-item" href="ListarMovimientos.jsp">Listar</a></li>
             <li><a class="dropdown-item" href="ListarMovimientosCliente.jsp">Listar Cliente Usuario</a></li>
+             <%} %>
           </ul>
         </li>
      
@@ -83,12 +99,13 @@
             Prestamos
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          		<% if(session.getAttribute("permiso") != null) //.equals("Admin"))
+          		<% if(session.getAttribute("permiso").equals("Admin")) //)
            { %>
-
+            <li><a class="dropdown-item" href="ServletPrestamos?lp=<%=session.getAttribute("dni").toString()%>">Lista Prestamos</a></li>
+            <li><a class="dropdown-item" href="ServletPrestamos?mp=<%=session.getAttribute("dni").toString()%>">Mis Prestamos</a></li>
             <%} %>
-            <li><a class="dropdown-item" href="ServletPrestamos?lp=1">Lista Prestamos</a></li>
-            <li><a class="dropdown-item" href="ServletPrestamos?mp=1">Mis Prestamos</a></li>
+ 			<li><a class="dropdown-item" href="NuevoPrestamo.jsp">Nuevo</a></li>
+ 			<li><a class="dropdown-item" href="MisPrestamos.jsp">Pago</a></li>
           </ul>
         </li>
       </ul>
@@ -111,7 +128,7 @@
            <% if(session.getAttribute("userid")!=null)
            { %>
            
-           <%=session.getAttribute("userid").toString() %>
+           <%=session.getAttribute("dni").toString() %>
            
            <%} %>
           </a>

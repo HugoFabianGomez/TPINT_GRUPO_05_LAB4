@@ -30,6 +30,7 @@
     <title>MovGeneral</title>
 </head>
 <body>
+	<jsp:include page="Menu.jsp"></jsp:include>
 	<%
 			if(session.getAttribute("userid")==null || session.getAttribute("permiso")=="NoAdmin")
 			{
@@ -43,6 +44,7 @@
 					}
 			}
 			ArrayList<Cliente> lista_cliente = (ArrayList<Cliente>) ServletClientes.obtenerClientes();
+			
 	%>
 	
 		<!--  -->  

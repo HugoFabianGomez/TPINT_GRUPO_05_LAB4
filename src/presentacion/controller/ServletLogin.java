@@ -68,7 +68,8 @@ public class ServletLogin extends HttpServlet {
 					System.out.println("NO ADMIN");
 					session.setAttribute("permiso", "NoAdmin");
 					session.setAttribute("userid", userid);
-					session.setAttribute("usuario", Ousuario);
+		
+					
 					response.sendRedirect("Menu.jsp");
 				}
 			}

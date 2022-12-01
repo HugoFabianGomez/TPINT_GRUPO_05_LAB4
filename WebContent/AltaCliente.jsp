@@ -25,6 +25,7 @@
 		ArrayList<Nacionalidad> list_Nacionalidad = (ArrayList<Nacionalidad>) ServletNacionalidades.obtenerNacionalidades();	
 		ArrayList<Localidad> list_Localidad =       (ArrayList<Localidad>)      ServletLocalidades.obtenerLocalidades();
 		ArrayList<Provincia> list_Provincia =       (ArrayList<Provincia>)      ServletProvincias.obtenerProvincia();	
+		
 		%>
 
 	<jsp:include page="Menu.jsp"></jsp:include>
