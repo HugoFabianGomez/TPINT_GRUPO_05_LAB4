@@ -32,7 +32,7 @@
 			OCliente=CDAO.obtenerxusuario(session.getAttribute("userid").toString());
 			if (OCliente!=null)
 			session.setAttribute("dni", OCliente.getCuil());
-			
+
 		}
 
 %>
@@ -101,14 +101,30 @@
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
           		<% if(session.getAttribute("permiso").equals("Admin")) //)
            { %>
+			<li><a class="dropdown-item" href="ListarPrestamos.jsp">Pago</a></li>
+            <%} %>
             <li><a class="dropdown-item" href="ServletPrestamos?lp=<%=session.getAttribute("dni").toString()%>">Lista Prestamos</a></li>
             <li><a class="dropdown-item" href="ServletPrestamos?mp=<%=session.getAttribute("dni").toString()%>">Mis Prestamos</a></li>
-            <%} %>
  			<li><a class="dropdown-item" href="NuevoPrestamo.jsp">Nuevo</a></li>
  			<li><a class="dropdown-item" href="MisPrestamos.jsp">Pago</a></li>
           </ul>
         </li>
+         <% if(session.getAttribute("permiso").equals("Admin")) { %>
+         <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Reportes
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                           
+            <li><a class="dropdown-item" href="Reportes.jsp">Dashboard</a></li>
+
+             <%} %>
+          </ul>
+        </li>
+        
+        
       </ul>
+      
 
       
 	   <!--   <form class="d-flex" role="search">
