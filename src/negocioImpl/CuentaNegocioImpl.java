@@ -62,4 +62,19 @@ public class CuentaNegocioImpl implements CuentaNegocio {
 	public int cantidadCuentas(int dni) {
 		return cuDao.cantidadCuentas(dni);
 	}
+
+	@Override
+	public boolean existeNumero(int numeroCuenta) {		
+		return cuDao.existeNumero(numeroCuenta);
+	}
+
+	@Override
+	public boolean existeCbu(int cbu) {
+		return cuDao.existeCbu(cbu);
+	}
+
+	@Override
+	public boolean existeDniCuenta(int dni) {
+		return cuDao.existeDniCuenta(dni);
+	}
 }

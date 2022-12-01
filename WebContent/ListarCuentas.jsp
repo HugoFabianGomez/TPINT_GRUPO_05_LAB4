@@ -25,7 +25,7 @@
 </head>
 <body>
 	<jsp:include page="Menu.jsp"></jsp:include>
-	<h1>Lista de Cuentas</h1>
+	<h2 style="text-align: center; margin-bottom: 20px;">Lista de Cuentas</h2>
 
 
 	<%
@@ -57,29 +57,23 @@
 				%>
 				<tr>
 				
-					<td><%=cuenta.getNumeroCuenta() %></td>
-					<td><%=cuenta.getCbu() %></td>
-					<td><%=cuenta.getTipoCuenta().getDescripcion() %></td>
-					<td><%=cuenta.getFechaCreacion() %></td>
-					<td><%=cuenta.getCliente().getDni() %></td>
-					<td><%=cuenta.getSaldo() %></td>
-					<td><%=cuenta.getEstado() %></td>	
-					<form action="ServletCuentas?numeroCuenta=<%=cuenta.getNumeroCuenta() %>" method="post">
-					<td><input type="submit" name="btnModificar" value="Modificar"/></td>
-					<td><input type="submit" name="btnEliminar" onclick="return confirm('¿Está seguro que desea eliminar esta cuenta?')" value="Eliminar"/></td>	
-					</form>			
-<!-- 					<td>	 -->
-<!-- 						<a class="btn btn-primary" -->
-<!--                             href="/TP_INTEGRADOR_GRUPO_5/ServletCuentas?numeroCuenta=<%=cuenta.getNumeroCuenta() %>"> --%>
-<!--                                 <i class="fa-thin fa-pen-to-square"></i>                              -->
-<!--                         </a> -->
-<!--                     </td> -->
-<!--                     <td>	 -->
-<!-- 						<a class="btn btn-primary" -->
-<!--                             href="/TP_INTEGRADOR_GRUPO_5/ServletCuentas?numeroCuenta=<%=cuenta.getNumeroCuenta() %>"> --%>
-<!--                                 <i class="fa-thin fa-trash"></i>                        -->
-<!--                         </a> -->
-<!--                     </td> -->
+					<td align="center"><%=cuenta.getNumeroCuenta() %></td>
+					<td align="center"><%=cuenta.getCbu() %></td>
+					<td align="center"><%=cuenta.getTipoCuenta().getDescripcion() %></td>
+					<td align="center"><%=cuenta.getFechaCreacion() %></td>
+					<td align="center"><%=cuenta.getCliente().getDni() %></td>
+					<td align="center"><%=cuenta.getSaldo() %></td>
+					<td align="center"><%=cuenta.getEstado() %></td>	
+					<td align="center">
+						<div>
+							<a class="btn btn-primary" href="ServletCuentas?modificar=<%=cuenta.getNumeroCuenta() %>">Modificar</a>
+						</div>
+					</td>
+					<td align="center">
+						<div>
+							<a class="btn btn-primary" onclick="return confirm('¿Está seguro que desea eliminar esta cuenta?')" href="ServletCuentas?eliminar=<%=cuenta.getNumeroCuenta() %>">Eliminar</a>
+						</div>
+					</td>			
 				</tr>	
 				<%
 					}
@@ -90,6 +84,39 @@
 	<div>
 		<a class="btn btn-primary" href="Inicio.jsp">Volver</a>
 	</div>
+	
+	<% 
+	boolean modifico=false;
+	if(request.getAttribute("modifico")!=null){
+		modifico = (boolean)request.getAttribute("modifico");
+		if(modifico==false){
+		%>
+			<div class="mb-3" >
+				<label class="form-label">Error al modificar cuenta..</label>
+			</div>
+		<% 
+		}
+		else if(modifico==true){
+		%>
+			<div class="mb-3">
+				<label class="form-label">Cuenta modificada con éxito!</label>
+			</div>
+				
+		<% 
+		}
+	}
+	%>
+	
+	<%
+	if(request.getAttribute("elimino")!=null){
+	%>
+		<div class="mb-3" >
+			<label class="form-label">Cuenta eliminada correctamente!</label>
+		</div>
+	<%
+	}
+	%>
+	
 </div>
 
 </body>

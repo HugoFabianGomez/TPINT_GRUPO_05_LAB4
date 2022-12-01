@@ -3,6 +3,8 @@ package daoImpl;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.lang.Exception;
+
+import dao.ClienteDao;
 import dao.CuentaDao;
 import entidades.Cliente;
 import entidades.Cuenta;
@@ -14,28 +16,27 @@ public class CuentaDaoImpl implements CuentaDao {
 
 	@Override
 	public boolean insertar(Cuenta cuenta) {
-		boolean estado=true;
-
-		cn = new Conexion();
-		cn.Open();	
-
-		String query = "insert into Cuentas (numero_cuenta_CU, cbu_CU, fecha_creacion_CU, saldo_CU, estado_CU, codigo_tipo_cuenta_CU, dni_cliente_CU) values"+
-						"("+cuenta.getNumeroCuenta()+","+cuenta.getCbu()+",'"+cuenta.getFechaCreacion()+"',"+cuenta.getSaldo()+","+cuenta.getEstado()+","+cuenta.getTipoCuenta().getCodigo()+","+cuenta.getCliente().getDni()+");";
-		
-		System.out.println(query);
-		try
-		 {
-			estado=cn.execute(query);
-			System.out.println("llego al try catch");
-		 }
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		finally
-		{
-			cn.close();
-		}
+		boolean estado=false;
+			cn = new Conexion();
+			cn.Open();	
+	
+			String query = "insert into Cuentas (numero_cuenta_CU, cbu_CU, fecha_creacion_CU, saldo_CU, estado_CU, codigo_tipo_cuenta_CU, dni_cliente_CU) values"+
+							"("+cuenta.getNumeroCuenta()+","+cuenta.getCbu()+",'"+cuenta.getFechaCreacion()+"',"+cuenta.getSaldo()+","+cuenta.getEstado()+","+cuenta.getTipoCuenta().getCodigo()+","+cuenta.getCliente().getDni()+");";
+			
+			System.out.println(query);
+			try
+			 {
+				estado=cn.execute(query);
+				System.out.println("llego al try catch");
+			 }
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+			finally
+			{
+				cn.close();
+			}
 		return estado;
 	}
 
@@ -94,32 +95,30 @@ public class CuentaDaoImpl implements CuentaDao {
 
 	@Override
 	public boolean modificar(Cuenta cuenta) {
-		boolean estado=true;
-
-		cn = new Conexion();
-		cn.Open();	
-
-		String query = "update cuentas set\r\n" +  
-				"cbu_CU ="+cuenta.getCbu()+",\r\n" +
-				"fecha_creacion_CU ='"+cuenta.getFechaCreacion()+"',\r\n" +
-				"saldo_CU ="+cuenta.getSaldo()+",\r\n" +
-				"estado_CU ="+cuenta.getEstado()+",\r\n" +
-				"codigo_tipo_cuenta_CU ="+cuenta.getTipoCuenta().getCodigo()+",\r\n" +
-				"dni_cliente_CU ="+cuenta.getCliente().getDni()+"\r\n"+
-				"where numero_cuenta_CU="+cuenta.getNumeroCuenta();
-				
-		try
-		 {
-			estado=cn.execute(query);
-		 }
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		finally
-		{
-			cn.close();
-		}
+		boolean estado=false;
+			cn = new Conexion();
+			cn.Open();	
+	
+			String query = "update cuentas set\r\n" +  
+					"fecha_creacion_CU ='"+cuenta.getFechaCreacion()+"',\r\n" +
+					"saldo_CU ="+cuenta.getSaldo()+",\r\n" +
+					"estado_CU ="+cuenta.getEstado()+",\r\n" +
+					"codigo_tipo_cuenta_CU ="+cuenta.getTipoCuenta().getCodigo()+",\r\n" +
+					"dni_cliente_CU ="+cuenta.getCliente().getDni()+"\r\n"+
+					"where numero_cuenta_CU="+cuenta.getNumeroCuenta();
+					
+			try
+			 {
+				estado=cn.execute(query);
+			 }
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+			finally
+			{
+				cn.close();
+			}
 		return estado;
 	}
 
@@ -402,5 +401,84 @@ public class CuentaDaoImpl implements CuentaDao {
 				 cn.close();
 			 }
 		 return cantidad;
+	}
+
+	@Override
+	public boolean existeNumero(int numeroCuenta) {
+		// TODO Auto-generated method stub
+				cn = new Conexion();
+				cn.Open();
+				boolean existeNumero = false;
+					 try
+					 {
+						 ResultSet rs= cn.query("select if(exists(select * from cuentas where numero_cuenta_CU = "+numeroCuenta+"),1,0) as resultado;");
+			
+						 	 rs.next();
+						 	existeNumero = rs.getBoolean("resultado");
+							 
+					 }
+					 catch(Exception e)
+					 {
+						 e.printStackTrace();
+					 }
+					 finally
+					 {
+						 cn.close();
+					 }
+					 
+					 
+				 return existeNumero;
+	}
+
+	@Override
+	public boolean existeCbu(int cbu) {
+		cn = new Conexion();
+		cn.Open();
+		boolean existeCbu = false;
+			 try
+			 {
+				 ResultSet rs= cn.query("select if(exists(select * from cuentas where cbu_CU = "+cbu+"),1,0) as resultado;");
+	
+				 	 rs.next();
+				 	existeCbu = rs.getBoolean("resultado");
+					 
+			 }
+			 catch(Exception e)
+			 {
+				 e.printStackTrace();
+			 }
+			 finally
+			 {
+				 cn.close();
+			 }
+			 
+			 
+		 return existeCbu;
+	}
+
+	@Override
+	public boolean existeDniCuenta(int dni) {
+		cn = new Conexion();
+		cn.Open();
+		boolean existeDniCuenta = false;
+			 try
+			 {
+				 ResultSet rs= cn.query("select if(exists(select * from clientes where dni_CLI = "+dni+"),1,0) as resultado;");
+	
+				 	 rs.next();
+				 	existeDniCuenta = rs.getBoolean("resultado");
+					 
+			 }
+			 catch(Exception e)
+			 {
+				 e.printStackTrace();
+			 }
+			 finally
+			 {
+				 cn.close();
+			 }
+			 
+			 
+		 return existeDniCuenta;
 	}
 }

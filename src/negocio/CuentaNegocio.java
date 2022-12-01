@@ -15,4 +15,7 @@ public interface CuentaNegocio {
 	public ArrayList<Cuenta> obtenerTodos(int dni);
 	public ArrayList<Cuenta> obtenerCuentasCliente(int dni);
 	public int cantidadCuentas(int dni);
+	boolean existeNumero(int numeroCuenta);
+	boolean existeCbu(int cbu);
+	boolean existeDniCuenta(int dni);
 }
