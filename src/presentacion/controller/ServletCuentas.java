@@ -109,10 +109,10 @@ public class ServletCuentas extends HttpServlet {
 			boolean existeDni = cuNeg.existeDniCuenta(cuenta.getCliente().getDni());
 			
 			if(existeDni == true) {
-				int cantidadCuentas = cuNeg.cantidadCuentas(cuenta.getCliente().getDni());
-				if(cantidadCuentas < 3) {
+				/*int cantidadCuentas = cuNeg.cantidadCuentas(cuenta.getCliente().getDni());
+				if(cantidadCuentas < 3) {*/
 					modifico = cuNeg.modificar(cuenta);
-				}
+				/*}*/
 			}
 			
 			ArrayList<Cuenta> listaCuentas = cuNeg.obtenerTodos();
