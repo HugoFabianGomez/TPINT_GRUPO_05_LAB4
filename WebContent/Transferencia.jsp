@@ -18,19 +18,19 @@
 					Usuario currentUser = (Usuario)(session.getAttribute("usuario"));
 						
 				
-				if(session.getAttribute("usuario") !=null){
+				if(session.getAttribute("usuario") !=null && session.getAttribute("permiso").equals("Admin")){
 					//System.out.println("currentUser= " + currentUser.getNombreUsuario());
-					} else if(currentUser ==null){
-						
-						response.sendRedirect("/TP_INTEGRADOR_GRUPO_5/Login.jsp");
-						System.out.println("No hay usuario");
-					} else 
-				//System.out.println("Que tengo en Transferencia ln.29= "+loginUser.getNombreUsuario());
-				if(session.getAttribute("permiso").equals("Admin")){
 					JOptionPane.showMessageDialog(null, "Esta Opcion es del Perfil Cliente");
-					response.sendRedirect("/TP_INTEGRADOR_GRUPO_5/Login.jsp");
 					System.out.println("Esta Opcion es del Perfil Cliente");
+					response.sendRedirect("/TP_INTEGRADOR_GRUPO_5/Login.jsp");
+				
+				} else if(currentUser == null){
+						System.out.println("No hay usuario");
+						response.sendRedirect("/TP_INTEGRADOR_GRUPO_5/Login.jsp");
+						
 				} else if(session.getAttribute("permiso").equals("NoAdmin"))
+				//System.out.println("Que tengo en Transferencia ln.29= "+loginUser.getNombreUsuario());
+					
 				{
 					ClienteNegocio clienteNegocio = new ClienteNegocioImpl();
 					String Usuario = currentUser.getNombreUsuario();
