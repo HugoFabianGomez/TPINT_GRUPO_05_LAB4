@@ -128,7 +128,7 @@
            <% if(session.getAttribute("userid")!=null)
            { %>
            
-           <%=session.getAttribute("dni").toString() %>
+           <%=session.getAttribute("userid").toString() %>
            
            <%} %>
           </a>

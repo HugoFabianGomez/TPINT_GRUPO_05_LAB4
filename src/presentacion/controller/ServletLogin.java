@@ -60,6 +60,7 @@ public class ServletLogin extends HttpServlet {
 				{
 					System.out.println("ADMIN");
 					session.setAttribute("permiso", "Admin");
+					session.setAttribute("usuario", Ousuario);
 					response.sendRedirect("Menu.jsp");
 				}
 				else if(Ousuario.getTipoUsuario().getTipoUsuario().equals("Cliente"))
@@ -68,6 +69,7 @@ public class ServletLogin extends HttpServlet {
 					System.out.println("NO ADMIN");
 					session.setAttribute("permiso", "NoAdmin");
 					session.setAttribute("userid", userid);
+					session.setAttribute("usuario", Ousuario);
 		
 					
 					response.sendRedirect("Menu.jsp");

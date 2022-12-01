@@ -15,12 +15,13 @@
 </head>
 <body>
 	<%
-		Usuario currenteUser = (Usuario) (session.getAttribute("usuario"));
+		//Usuario currenteUser = (Usuario) (session.getAttribute("usuario"));
+		String Usuario = session.getAttribute("userid").toString();
 		if(session.getAttribute("usuario") == null){
 			response.sendRedirect("/TP_INTEGRADOR_GRUPO_5/Login.jsp");
-			System.out.println("No hay usuario");
+
 		} 		
-			String Usuario = currenteUser.getNombreUsuario();
+			//String Usuario = currenteUser.getNombreUsuario();
 			ClienteNegocio clienteNegocio = new ClienteNegocioImpl();
 	 		Cliente cl = clienteNegocio.obtenerUno(Usuario);
 	%>
